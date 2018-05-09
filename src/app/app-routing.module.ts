@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { LayoutHome } from './home/layout.component';
 
 const routes : Routes = [
 	{
@@ -17,6 +18,7 @@ const routes : Routes = [
 	},
 	{
 		path : 'home',
+		component : LayoutHome,
 		children :
 		[
 			{
@@ -27,7 +29,7 @@ const routes : Routes = [
 	},
 	{
 		path : '**',//sino concuerda con ninguna ruta entonces entra aqui
-		component : LoginComponent
+		component : LayoutHome
 	}
 ];
 
