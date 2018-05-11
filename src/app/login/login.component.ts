@@ -9,7 +9,7 @@ import {  GoogleLoginProvider } from "angularx-social-login";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent{
   
   private user : SocialUser;
   private loggedIn : boolean;
@@ -30,13 +30,6 @@ export class LoginComponent implements OnInit{
 
   signOut() : void {
   	this.authService.signOut();
-  }
-  ngOnInit(){
-  	/*this.authService.authState.subscribe((user) => {
-  		this.user = user;
-  		this.loggedIn = (user != null);
-  		console.log(user);
-  	});*/
   }
 
 }

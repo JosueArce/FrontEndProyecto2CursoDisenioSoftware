@@ -1,8 +1,29 @@
-<!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
 
-
-
-<a  (click)="signInWithGoogle()">Google Sign In</a>
-
-<a (click)="signOut()">Google Sign OUT</a>
+<div class="container" >
+	<div class="row align-items-center">
+    <div class="col">
+    </div>
+    <div class="col">
+      <div class="card bg-light mb-3" style="max-width: 18rem;">
+	  <div class="card-header"><strong>Iniciar Sesión</strong></div>
+	  <div class="card-body">
+	    <p class="card-text">Para poder continuar con las funcionalidades del sistema debe iniciar sesión primero..</p>
+	    <a class="btn btn-light" style="width: 100%" (click)="signInWithGoogle()">
+			<span><img src="../../assets/google-plus-logo-button.png" alt=""></span>
+	    	Entrar con Google
+	    </a>
+	  </div>
+	  <hr>
+	  <div class="card-body">
+	  	<a [routerLink]="['/register']" class="card-link">Registrarme</a> <!-- se debe redireccionar a la ventana de register -->
+	  </div>
+	</div>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+	
+</div>
+<!-- 
+<a (click)="signOut()">Google Sign OUT</a> -->
 
