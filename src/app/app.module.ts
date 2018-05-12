@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router'
 
 
 import { AppComponent } from './app.component';
@@ -30,7 +29,7 @@ export function provideConfig() {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SocialLoginModule,
+    SocialLoginModule
   ],
   providers: [
     {

@@ -7,12 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { LayoutHome } from './home/layout.component';
 
-const ROUTES : Routes = [
-	{
-		path: '',
-		redirectTo: 'home', 
-		pathMatch: 'full'
-	},
+const routes : Routes = [
 	{
 		path: 'login',
 		component : LoginComponent
@@ -29,17 +24,17 @@ const ROUTES : Routes = [
 			{
 				path : '',
 				loadChildren : './home/home.module#HomeModule'
-			},
+			}
 		]
 	},
 	{
-		path : '**',//si no concuerda con ninguna ruta entonces entra aqui
+		path : '**',//sino concuerda con ninguna ruta entonces entra aqui
 		component : LayoutHome
 	}
 ];
 
 @NgModule({
-	imports : [ RouterModule.forRoot(ROUTES) ],
+	imports : [ RouterModule.forRoot(routes) ],
 	exports : [ RouterModule ]
 })
 
