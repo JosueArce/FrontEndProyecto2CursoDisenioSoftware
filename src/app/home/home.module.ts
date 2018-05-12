@@ -8,6 +8,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { SellersListComponent } from './admin/sellers-list/sellers-list.component';
 import { RequestsComponent } from './admin/requests/requests.component';
 import { PaymentComponent } from './shopping-cart/payment/payment.component';
+import { ProductComponent } from './catalog/product/product.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { PaymentComponent } from './shopping-cart/payment/payment.component';
     SellersListComponent,
     RequestsComponent,
     PaymentComponent,
+    ProductComponent,
   ],
   imports: [
     HomeRoutingModule,
