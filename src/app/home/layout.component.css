@@ -1,0 +1,7 @@
+*html #footer {
+	margin-top: -2px; /* prevents infinite scroll if #footer have a border of 2px*/
+	position: absolute;
+	background:#999;
+	top: expression(documentElement.scrollTop+(documentElement.clientHeight-this.clientHeight));
+}
+   

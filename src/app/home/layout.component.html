@@ -1,35 +1,50 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="">
-    <img src="../../assets/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-    SuperDAJ
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="">Catálogo <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="">Productos</a>
-      </li>
-      <li class="nav-item">
-        <div class="dropdown show">
-          <a class="btn btn-light dropdown-toggle" href="#" role="button" id="opcionesMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Opciones
-          </a>
-
-          <div class="dropdown-menu" aria-labelledby="opcionesMenu">
-            <a class="dropdown-item" href="#">Ver mi Perfil</a>
-            <a class="dropdown-item" href="#">Acerca de la aplicación</a>
-            <a class="dropdown-item" href="#">Cerrar Sesión</a>
-          </div>
+<nav class="navbar navbar-light navbar-expand-lg sticky-top d-flex clean-navbar" style="background-color: #e3f2fd;">
+    <div class="container">
+        <a class="navbar-brand logo" routerLink="/">
+            <div>
+                <img src="../assets/img/logoB.png" style="height: 70px; width: 85px;" title="Ir a página de inicio">
+            </div>
+        </a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+            class="collapse navbar-collapse float-left" id="navcol-1">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/catalog">Catálogo</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/">Pricing</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/">Galería</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/">Slider</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/product">Producto</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/payment">Pago</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/">Carrito</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/register">Crear Cuenta</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/">Registrarse como Vendedor</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/">Mis Productos</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/">solicitudes</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/">vendedores</a></li>
+            </ul>
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="btn btn-primary" role="button" routerLink='/login' style="background-color:rgb(32,152,13);">Ingresar</a>
+                </li>
+                <li class="nav-item">
+                    <a 
+                    *ngIf="isLoggedIn()" 
+                    (click)="logOut()" 
+                    class="btn btn-primary" 
+                    role="button" 
+                    style="background-color:rgb(193,31,31);">Cerrar Sesión</a>
+                </li>
+            </ul>
+            
+            
         </div>
-      </li>
-    </ul>    
-  </div>
+    </div>
 </nav>
 
 <router-outlet></router-outlet>
+
+<div class="card text-white bg-dark mb-3" id="footer">
+  <p class="card-text" style="text-align: center;">© 2018 Derechos Reservados</p>
+</div>
