@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 import { LoginService } from './login.service'
 
@@ -10,8 +12,19 @@ import { LoginService } from './login.service'
 })
 export class LoginComponent{
   
-  constructor(public loginService: LoginService){}
+  constructor(
+    public loginService: LoginService, 
+    public router: Router){}
 
+  signIn(){
+  	this.loginService.signInWithGoogle();
+  	this.router.navigate(['about']);
+  }
 
+  signOut(){
+  	this.loginService.signOut();
+  }
+
+  
 
 }

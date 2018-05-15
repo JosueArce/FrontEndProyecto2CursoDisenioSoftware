@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
+import { MatDialogModule, MatDialogRef } from '@angular/material';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { LayoutHome } from './home/layout.component';
@@ -30,7 +31,9 @@ export function provideConfig() {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SocialLoginModule
+    SocialLoginModule,
+    MatDialogModule,
+    NoopAnimationsModule
   ],
   providers: [
     {

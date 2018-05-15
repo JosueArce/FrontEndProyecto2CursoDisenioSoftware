@@ -23,6 +23,10 @@ export class LayoutHome {
 		this.loginService.signOut();
 	}
 
+	openLoginModal(){
+		this.loginService.openLoginModal();
+	}
+
 }
 
 
