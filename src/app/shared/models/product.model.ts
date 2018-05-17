@@ -1,13 +1,13 @@
 export interface ProductModel{
-	ID : number;
-	Nombre : string;
-	Descripcion: string;
-	Existencia : number;
-	Precio : number;
-	Categoría : string;
-	DuracionEnvio:number;
-	Estado :  number;
-	Imagen : string;
-	Vendedor : string;
-	TarifaEnvio : number;
+	idProducto : number;
+	producto : string;
+	descripcion: string;
+	existencia : number;
+	precio : number;
+	categoría : string;
+	duracionEnvio:number;
+	estado :  number;
+	imagen : string;
+	vendedor : string;
+	tarifaEnvio : number;
 }

@@ -29,7 +29,6 @@ export class ProductHandlerService {
   	this.http_request.getService('Productos')
   			.then(response => 
 				{
-					console.log(response);
 					this.onChange.emit({data : response});
 				}
 			)
