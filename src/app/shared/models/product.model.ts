@@ -1,4 +1,4 @@
-export interface ProductoModel{
+export interface ProductModel{
 	ID : number;
 	Nombre : string;
 	Descripcion: string;
