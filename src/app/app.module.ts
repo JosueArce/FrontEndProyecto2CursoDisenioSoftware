@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
@@ -8,6 +8,12 @@ import { LayoutHome } from './home/layout.component';
 
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
+
+//services
+import { LoginService } from './login/login.service';
+import { ProductHandlerService } from './shared/handlers/product.handler.service';
+import { CatalogHandlerService } from './shared/handlers/catalog.handler.service';
+import { Http_Requests } from './shared/http_request.service';
 
 let config = new AuthServiceConfig([
   {
@@ -29,13 +35,18 @@ export function provideConfig() {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SocialLoginModule
+    SocialLoginModule,
+    HttpModule
   ],
   providers: [
     {
       provide : AuthServiceConfig,
       useFactory : provideConfig
-    }
+    },
+    LoginService,
+    Http_Requests,
+    ProductHandlerService,
+    CatalogHandlerService
   ],
   bootstrap: [AppComponent]
 })

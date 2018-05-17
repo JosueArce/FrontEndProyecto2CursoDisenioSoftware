@@ -1,35 +1,73 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="">
-    <img src="../../assets/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-    SuperDAJ
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="">Catálogo <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="">Productos</a>
-      </li>
-      <li class="nav-item">
-        <div class="dropdown show">
-          <a class="btn btn-light dropdown-toggle" href="#" role="button" id="opcionesMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Opciones
-          </a>
-
-          <div class="dropdown-menu" aria-labelledby="opcionesMenu">
-            <a class="dropdown-item" href="#">Ver mi Perfil</a>
-            <a class="dropdown-item" href="#">Acerca de la aplicación</a>
-            <a class="dropdown-item" href="#">Cerrar Sesión</a>
-          </div>
+<nav class="navbar navbar-light navbar-expand-lg sticky-top d-flex clean-navbar" style="background-color: #e3f2fd;">
+    <div class="container">
+        <a class="navbar-brand logo" routerLink="/">
+            <div>
+                <img src="../assets/img/logoB.png" style="height: 70px; width: 85px;" title="Ir a página de inicio">
+            </div>
+        </a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+            class="collapse navbar-collapse float-left" id="navcol-1">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/catalog">Catálogo</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/">Pricing</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/">Galería</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/">Slider</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/product">Producto</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/payment">Pago</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/">Carrito</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/register">Crear Cuenta</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/">Registrarse como Vendedor</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/">Mis Productos</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/">Solicitudes</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/">Vendedores</a></li>
+            </ul>
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item">
+                    <button *ngIf="!isLoggedIn()" 
+                    class="btn btn-primary" 
+                    data-toggle="modal" data-target="#loginModal" 
+                    style="background-color:rgb(32,152,13);">Ingresar</button>
+                </li>
+                <li class="nav-item">
+                    <a 
+                    *ngIf="isLoggedIn()" 
+                    (click)="logOut()" 
+                    class="btn btn-primary" 
+                    role="button" 
+                    style="background-color:rgb(193,31,31);">Cerrar Sesión</a>
+                </li>
+            </ul>
+            
+            
         </div>
-      </li>
-    </ul>    
-  </div>
+    </div>
 </nav>
 
+<!-- <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
 <router-outlet></router-outlet>
+
+
+

@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise'
 
 export class Http_Requests {
 	
-	public apiURL:string = "https://super-daj.herokuapp.com//";
+	public apiURL:string = "https://super-daj.herokuapp.com/";
 	public results : Object[];
 	public options : RequestOptions;
 	public headers: Headers;
