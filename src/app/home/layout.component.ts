@@ -19,14 +19,6 @@ export class LayoutHome {
 		this.loginService.signInWithGoogle();
 	}
 
-	logOut(){
-		this.loginService.signOut();
-	}
-
-	openLoginModal(){
-		this.loginService.openLoginModal();
-	}
-
 }
 
 
