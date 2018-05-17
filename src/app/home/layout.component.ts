@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../login/login.service'
+import { LoginService } from '../login/login.service';
+import { ProductHandlerService } from '../shared/handlers/product.handler.service';
 
 @Component({
 	selector : 'layout-home',
@@ -9,7 +10,9 @@ import { LoginService } from '../login/login.service'
 
 export class LayoutHome {
 
-	constructor(public loginService: LoginService){	}
+	constructor(private producHandler : ProductHandlerService,public loginService: LoginService){	
+		this.producHandler.getProducts();
+	}
 	
 	isLoggedIn(){
 		return this.loginService.isLoggedIn();

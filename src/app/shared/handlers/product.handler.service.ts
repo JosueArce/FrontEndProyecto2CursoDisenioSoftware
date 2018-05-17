@@ -4,7 +4,7 @@ import { ProductModel } from '../models/product.model';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class ProductsHandlerService {
+export class ProductHandlerService {
 
   public onChange : EventEmitter<any> = new EventEmitter<any>();
   public selectedProduct : ProductModel
@@ -29,7 +29,7 @@ export class ProductsHandlerService {
   	this.http_request.getService('Productos')
   			.then(response => 
 				{
-					console.log(r);
+					console.log(response);
 					this.onChange.emit({data : response});
 				}
 			)

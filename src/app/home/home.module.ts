@@ -20,7 +20,7 @@ import { LoginService } from '../login/login.service';
     SellersListComponent,
     RequestsComponent,
     PaymentComponent,
-    ProductComponent,
+    ProductComponent
   ],
   imports: [
     HomeRoutingModule,

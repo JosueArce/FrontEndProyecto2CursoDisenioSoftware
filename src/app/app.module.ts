@@ -6,6 +6,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
+import { LayoutHome } from './home/layout.component';
 
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
@@ -13,7 +14,6 @@ import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from
 //services
 import { LoginService } from './login/login.service';
 import { ProductHandlerService } from './shared/handlers/product.handler.service';
-//import { FilterTextCatalogPipe } from './shared/pipes/filter-text-catalog.pipe';
 import { CatalogHandlerService } from './shared/handlers/catalog.handler.service';
 import { Http_Requests } from './shared/http_request.service';
 
@@ -31,8 +31,8 @@ export function provideConfig() {
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents/*,
-    FilterTextCatalogPipe*/
+    routingComponents,
+    LayoutHome
   ],
   imports: [
     BrowserModule,
