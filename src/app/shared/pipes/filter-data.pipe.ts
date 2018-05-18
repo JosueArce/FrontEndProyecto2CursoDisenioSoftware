@@ -5,19 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterDataPipe implements PipeTransform {
 
-  transform(value: any, input: string, searchableList: any) {
+    transform(value: any, input: string) {
         if (input) {
             input = input.toLowerCase();
             return value.filter(function (el: any) {
-                var isTrue = false;
-                for (var k in searchableList) {
-                    if (el[searchableList[k]].toLowerCase().indexOf(input) > -1) {
-                        isTrue = true;
-                    }
-                    if (isTrue) {
-                        return el
-                    }
-                }
+                return (el.producto.toLowerCase().indexOf(input) || el.vendedor.toLowerCase().indexOf(input)) > -1;
             })
         }
         return value;
