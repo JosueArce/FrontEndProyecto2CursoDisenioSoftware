@@ -6,7 +6,7 @@
                 <p>Catálogo de productos.</p>
             </div>
             <div class="input-group">
-                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div><input class="form-control" type="text" placeholder="I am looking for..">
+                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div><input class="form-control" type="text" placeholder="I am looking for.." [(ngModel)]="queryString">
                 <div class="input-group-append"><button class="btn btn-light" type="button">Search </button></div>
             </div>
             <div class="content">
@@ -65,30 +65,35 @@
                             <div class="row no-gutters">
                                 
                                 <div class="col-12 col-md-6 col-lg-4">
-                                    <div class="clean-product-item" *ngFor = "let product of productRecords">
-                                        <div class="image"><a href="#"><img class="img-fluid d-block mx-auto" src="{{product.imagen}}"></a></div>
-                                        <div class="product-name"><a href="#"><strong>{{product.producto}}</strong>
+                                    <div class="clean-product-item" *ngFor = "let product of (productHandler.productRecords | filterData : queryString : productHandler.productRecords)" (click)="selectedProduct(product)" [routerLink]="['/product']">
+                                        <div class="image"><a ><img class="img-fluid d-block mx-auto" src="{{product.imagen}}"></a></div>
+                                        <div class="product-name"><a ><strong>{{product.producto}}</strong>
                                         <br>by {{product.vendedor}}
                                         </a></div>
                                         <div class="about">
                                             <div class="price">
-                                                <h3>${{product.precio}}</h3>
+                                                <h3>Precio${{product.precio}}</h3>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 
                             </div>
-                            <nav>
-                                <ul class="pagination">
-                                    <li class="page-item disabled"><a class="page-link" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                                    <li class="page-item active"><a class="page-link">1</a></li>
-                                    <li class="page-item"><a class="page-link">2</a></li>
-                                    <li class="page-item"><a class="page-link">3</a></li>
-                                    <li class="page-item"><a class="page-link" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-                                </ul>
-                            </nav>
+                            
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-12 col-lg-12">
+                        <nav>
+                            <ul class="pagination" >
+                                <li class="page-item disabled"><a class="page-link" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                                <li class="page-item active"><a class="page-link">1</a></li>
+                                <li class="page-item"><a class="page-link">2</a></li>
+                                <li class="page-item"><a class="page-link">3</a></li>
+                                <li class="page-item"><a class="page-link" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
