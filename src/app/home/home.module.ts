@@ -10,6 +10,8 @@ import { RequestsComponent } from './admin/requests/requests.component';
 import { PaymentComponent } from './shopping-cart/payment/payment.component';
 import { ProductComponent } from './catalog/product/product.component';
 import { LoginService } from '../login/login.service';
+import {FormsModule} from "@angular/forms";
+import { FilterDataPipe } from '../shared/pipes/filter-data.pipe';
 
 
 @NgModule({
@@ -20,14 +22,17 @@ import { LoginService } from '../login/login.service';
     SellersListComponent,
     RequestsComponent,
     PaymentComponent,
-    ProductComponent
+    ProductComponent,
+    FilterDataPipe
   ],
   imports: [
     HomeRoutingModule,
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   providers: [
-    LoginService
+    LoginService,
+    FilterDataPipe
   ]
 })
 export class HomeModule { }
