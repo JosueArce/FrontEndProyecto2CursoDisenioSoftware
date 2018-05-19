@@ -15,6 +15,7 @@ import { ProductHandlerService } from './shared/handlers/product.handler.service
 import { CatalogHandlerService } from './shared/handlers/catalog.handler.service';
 import { GlobalService } from './shared/handlers/global-service.service';
 import { Http_Requests } from './shared/http_request.service';
+import { CartService } from './shared/handlers/cart.handler.service';
 
 let config = new AuthServiceConfig([
   {
@@ -48,7 +49,8 @@ export function provideConfig() {
     Http_Requests,
     ProductHandlerService,
     CatalogHandlerService,
-    GlobalService
+    GlobalService,
+    CartService
   ],
   bootstrap: [AppComponent]
 })
