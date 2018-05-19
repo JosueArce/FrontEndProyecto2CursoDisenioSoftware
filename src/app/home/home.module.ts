@@ -12,6 +12,8 @@ import { ProductComponent } from './catalog/product/product.component';
 import { LoginService } from '../login/login.service';
 import {FormsModule} from "@angular/forms";
 import { FilterDataPipe } from '../shared/pipes/filter-data.pipe';
+import { SellerRegistrationComponent } from './seller-registration/seller-registration.component';
+
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import { FilterDataPipe } from '../shared/pipes/filter-data.pipe';
     RequestsComponent,
     PaymentComponent,
     ProductComponent,
-    FilterDataPipe
+    FilterDataPipe,
+    SellerRegistrationComponent
   ],
   imports: [
     HomeRoutingModule,
