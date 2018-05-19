@@ -29,6 +29,14 @@ export class CartService {
     return 0;
   }
 
+  public addProductQuantity(){
+
+  }
+
+  public removeProductQuantity(){
+    
+  }
+
   public getTotal(){
     let total = 0;
     for(let item in this.cartElements){
