@@ -67,11 +67,13 @@ export class ProductHandlerService {
   }
 
   public pushImageCloud(newImage):void{
-
+  	
   }
 
-  public filterData(data){
-  	console.log(data);
+  public getImageCloud() : string{
+  	return null;
   }
+
+  
 
 }
