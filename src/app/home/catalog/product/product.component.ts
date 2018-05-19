@@ -34,6 +34,7 @@ export class ProductComponent implements OnInit {
     else{
       //add product to cart
       this.cartHandler.pushToCartElementList(this.selectedProduct);
+      this.router.navigate(['cart']);
     }
   }
 
