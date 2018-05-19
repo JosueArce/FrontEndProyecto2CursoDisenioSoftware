@@ -4,6 +4,7 @@ import { ProductModel } from '../../../shared/models/product.model';
 import { LoginService } from '../../../login/login.service';
 import { Router } from '@angular/router';
 import { GlobalService } from '../../../shared/handlers/global-service.service';
+import { CartService } from '../../../shared/handlers/cart.handler.service';
 
 @Component({
   selector: 'app-product',
@@ -18,17 +19,22 @@ export class ProductComponent implements OnInit {
   	private productHandler : ProductHandlerService, 
   	private loginService: LoginService,
   	private router: Router,
-    private globalHandler : GlobalService) { }
+    private globalHandler : GlobalService,
+    private cartHandler : CartService) { }
 
   ngOnInit() {
   	this.selectedProduct = this.productHandler.getSelectedProduct();
   }
 
   addToCart(){
-  	if(!this.loginService.isLoggedIn()){
+  	if(!this.globalHandler.isLoggedIn()){
       this.globalHandler.pushToLocalStorage("currentRoute",this.globalHandler.getCurrentRoute());
   		this.router.navigate(['login']);
   	}
+    else{
+      //add product to cart
+      this.cartHandler.pushToCartElementList(this.selectedProduct);
+    }
   }
 
 }

@@ -16,8 +16,8 @@ export class LoginComponent{
     public router: Router,
     private globalHandler : GlobalService){}
 
-  signIn(){debugger;
-  	this.loginService.signInWithGoogle();
+  signIn(){
+  	this.globalHandler.signInWithGoogle();
 
     if(!this.globalHandler.getFromLocalStorage("currentRoute")){
       this.router.navigate(['about']);
