@@ -6,20 +6,47 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class CartService {
 
-  public cartElements : ProductModel[];
+  public cartElements : Array<ProductModel>;
 
 
-  constructor(public http_request : Http_Requests) {
-  	
+  constructor() {
+  	 this.cartElements = new Array<ProductModel>();
   }
 
 
   public pushToCartElementList(newElement : ProductModel) : void{
-  	this.cartElements.push(newElement);
+    if(!this.cartElements.includes(newElement))
+      this.cartElements.push(newElement);
+    else 
+      return null;//cambiar esto por mostrar un mensajito
   }
 
-  public getFromCartElementList() : ProductModel[]{
+  public getFromCartElementList() :Array<ProductModel>{
   	return this.cartElements;
+  }
+
+  public getSubTotal(){
+    return 0;
+  }
+
+  public getTotal(){
+    let total = 0;
+    for(let item in this.cartElements){
+      total+=this.cartElements[item].precio;
+    }
+    return total;
+  }
+
+  public getDescuento(){
+    return 0;
+  }
+
+  public getTotalEnvio(){
+    let totalEnvio = 0;
+    for(let item in this.cartElements){
+      totalEnvio += this.cartElements[item].tarifaEnvio;
+    }
+    return totalEnvio;
   }
 
 }

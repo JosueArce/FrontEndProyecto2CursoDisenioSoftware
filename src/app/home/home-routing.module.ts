@@ -49,6 +49,10 @@ const routes : Routes = [
 		component : SellersListComponent
 	},
 	{
+		path : 'cart',
+		component : ShoppingCartComponent
+	},
+	{
 		path : '**',//sino concuerda con ninguna ruta entonces entra aqui
 		component : AboutComponent
 	}
