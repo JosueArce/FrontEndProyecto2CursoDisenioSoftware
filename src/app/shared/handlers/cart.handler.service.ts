@@ -25,4 +25,28 @@ export class CartService {
   	return this.cartElements;
   }
 
+  public getSubTotal(){
+    return 0;
+  }
+
+  public getTotal(){
+    let total = 0;
+    for(let item in this.cartElements){
+      total+=this.cartElements[item].precio;
+    }
+    return total;
+  }
+
+  public getDescuento(){
+    return 0;
+  }
+
+  public getTotalEnvio(){
+    let totalEnvio = 0;
+    for(let item in this.cartElements){
+      totalEnvio += this.cartElements[item].tarifaEnvio;
+    }
+    return totalEnvio;
+  }
+
 }
