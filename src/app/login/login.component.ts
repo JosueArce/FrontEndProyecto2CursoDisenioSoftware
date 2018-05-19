@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-
+import { GlobalService } from '../shared/handlers/global-service.service';
 import { LoginService } from './login.service'
 
 
@@ -14,11 +13,18 @@ export class LoginComponent{
   
   constructor(
     public loginService: LoginService, 
-    public router: Router){}
+    public router: Router,
+    private globalHandler : GlobalService){}
 
-  signIn(){
+  signIn(){debugger;
   	this.loginService.signInWithGoogle();
-  	this.router.navigate(['about']);
+
+    if(!this.globalHandler.getFromLocalStorage("currentRoute")){
+      this.router.navigate(['about']);
+    }
+  	else{
+      this.router.navigate([this.globalHandler.getFromLocalStorage("currentRoute")]);
+    }
   }
 
   signOut(){
