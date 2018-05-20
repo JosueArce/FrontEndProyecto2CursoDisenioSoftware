@@ -13,7 +13,7 @@ import { LoginService } from '../login/login.service';
 import {FormsModule} from "@angular/forms";
 import { FilterDataPipe } from '../shared/pipes/filter-data.pipe';
 import { SellerRegistrationComponent } from './seller-registration/seller-registration.component';
-
+import { PaginationComponent } from './shared/pagination/pagination.component';
 
 
 @NgModule({
@@ -26,7 +26,8 @@ import { SellerRegistrationComponent } from './seller-registration/seller-regist
     PaymentComponent,
     ProductComponent,
     FilterDataPipe,
-    SellerRegistrationComponent
+    SellerRegistrationComponent,
+    PaginationComponent
   ],
   imports: [
     HomeRoutingModule,

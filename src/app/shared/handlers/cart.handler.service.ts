@@ -7,37 +7,53 @@ import { Observable } from 'rxjs';
 export class CartService {
 
   public cartElements : Array<ProductModel>;
+  public backUpCartElements : Array<any>;
 
 
   constructor() {
   	 this.cartElements = new Array<ProductModel>();
+     this.backUpCartElements = new Array<any>();
   }
 
 
   public pushToCartElementList(newElement : ProductModel) : void{
-    if(!this.cartElements.includes(newElement))
-      this.cartElements.push(newElement);
-    else 
-      return null;//cambiar esto por mostrar un mensajito
+    for(let item in this.cartElements){
+      if(this.cartElements[item].idProducto === newElement.idProducto){
+         return null;//poner mensaje de que ya existe
+      }
+    }
+    this.cartElements.push(newElement); this.copyList(newElement);
+  }
+
+  private copyList(producto : ProductModel){
+    this.backUpCartElements.push(
+      {
+        idProducto : producto.idProducto,
+        producto : producto.producto,
+        imagen : producto.imagen,
+        vendedor : producto.vendedor,
+        descripcion : producto.descripcion,
+        tarifa : producto.tarifaEnvio,
+        duracion : producto.tarifaEnvio,
+        existencia : producto.existencia,
+        precio : producto.precio
+      }
+    );
   }
 
   public getFromCartElementList() :Array<ProductModel>{
-  	return this.cartElements;
+  	return this.backUpCartElements;
   }
 
-  public getSubTotal(){
-    return 0;
+  public removeFromCartElements(producto : ProductModel) : void {
+    let index = this.cartElements.indexOf(producto,0);
+    this.cartElements.splice(index,1);
+
+    index = this.backUpCartElements.indexOf(producto,0);
+    this.backUpCartElements.splice(index,1);
   }
 
-  public addProductQuantity(){
-
-  }
-
-  public removeProductQuantity(){
-    
-  }
-
-  public getTotal(){
+  public getSubTotal() : number{
     let total = 0;
     for(let item in this.cartElements){
       total+=this.cartElements[item].precio;
@@ -45,11 +61,21 @@ export class CartService {
     return total;
   }
 
-  public getDescuento(){
-    return 0;
+  public onChangeQuantity(producto, cantidadActual : number){
+    for(let item in this.cartElements){
+      if(producto.idProducto === this.cartElements[item].idProducto)
+        {debugger;
+        this.cartElements[item].precio = this.backUpCartElements[item].precio * cantidadActual;
+        return;
+      }
+    }
   }
 
-  public getTotalEnvio(){
+  public getTotal() : number{
+    return this.getSubTotal() + this.getTotalEnvio();
+  }
+
+  public getTotalEnvio() : number{
     let totalEnvio = 0;
     for(let item in this.cartElements){
       totalEnvio += this.cartElements[item].tarifaEnvio;
