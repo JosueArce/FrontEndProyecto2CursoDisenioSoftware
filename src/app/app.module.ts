@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
@@ -9,8 +10,18 @@ import { LayoutHome } from './home/layout.component';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
 
+import { 
+  MatDialogModule,  
+  MatListModule,
+  MatSnackBarModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatChipsModule
+} from "@angular/material";
+
 //services
 import { LoginService } from './login/login.service';
+import { LoginModalService } from './login/loginModal.service';
 import { ProductHandlerService } from './shared/handlers/product.handler.service';
 import { CatalogHandlerService } from './shared/handlers/catalog.handler.service';
 import { GlobalService } from './shared/handlers/global-service.service';
@@ -38,7 +49,14 @@ export function provideConfig() {
     BrowserModule,
     AppRoutingModule,
     SocialLoginModule,
-    HttpModule
+    HttpModule,
+    MatDialogModule,  
+    MatListModule,
+    MatSnackBarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatChipsModule,
+    NoopAnimationsModule
   ],
   providers: [
     {
@@ -46,6 +64,7 @@ export function provideConfig() {
       useFactory : provideConfig
     },
     LoginService,
+    LoginModalService,
     Http_Requests,
     ProductHandlerService,
     CatalogHandlerService,
