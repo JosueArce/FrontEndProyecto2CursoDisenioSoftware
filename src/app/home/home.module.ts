@@ -14,7 +14,6 @@ import { SellerRegistrationComponent } from './seller-registration/seller-regist
 import { PaginationComponent } from './shared/pagination/pagination.component';
 
 
-
 @NgModule({
   declarations: [
     routingComponents,
