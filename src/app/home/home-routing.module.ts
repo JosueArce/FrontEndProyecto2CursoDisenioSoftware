@@ -8,8 +8,6 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ProductComponent } from './catalog/product/product.component';
 import { PaymentComponent } from './shopping-cart/payment/payment.component';
 import { SellerRegistrationComponent } from './seller-registration/seller-registration.component';
-import { SellersListComponent } from './admin/sellers-list/sellers-list.component';
-import { RequestsComponent } from './admin/requests/requests.component';
 
 const routes : Routes = [
 	{
@@ -41,14 +39,6 @@ const routes : Routes = [
 		component : SellerRegistrationComponent
 	},
 	{
-		path : 'requests',
-		component : RequestsComponent
-	},
-	{
-		path : 'seller-list',
-		component : SellersListComponent
-	},
-	{
 		path : 'cart',
 		component : ShoppingCartComponent
 	},
@@ -69,5 +59,6 @@ export const routingComponents  = [
 		CatalogComponent, 
 		ShoppingCartComponent, 
 		ProductComponent,
-		PaymentComponent
+		PaymentComponent,
+		SellerRegistrationComponent
 	];
