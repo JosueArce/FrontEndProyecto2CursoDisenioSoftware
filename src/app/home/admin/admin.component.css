@@ -1,0 +1,15 @@
+#titulo{
+	background-image:url("../../../assets/img/super1.jpg");
+}
+
+#border-circular, .block-heading{
+	border-radius: 10px;
+	border: 5px solid #98cef6;
+	background-color: white;
+}
+
+#item:hover{
+	border-radius: 10px;
+  	border: 3px solid #e3f2fd;
+}
+

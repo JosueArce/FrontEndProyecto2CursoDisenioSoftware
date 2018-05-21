@@ -6,22 +6,24 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class ProductHandlerService {
 
-  public onChange : EventEmitter<any> = new EventEmitter<any>();
+  public onChange : EventEmitter<any> = new EventEmitter();
+  public productRecords : ProductModel[];
   public selectedProduct : ProductModel
+
 
   constructor(public http_request : Http_Requests) {
   	this.selectedProduct = {
-  		ID : 0,
-		Nombre : '',
-		Descripcion: '',
-		Existencia : 0,
-		Precio : 0,
-		Categoría : '',
-		DuracionEnvio:0,
-		Estado :  0,
-		Imagen : '',
-		Vendedor : '',
-		TarifaEnvio : 0
+  		idProducto : 0,
+		producto : '',
+		descripcion: '',
+		existencia : 0,
+		precio : 0,
+		categoría : '',
+		duracionEnvio:0,
+		estado :  0,
+		imagen : '',
+		vendedor : '',
+		tarifaEnvio : 0
   	};
   }
 
@@ -29,7 +31,8 @@ export class ProductHandlerService {
   	this.http_request.getService('Productos')
   			.then(response => 
 				{
-					this.onChange.emit({data : response});
+					//this.onChange.emit({data : response});
+					this.productRecords = response;
 				}
 			)
 			.catch(error => 
@@ -55,16 +58,22 @@ export class ProductHandlerService {
 			)
   }
 
-  public get getSelectedProduct(){
+  public getSelectedProduct(){
   	return this.selectedProduct;
   }
 
-  public set setSelectedProduct(newProduct : ProductModel){
+  public setSelectedProduct(newProduct){
   	 this.selectedProduct = newProduct;
   }
 
   public pushImageCloud(newImage):void{
-
+  	
   }
+
+  public getImageCloud() : string{
+  	return null;
+  }
+
+  
 
 }

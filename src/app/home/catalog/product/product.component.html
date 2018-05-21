@@ -2,27 +2,27 @@
     <section class="clean-block clean-product dark">
         <div class="container">
             <div class="block-heading">
-                <h2 class="text-info">Product Page</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
+                <h2 class="text-info">Información del Producto!</h2>
+                <p>Información sobre el producto seleccionado!</p>
             </div>
             <div class="block-content">
                 <div class="product-info">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="gallery">
-                                <div class="sp-wrap"><a href="assets/img/tech/image1.jpg"><img class="img-fluid d-block mx-auto" src="assets/img/tech/image1.jpg"></a><a href="assets/img/tech/image1.jpg"><img class="img-fluid d-block mx-auto" src="assets/img/tech/image1.jpg"></a><a href="assets/img/tech/image1.jpg"><img class="img-fluid d-block mx-auto" src="assets/img/tech/image1.jpg"></a></div>
+                                <div class="sp-wrap"><img class="img-fluid d-block mx-auto" src="{{selectedProduct.imagen}}"></div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="info">
-                                <h3>Nombre Artículo</h3>
+                                <h3>{{selectedProduct.producto}}</h3>
                                 <div class="price">
-                                    <h3>$300.00</h3>
-                                </div><button class="btn btn-primary" type="button"><i class="icon-basket"></i>Añadir al Carrito</button>
-                                <div class="summary">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec augue nunc, pretium at augue at, convallis pellentesque ipsum. Vestibulum diam risus, sagittis at fringilla at, pulvinar vel risus. Vestibulum dignissim
-                                        eu nulla eu imperdiet. Morbi mollis tellus a nunc vestibulum consequat. Quisque tristique elit et nibh dapibus sodales. Nam sollicitudin a urna sed iaculis.</p>
+                                    <h3>${{selectedProduct.precio}}</h3>
                                 </div>
+                                <div class="summary">
+                                    <p>{{selectedProduct.descripcion}}.</p>
+                                </div>
+                                <button class="btn btn-primary" type="button"  (click)="addToCart()"><i class="icon-basket"></i>Añadir al Carrito</button>
                             </div>
                         </div>
                     </div>

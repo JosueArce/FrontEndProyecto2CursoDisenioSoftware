@@ -1,3 +1,6 @@
+
+//HAY QUE BORRAR ESTE SERVICIO
+
 import { Injectable } from '@angular/core';
 
 import { AuthService, SocialUser } from "angularx-social-login";
@@ -17,7 +20,6 @@ export class LoginService{
   	this.authService.authState.subscribe((user) => {
   		this.user = user;
   		this.loggedIn = (user != null);
-  		console.log(user);
   	})
   }
 
