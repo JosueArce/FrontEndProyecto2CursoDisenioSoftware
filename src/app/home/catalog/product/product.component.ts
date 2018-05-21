@@ -15,6 +15,7 @@ import { LoginModalService } from '../../../login/loginModal.service';
 export class ProductComponent implements OnInit {
 
   private selectedProduct : any;
+  private isLogged : boolean = false;
 
   constructor(
   	private productHandler : ProductHandlerService, 
@@ -26,6 +27,7 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
   	this.selectedProduct = this.productHandler.getSelectedProduct();
+    this.isLoggedIn();
   }
 
   addToCart(){
@@ -39,6 +41,20 @@ export class ProductComponent implements OnInit {
       this.cartHandler.pushToCartElementList(this.selectedProduct);
       this.router.navigate(['cart']);
     }
+    else this.loginModalService.openDialog();
+  }
+
+  isLoggedIn(){
+    this.globalHandler.userLogged.subscribe({
+      next : (event : any) => {
+        if(!event) {          
+          this.isLogged = false;
+        }
+        else{         
+          this.isLogged = true;
+        }
+      }
+    });
   }
 
 }
