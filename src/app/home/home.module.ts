@@ -12,6 +12,7 @@ import {FormsModule} from "@angular/forms";
 import { FilterDataPipe } from '../shared/pipes/filter-data.pipe';
 import { SellerRegistrationComponent } from './seller-registration/seller-registration.component';
 import { PaginationComponent } from './shared/pagination/pagination.component';
+import { MyProductsComponent } from './my-products/my-products.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { PaginationComponent } from './shared/pagination/pagination.component';
     ProductComponent,
     FilterDataPipe,
     SellerRegistrationComponent,
-    PaginationComponent
+    PaginationComponent,
+    MyProductsComponent
   ],
   imports: [
     HomeRoutingModule,
