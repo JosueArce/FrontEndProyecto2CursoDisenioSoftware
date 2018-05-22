@@ -10,6 +10,9 @@ import { ProductComponent } from './catalog/product/product.component';
 import { LoginService } from '../login/login.service';
 import {FormsModule} from "@angular/forms";
 import { FilterDataPipe } from '../shared/pipes/filter-data.pipe';
+import { FilterByCategoryPipe } from '../shared/pipes/filter-by-category.pipe';
+import { FilterBySellerPipe } from '../shared/pipes/filter-by-seller.pipe';
+import { FilterByBrandPipe } from '../shared/pipes/filter-by-brand.pipe';
 import { SellerRegistrationComponent } from './seller-registration/seller-registration.component';
 import { PaginationComponent } from './shared/pagination/pagination.component';
 import { MyProductsComponent } from './my-products/my-products.component';
@@ -25,6 +28,9 @@ import {MatCardModule} from '@angular/material/card';
     PaymentComponent,
     ProductComponent,
     FilterDataPipe,
+    FilterByBrandPipe,
+    FilterByCategoryPipe,
+    FilterBySellerPipe,
     SellerRegistrationComponent,
     PaginationComponent,
     MyProductsComponent
@@ -37,7 +43,10 @@ import {MatCardModule} from '@angular/material/card';
   ],
   providers: [
     LoginService,
-    FilterDataPipe
+    FilterDataPipe,
+    FilterByBrandPipe,
+    FilterByCategoryPipe,
+    FilterBySellerPipe
   ]
 })
 export class HomeModule { }

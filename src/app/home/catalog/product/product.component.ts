@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { GlobalService } from '../../../shared/handlers/global-service.service';
 import { CartService } from '../../../shared/handlers/cart.handler.service';
 import { LoginModalService } from '../../../login/loginModal.service';
+import {ISubscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'app-product',
@@ -16,45 +17,29 @@ export class ProductComponent implements OnInit {
 
   private selectedProduct : any;
   private isLogged : boolean = false;
+  private subscription: ISubscription;
 
   constructor(
   	private productHandler : ProductHandlerService, 
   	private loginService: LoginService,
   	private router: Router,
     private globalHandler : GlobalService,
-    private loginModalService: LoginModalService,
-    private cartHandler : CartService) { }
+    private cartHandler : CartService,
+    public loginModalService: LoginModalService) 
+  {
+      this.globalHandler.isLoggedIn();
+    }
 
   ngOnInit() {
   	this.selectedProduct = this.productHandler.getSelectedProduct();
-    this.isLoggedIn();
   }
 
-  addToCart(){
-  	if(!this.globalHandler.isLoggedIn()){
-      this.loginModalService.openDialog();
-    //   this.globalHandler.pushToLocalStorage("currentRoute",this.globalHandler.getCurrentRoute());
-  		// this.router.navigate(['login']);
-  	}
-    else{
-      //add product to cart
+  addToCart()
+  {
+    if(this.globalHandler.loggedIn){
       this.cartHandler.pushToCartElementList(this.selectedProduct);
       this.router.navigate(['cart']);
     }
     else this.loginModalService.openDialog();
   }
-
-  isLoggedIn(){
-    this.globalHandler.userLogged.subscribe({
-      next : (event : any) => {
-        if(!event) {          
-          this.isLogged = false;
-        }
-        else{         
-          this.isLogged = true;
-        }
-      }
-    });
-  }
-
 }

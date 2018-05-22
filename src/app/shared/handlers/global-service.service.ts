@@ -8,7 +8,7 @@ import { LoginModalService } from '../../login/loginModal.service';
 export class GlobalService {
   openLogin: boolean; 
   private user : SocialUser;
-  //private loggedIn : boolean;
+  public loggedIn : boolean;
   public userLogged : EventEmitter<any> = new EventEmitter<any>();
   constructor(private route: Router,private authService : AuthService, public loginModalService: LoginModalService) { }
 
@@ -35,12 +35,12 @@ export class GlobalService {
 
   signOut() : void {
     this.authService.signOut()
-    .then(response=>{ this.userLogged.emit(false) });
+    .then(response=>{ this.userLogged.emit(false);this.loggedIn = false; });
   }
 
   isLoggedIn(){
     this.authService.authState.subscribe((user) => {
-      if(user) this.userLogged.emit(true);
+      if(user) {this.userLogged.emit(true);this.loggedIn = true;}
     })
   }
 

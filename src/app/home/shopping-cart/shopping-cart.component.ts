@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../shared/handlers/cart.handler.service';
+import { GlobalService } from '../../shared/handlers/global-service.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -8,7 +9,7 @@ import { CartService } from '../../shared/handlers/cart.handler.service';
 })
 export class ShoppingCartComponent implements OnInit {
 
-  constructor(private cartHandler : CartService) { }
+  constructor(private cartHandler : CartService, private globalHandler : GlobalService) { }
 
   ngOnInit() {
   }
