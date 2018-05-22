@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
+import {FormsModule} from "@angular/forms";
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
@@ -51,6 +51,7 @@ export function provideConfig() {
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     SocialLoginModule,
     HttpModule,

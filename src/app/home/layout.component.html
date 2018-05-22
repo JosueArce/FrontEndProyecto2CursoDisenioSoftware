@@ -1,6 +1,6 @@
 
 <nav class="navbar navbar-light navbar-expand-lg sticky-top d-flex clean-navbar" id="menu">
-    <div class="container">
+    <div class="container-fluid">
         <a class="navbar-brand logo" routerLink="/">
             <div>
                 <img src="../assets/img/logoB.png" style="height: 70px; width: 85px;" title="Ir a página de inicio">
@@ -18,18 +18,32 @@
                 <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/my-products">Mis Productos</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" routerLink="/admin">Administrador</a></li>
             </ul>
-            <ul class="nav navbar-nav ml-auto">
+            <ul class="nav navbar-nav ml-auto" style="float: right;">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" data-bs-hover-animate="rubberBand" id="nombre_usuario" *ngIf="user">&nbsp;
+                        <div class="dropdown">
+                          <button class="btn btn-primary" type="button" id="btn_user_name" >{{user.name}}                            
+                          </button>
+                          <button class="btn btn-default dropdown-toggle" style="background-color: transparent;"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{user.photoUrl}}" id="foto_usuario">
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a 
+                                *ngIf="isLogged" 
+                                (click)="globalService.signOut()" 
+                                class="btn " 
+                                role="button">Cerrar Sesión
+                            </a>
+                          </div>
+                        </div>
+                    </a>
+                </li>
+
+                 
                 <li class="nav-item">
                     <button *ngIf="!isLogged" 
                     class="btn btn-outline-dark" 
                     (click)="logIn()">Ingresar</button>
-                </li>
-                <li class="nav-item">
-                    <a 
-                    *ngIf="isLogged" 
-                    (click)="globalService.signOut()" 
-                    class="btn btn-outline-dark" 
-                    role="button">Cerrar Sesión</a>
                 </li>
             </ul>
         </div>

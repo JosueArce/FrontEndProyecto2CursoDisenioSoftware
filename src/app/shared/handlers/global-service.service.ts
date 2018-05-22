@@ -7,7 +7,7 @@ import { LoginModalService } from '../../login/loginModal.service';
 @Injectable()
 export class GlobalService {
   openLogin: boolean; 
-  private user : SocialUser;
+  public user : EventEmitter<SocialUser> = new EventEmitter<SocialUser>();
   public loggedIn : boolean;
   public userLogged : EventEmitter<any> = new EventEmitter<any>();
   constructor(private route: Router,private authService : AuthService, public loginModalService: LoginModalService) { }
@@ -27,7 +27,7 @@ export class GlobalService {
   signInWithGoogle() : void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
     this.authService.authState.subscribe((user) => {
-      this.user = user;
+      this.user.emit(user);
      // this.loggedIn = (user != null);
     })
     this.loginModalService.dialogRef.close();
@@ -35,12 +35,12 @@ export class GlobalService {
 
   signOut() : void {
     this.authService.signOut()
-    .then(response=>{ this.userLogged.emit(false);this.loggedIn = false; });
+    .then(response=>{ this.userLogged.emit(false);this.loggedIn = false;this.user.emit(null)});
   }
 
   isLoggedIn(){
     this.authService.authState.subscribe((user) => {
-      if(user) {this.userLogged.emit(true);this.loggedIn = true;}
+      if(user) {this.userLogged.emit(true);this.loggedIn = true;this.user.emit(user)}
     })
   }
 
