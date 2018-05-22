@@ -1,3 +1,7 @@
 #menu {
 	background-image: url("../../assets/img/background-with-squares.png");
 }
+
+.nav-item{
+	font-family: 'Modern Antiqua', cursive;
+}

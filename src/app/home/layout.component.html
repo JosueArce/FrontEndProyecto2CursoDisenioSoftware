@@ -21,21 +21,17 @@
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item">
                     <button *ngIf="!isLogged" 
-                    class="btn btn-primary" 
-                    (click)="logIn()" 
-                    style="background-color:rgb(32,152,13);">Ingresar</button><!-- data-toggle="modal" data-target="#loginModal" --> 
+                    class="btn btn-outline-dark" 
+                    (click)="logIn()">Ingresar</button>
                 </li>
                 <li class="nav-item">
                     <a 
                     *ngIf="isLogged" 
                     (click)="globalService.signOut()" 
-                    class="btn btn-primary" 
-                    role="button" 
-                    style="background-color:rgb(193,31,31);">Cerrar Sesión</a>
+                    class="btn btn-outline-dark" 
+                    role="button">Cerrar Sesión</a>
                 </li>
             </ul>
-            
-            
         </div>
     </div>
 </nav>

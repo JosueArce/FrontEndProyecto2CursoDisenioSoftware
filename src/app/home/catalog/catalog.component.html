@@ -64,7 +64,7 @@
                         <div class="products">
                             <div class="row no-gutters" style="max-height: 600px;overflow: auto;">                                
                                 <div class="col-4 col-md-4 col-lg-4" *ngFor = "let product of (productHandler.productRecords | filterData : queryString : productHandler.productRecords)">
-                                    <div class="clean-product-item"  (click)="selectedProduct(product)" [routerLink]="['/product']">
+                                    <!-- <div class="clean-product-item"  (click)="selectedProduct(product)" [routerLink]="['/product']">
                                         <div class="image"><a ><img class="img-fluid d-block mx-auto" src="{{product.imagen}}"></a></div>
                                         <div class="product-name"><a ><strong>{{product.producto}}</strong>
                                         <br>by {{product.vendedor}}
@@ -74,7 +74,19 @@
                                                 <h3>Precio  ${{product.precio}}</h3>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
+                                    <mat-card class="card">
+                                      <img mat-card-image src="{{product.imagen}}">
+                                      <mat-card-content>
+                                        <div class="product-name"><a (click)="selectedProduct(product)" [routerLink]="['/product']"><strong>{{product.producto}}</strong>
+                                        <br>by {{product.vendedor}}
+                                        </a></div>
+                                      </mat-card-content>
+                                      <mat-card-footer>
+                                        <span>₡{{product.precio}}</span>
+                                      </mat-card-footer>
+                                    </mat-card>
+
                                 </div>
                                 
                             </div>
