@@ -3,7 +3,7 @@ import { ActivatedRoute, UrlSegment,Router } from '@angular/router';
 import { AuthService, SocialUser } from "angularx-social-login";
 import {  GoogleLoginProvider } from "angularx-social-login";
 import { LoginModalService } from '../../login/loginModal.service';
-import { MatSnackBar } from '@angular/material';
+
 
 @Injectable()
 export class GlobalService {
@@ -13,8 +13,7 @@ export class GlobalService {
   public userLogged : EventEmitter<any> = new EventEmitter<any>();
   constructor(private route: Router,
     private authService : AuthService, 
-    public loginModalService: LoginModalService,
-    public snackBar: MatSnackBar) { }
+    public loginModalService: LoginModalService) { }
 
   public pushToLocalStorage(nombre : string, data : any) : void{
   	localStorage.setItem(nombre,JSON.stringify(data));
@@ -35,13 +34,11 @@ export class GlobalService {
      // this.loggedIn = (user != null);
     })
     this.loginModalService.dialogRef.close();
-    this.openSnackBar('Has iniciado sesión!', 'Ok');
   }
 
   signOut() : void {
     this.authService.signOut()
     .then(response=>{ this.userLogged.emit(false);this.loggedIn = false; });
-    this.openSnackBar('Has cerrado sesión!', 'Ok');
   }
 
   isLoggedIn(){
@@ -50,12 +47,6 @@ export class GlobalService {
     })
   }
 
-  openSnackBar(message: string, action: string) {
-    let extraClasses=['background-grey'];
-      this.snackBar.open(message, action, {
-        duration: 2000,
-        extraClasses: extraClasses
-    });
-  }
+  
 
 }
