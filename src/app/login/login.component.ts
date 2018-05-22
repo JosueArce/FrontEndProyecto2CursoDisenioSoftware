@@ -17,7 +17,7 @@ export class LoginComponent{
     private globalHandler : GlobalService){}
 
   signIn(){
-  	this.globalHandler.signInWithGoogle();
+  	this.loginService.signInWithGoogle();
   }
 
   signOut(){

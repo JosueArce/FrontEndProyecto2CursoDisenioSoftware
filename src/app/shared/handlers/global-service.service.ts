@@ -4,13 +4,16 @@ import { AuthService, SocialUser } from "angularx-social-login";
 import {  GoogleLoginProvider } from "angularx-social-login";
 import { LoginModalService } from '../../login/loginModal.service';
 
+
 @Injectable()
 export class GlobalService {
   openLogin: boolean; 
   private user : SocialUser;
   public loggedIn : boolean;
   public userLogged : EventEmitter<any> = new EventEmitter<any>();
-  constructor(private route: Router,private authService : AuthService, public loginModalService: LoginModalService) { }
+  constructor(private route: Router,
+    private authService : AuthService, 
+    public loginModalService: LoginModalService) { }
 
   public pushToLocalStorage(nombre : string, data : any) : void{
   	localStorage.setItem(nombre,JSON.stringify(data));
@@ -43,5 +46,7 @@ export class GlobalService {
       if(user) {this.userLogged.emit(true);this.loggedIn = true;}
     })
   }
+
+  
 
 }

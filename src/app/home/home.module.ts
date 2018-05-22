@@ -8,7 +8,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { PaymentComponent } from './shopping-cart/payment/payment.component';
 import { ProductComponent } from './catalog/product/product.component';
 import { LoginService } from '../login/login.service';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { FilterDataPipe } from '../shared/pipes/filter-data.pipe';
 import { FilterByCategoryPipe } from '../shared/pipes/filter-by-category.pipe';
 import { FilterBySellerPipe } from '../shared/pipes/filter-by-seller.pipe';
@@ -16,9 +16,18 @@ import { FilterByBrandPipe } from '../shared/pipes/filter-by-brand.pipe';
 import { SellerRegistrationComponent } from './seller-registration/seller-registration.component';
 import { PaginationComponent } from './shared/pagination/pagination.component';
 import { MyProductsComponent } from './my-products/my-products.component';
-
+import { AddProductComponent } from './my-products/add-product/add-product.component';
+import { AddProductService } from './my-products/add-product/add-product.service';
 //Angular Material
-import {MatCardModule} from '@angular/material/card';
+import {
+  MatButtonModule, 
+  MatCardModule,
+  MatFormFieldModule,
+  MatDialogModule,
+  MatInputModule,
+  MatSelectModule
+} from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -33,20 +42,31 @@ import {MatCardModule} from '@angular/material/card';
     FilterBySellerPipe,
     SellerRegistrationComponent,
     PaginationComponent,
-    MyProductsComponent
+    MyProductsComponent,
+    AddProductComponent,
   ],
   imports: [
     HomeRoutingModule,
     CommonModule,
     FormsModule,
-    MatCardModule
+    ReactiveFormsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [
     LoginService,
     FilterDataPipe,
     FilterByBrandPipe,
     FilterByCategoryPipe,
-    FilterBySellerPipe
+    FilterBySellerPipe,
+    AddProductService
+  ],
+  entryComponents: [
+    AddProductComponent
   ]
 })
 export class HomeModule { }
