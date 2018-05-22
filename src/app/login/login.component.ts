@@ -18,13 +18,6 @@ export class LoginComponent{
 
   signIn(){
   	this.globalHandler.signInWithGoogle();
-
-    /*if(!this.globalHandler.getFromLocalStorage("currentRoute")){
-      this.router.navigate(['about']);
-    }
-  	else{
-      this.router.navigate([this.globalHandler.getFromLocalStorage("currentRoute")]);
-    }*/
   }
 
   signOut(){
