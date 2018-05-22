@@ -6,6 +6,7 @@ import { GlobalService } from '../shared/handlers/global-service.service';
 import { Router } from '@angular/router';
 import { AuthService, SocialUser } from "angularx-social-login";
 
+
 @Component({
 	selector : 'layout-home',
 	templateUrl : './layout.component.html',
@@ -40,9 +41,13 @@ export class LayoutHome{
 
 	logIn(){
 		this.loginModalService.openDialog();
-		//this.globalService.pushToLocalStorage("currentRoute",this.globalService.getCurrentRoute());
-		//this.loginService.signInWithGoogle();
 	}
+
+	logOut(){
+		this.globalService.signOut();
+	}
+
+	
 
 }
 
