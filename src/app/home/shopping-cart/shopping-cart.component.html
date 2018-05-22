@@ -3,13 +3,14 @@
         <div class="container-fluid">
             <div class="block-heading">
                 <h2 class="text-info">Shopping Cart</h2>
-                <p>Productos actualmente en su carrito de compras.</p>
+                <p *ngIf="globalHandler.loggedIn">Productos actualmente en su carrito de compras.</p>
+                <p *ngIf="!globalHandler.loggedIn">Necesita iniciar sesión primero antes de continuar realizando compras.</p>
             </div>
             <div class="content">
-                <div class="row">
+                <div class="row" *ngIf="globalHandler.loggedIn">
                     <div class="col-sm-12 col-md-9 col-lg-9" style="max-height: 600px;overflow-x: auto;">
                         <img style="width: 60%;" *ngIf="cartHandler.backUpCartElements.length === 0" src="https://res.cloudinary.com/ddzutuizv/image/upload/v1526774591/no_hay_productos.jpg" alt="Imagen">
-                        <div class="col-md-12 col-lg-12" *ngFor="let product of cartHandler.getFromCartElementList()">
+                        <div class="col-md-12 col-lg-12"  *ngFor="let product of cartHandler.getFromCartElementList()">
                             <div class="items">
                                 <div class="product">
                                     <div class="row justify-content-center align-items-center">
