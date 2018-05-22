@@ -15,6 +15,7 @@ import { AuthService, SocialUser } from "angularx-social-login";
 export class LayoutHome{
 
 	private isLogged : boolean = false;
+	private user : SocialUser = null;
 
 	constructor(
 		private producHandler : ProductHandlerService,
@@ -31,7 +32,17 @@ export class LayoutHome{
 		this.globalService.userLogged.subscribe({
 	      next : (event : any) => {
 	      	if(!event) this.isLogged = false;
-	      	else this.isLogged = true;
+	      	else 
+      		{
+      			this.isLogged = true;
+      			this.globalService.user.subscribe({
+      				next : (user : SocialUser) =>{
+      					if(user)
+      						this.user = user;
+      					else this.user = null;
+      				}
+      			});
+      		};
 	      }
 	    });
 	}

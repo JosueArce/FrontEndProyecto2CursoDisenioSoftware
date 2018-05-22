@@ -6,6 +6,30 @@
 	font-family: 'Modern Antiqua', cursive;
 }
 
+#foto_usuario {
+    border-radius:50%;
+    max-height:40px;
+    max-width:45px;
+}
+
+#btn_user_name {
+    background-color:transparent;
+    border:none;
+    border-radius:10px;
+    color: black;
+}
+
+#btn_user_name:hover {
+    background-color:#007bff;
+}
+
+#btn_user_name:visited {
+    text-decoration:none;
+    border:none;
+}
+
+
+
 .background-grey{
 	color: #635959;
 	background-color: #E0DDDD;
