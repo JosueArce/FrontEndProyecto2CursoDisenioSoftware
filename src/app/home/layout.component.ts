@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../login/login.service';
 import { LoginModalService } from '../login/loginModal.service';
 import { ProductHandlerService } from '../shared/handlers/product.handler.service';
 import { GlobalService } from '../shared/handlers/global-service.service';
 import { Router } from '@angular/router';
 import { AuthService, SocialUser } from "angularx-social-login";
+
 
 @Component({
 	selector : 'layout-home',
@@ -52,6 +52,12 @@ export class LayoutHome{
 	logIn(){
 		this.loginModalService.openDialog();
 	}
+
+	logOut(){
+		this.globalService.signOut();
+	}
+
+	
 
 }
 
