@@ -5,6 +5,7 @@ import { LoginService } from '../../../login/login.service';
 import { Router } from '@angular/router';
 import { GlobalService } from '../../../shared/handlers/global-service.service';
 import { CartService } from '../../../shared/handlers/cart.handler.service';
+import { LoginModalService } from '../../../login/loginModal.service';
 
 @Component({
   selector: 'app-product',
@@ -14,28 +15,46 @@ import { CartService } from '../../../shared/handlers/cart.handler.service';
 export class ProductComponent implements OnInit {
 
   private selectedProduct : any;
+  private isLogged : boolean = false;
 
   constructor(
   	private productHandler : ProductHandlerService, 
   	private loginService: LoginService,
   	private router: Router,
     private globalHandler : GlobalService,
+    private loginModalService: LoginModalService,
     private cartHandler : CartService) { }
 
   ngOnInit() {
   	this.selectedProduct = this.productHandler.getSelectedProduct();
+    this.isLoggedIn();
   }
 
   addToCart(){
   	if(!this.globalHandler.isLoggedIn()){
-      this.globalHandler.pushToLocalStorage("currentRoute",this.globalHandler.getCurrentRoute());
-  		this.router.navigate(['login']);
+      this.loginModalService.openDialog();
+    //   this.globalHandler.pushToLocalStorage("currentRoute",this.globalHandler.getCurrentRoute());
+  		// this.router.navigate(['login']);
   	}
     else{
       //add product to cart
       this.cartHandler.pushToCartElementList(this.selectedProduct);
       this.router.navigate(['cart']);
     }
+    else this.loginModalService.openDialog();
+  }
+
+  isLoggedIn(){
+    this.globalHandler.userLogged.subscribe({
+      next : (event : any) => {
+        if(!event) {          
+          this.isLogged = false;
+        }
+        else{         
+          this.isLogged = true;
+        }
+      }
+    });
   }
 
 }

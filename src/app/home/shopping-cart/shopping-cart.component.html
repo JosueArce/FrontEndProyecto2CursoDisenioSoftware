@@ -20,8 +20,8 @@
                                             <div class="product-specs">
                                                 <div><span>Vendedor:&nbsp;</span><span class="value">{{product.vendedor}}</span></div>
                                                 <div><span>Descripción:&nbsp;</span><span class="value">{{product.descripcion}}</span></div>
-                                                <div><span>Duración envío:&nbsp;</span><span class="value">{{product.duracionEnvio}} horas</span></div>
-                                                <div><span>Tarifa envío:&nbsp;</span><span class="value">{{product.tarifaEnvio}}</span></div>
+                                                <div><span>Duración envío:&nbsp;</span><span class="value">{{product.duracion}} horas</span></div>
+                                                <div><span>Tarifa envío:&nbsp;</span><span class="value">{{product.tarifa}}</span></div>
                                             </div>
                                         </div>
                                         <div class="col-6 col-md-2 quantity"><label class="d-none d-md-block" for="quantity">Cantidad</label>
@@ -45,7 +45,7 @@
                             <div class="container">
                                 <h4><span class="text">Subtotal</span><span class="price" style="float: right;">${{cartHandler.getSubTotal()}}</span></h4> <br>
                                 <h4><span class="text">Envío</span><span class="price" style="float: right;">${{cartHandler.getTotalEnvio()}}</span></h4><br>
-                                <h4><span class="text" style="color: blue">Total</span><span class="price" style="color: blue;float: right;">${{cartHandler.getTotal()}}</span></h4><button class="btn btn-primary btn-block btn-lg" type="button">Checkout</button>
+                                <h4><span class="text" style="color: blue">Total</span><span class="price" style="color: blue;float: right;">${{cartHandler.getTotal()}}</span></h4><button class="btn btn-primary btn-block btn-lg" type="button" routerLink="/payment">Checkout</button>
                             </div>
                             
                         </div>

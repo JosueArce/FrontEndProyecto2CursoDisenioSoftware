@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-light navbar-expand-lg sticky-top d-flex clean-navbar" style="background-color: #98cef6;">
+<nav class="navbar navbar-light navbar-expand-lg sticky-top d-flex clean-navbar" id="menu">
     <div class="container">
         <a class="navbar-brand logo" routerLink="/">
             <div>
@@ -20,15 +20,15 @@
             </ul>
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item">
-                    <button *ngIf="!isLoggedIn()" 
+                    <button *ngIf="!isLogged" 
                     class="btn btn-primary" 
                     (click)="logIn()" 
                     style="background-color:rgb(32,152,13);">Ingresar</button><!-- data-toggle="modal" data-target="#loginModal" --> 
                 </li>
                 <li class="nav-item">
                     <a 
-                    *ngIf="isLoggedIn()" 
-                    (click)="logOut()" 
+                    *ngIf="isLogged" 
+                    (click)="globalService.signOut()" 
                     class="btn btn-primary" 
                     role="button" 
                     style="background-color:rgb(193,31,31);">Cerrar Sesión</a>
