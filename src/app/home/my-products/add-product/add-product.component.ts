@@ -11,19 +11,20 @@ export class AddProductComponent implements OnInit {
   public title: string;
   public message: string;
   form: FormGroup;
+  selected = '';
   constructor(
   	public dialogRef: MatDialogRef<AddProductComponent>,
   	formBuilder: FormBuilder,
   	public snackBar: MatSnackBar) { 
   	this.form= formBuilder.group({
   		'nameFormControl': [null, Validators.required],
-        'quantityFormControl': [null, Validators.required],
+        'quantityFormControl': [null, Validators.compose([Validators.required, Validators.min(0)])],
         'descriptionFormControl': [null, Validators.required],
-        'priceFormControl': [null, Validators.required],
-        'categoryFormControl': [null, Validators.required],
-        'shippingTimeFormControl': [null, Validators.required],
-        'shippingPriceFormControl': [null, Validators.required],
-        'imageFormControl': [null, Validators.required]
+        'priceFormControl': [null, Validators.compose([Validators.required, Validators.min(0)])],
+        //'categoryFormControl': [null, Validators.required],
+        'shippingTimeFormControl': [null, Validators.compose([Validators.required, Validators.min(0)])],
+        'shippingFeeFormControl': [null, Validators.compose([Validators.required, Validators.min(0)])],
+        //'imageFormControl': [null, Validators.required]
   	});
   }
 
@@ -32,9 +33,22 @@ export class AddProductComponent implements OnInit {
     this.message = ""
   }
 
-  addProduct(){//funcion para añadir producto a la lista de productos del vendedor
+  noCategorySelected(): boolean{
+  	console.log('selected',this.selected);
+  	if(this.selected==''){
+  		return true;
+  	} else{
+  		return false;
+  	}
+  }
+
+  onSubmit(){//funcion para añadir producto a la lista de productos del vendedor
   	//validar si los datos son correcto para añadir o no el producto
-  	this.dialogRef.close();
+  	console.log('entre!')
+  	if(this.form.valid){
+  		this.dialogRef.close();
+  	}
+  	
   }
 
 }

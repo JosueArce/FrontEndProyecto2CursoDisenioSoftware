@@ -10,7 +10,7 @@ export class AddProductService{
 
 	openDialog(){
   	this.dialogRef = this.dialog.open(AddProductComponent, {
-        width: '70%',
+        width: '90%',
         data: { name: 'Ups!' }
     }); 
     return this.dialogRef.afterClosed()

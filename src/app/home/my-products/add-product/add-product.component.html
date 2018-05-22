@@ -1,5 +1,5 @@
 <div class="container profile profile-view" id="profile">
-        <form [formGroup]="form">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="form-row profile-row">
                 <div class="col-md-4 relative">
                     <div class="avatar">
@@ -19,26 +19,90 @@
 							        Campo <strong>requerido</strong>
 							    </mat-error>
                         	</mat-form-field>
-                            
                         </div>
                         <div class="col-sm-12 col-md-6">
-                            <div class="form-group"><label>Cantidad</label><input class="form-control" type="text" name="lastname"></div>
+                            <mat-form-field>
+                        		<mat-label>Cantidad</mat-label>
+                        		<input 
+                        		matInput type="number" placeholder="Cantidad" 
+                        		[formControl]="form.controls['quantityFormControl']" #quantity>
+                        		<mat-hint align="end">No puede ser negativo</mat-hint>
+                        		<mat-error *ngIf="form.get('quantityFormControl')?.invalid">
+							        Valor no válido o vacío
+							    </mat-error>
+                        	</mat-form-field>
                         </div>
                     </div>
-                    <div class="form-group"><label>Descripción</label><input class="form-control" type="email" autocomplete="off" required="" name="email"></div>
+		            <div class="form-row">
+			        	<div class="col-12">
+			        		<mat-form-field>
+	                    		<mat-label>Descripción del Producto</mat-label>
+	                    		<textarea matInput placeholder="Descripción" 
+	                    		[formControl]="form.controls['descriptionFormControl']"
+	                    		#description></textarea> 
+	                    		
+	                    		<mat-error *ngIf="form.controls['descriptionFormControl'].hasError('required')">
+							        Campo <strong>requerido</strong>
+							    </mat-error>
+	                    	</mat-form-field>
+			        	</div>    	
+		            </div>        
                     <div class="form-row">
                         <div class="col-sm-12 col-md-6">
-                            <div class="form-group"><label>Precio</label><input class="form-control" type="password" name="password" autocomplete="off" required=""></div>
-                            <div class="form-group"><label>Duración de envío</label><input class="form-control" type="password" name="password" autocomplete="off" required=""></div>
+                            <mat-form-field>
+                        		<mat-label>Precio (Colones)</mat-label>
+                        		<input 
+                        		matInput type="number" placeholder="Precio" 
+                        		[formControl]="form.controls['priceFormControl']" #price>
+                        		<span matPrefix>₡&nbsp;</span>
+							    <span matSuffix>.00</span>
+							    <mat-hint align="end">No puede ser negativo</mat-hint>
+                        		<mat-error *ngIf="form.get('priceFormControl')?.invalid">
+							        Campo <strong>requerido</strong>
+							    </mat-error>
+                        	</mat-form-field>
+                            <mat-form-field>
+                        		<mat-label>Duración de Envío (Horas)</mat-label>
+                        		<input 
+                        		matInput type="number" placeholder="Duración" 
+                        		[formControl]="form.controls['shippingTimeFormControl']" #shippingTime>
+                        		<span matSuffix>horas</span>
+                        		<mat-hint align="end">No puede ser negativo. Se recomienda que no sea 0</mat-hint>
+                        		<mat-error *ngIf="form.get('shippingTimeFormControl')?.invalid">
+							        Campo <strong>requerido</strong>
+							    </mat-error>
+                        	</mat-form-field>
                         </div>
                         <div class="col-sm-12 col-md-6">
-                            <div class="form-group"><label>Categoría</label><input class="form-control" type="password" name="confirmpass" autocomplete="off" required=""></div>
-                            <div class="form-group"><label>Tarifa Envío</label><input class="form-control" type="password" name="confirmpass" autocomplete="off" required=""></div>
+                            <mat-form-field>
+                        		<mat-label>Categoría</mat-label>
+                        		<mat-select required [(value)]="selected">
+							      <mat-option>-- None --</mat-option>
+							      <mat-option value="option">Option</mat-option>
+							    </mat-select>
+                        		<mat-error *ngIf="noCategorySelected()">
+							        Campo <strong>requerido</strong>
+							    </mat-error>
+                        	</mat-form-field>
+                            <mat-form-field>
+                        		<mat-label>Tarifa de Envío (Colones)</mat-label>
+                        		<input   
+                        		matInput type="number" placeholder="Tarifa" 
+                        		[formControl]="form.controls['shippingFeeFormControl']" #shippingFee>
+                        		<span matPrefix>₡&nbsp;</span>
+							    <span matSuffix>.00</span>
+							    <mat-hint align="end">No puede ser negativo</mat-hint>
+                        		<mat-error *ngIf="form.get('shippingFeeFormControl')?.invalid">
+							        Campo <strong>requerido</strong>
+							    </mat-error>
+                        	</mat-form-field>
                         </div>
                     </div>
                     <hr>
                     <div class="form-row">
-                        <div class="col-md-12 content-right"><button class="btn btn-primary form-btn" type="submit" style="width:100%;">AGREGAR</button></div>
+                        <div class="col-md-12 content-center">
+                        	<button class="btn btn-primary form-btn" type="submit" style="width:100%;">AGREGAR</button>
+                        </div>
                     </div>
                 </div>
             </div>
