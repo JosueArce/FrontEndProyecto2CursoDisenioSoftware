@@ -14,6 +14,8 @@ import { SellerRegistrationComponent } from './seller-registration/seller-regist
 import { PaginationComponent } from './shared/pagination/pagination.component';
 import { MyProductsComponent } from './my-products/my-products.component';
 
+//Angular Material
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { MyProductsComponent } from './my-products/my-products.component';
   imports: [
     HomeRoutingModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    MatCardModule
   ],
   providers: [
     LoginService,

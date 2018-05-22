@@ -1,3 +1,11 @@
+h2{
+  font-family: 'Indie Flower', cursive;
+  font-size: 45px;
+}
+h3{
+  font-family: 'Quicksand', sans-serif;
+}
+
 .search-form {
   margin:40px 5px;
   font:normal 12px sans-serif;
@@ -44,8 +52,23 @@
   outline:none;
 }
 
-#card {
-  margin:3px;
-  /*width:1px;*/
-  height:200px;
+.card {
+  position: relative;
+  margin:5px;
+  max-width: 250px;
+  min-width: 100px;
+  min-height: 360px;
+  max-height: 410px;
+}
+.mat-card-image {
+  max-width: 400px;
+  min-width: 100px;
+  min-height: 100px;
+  max-height: 200px;
+}
+
+.card span {
+   position: absolute;
+   bottom: 0;
+   right: 55%;
 }

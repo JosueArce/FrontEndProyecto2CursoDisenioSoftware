@@ -4,6 +4,10 @@
     padding-bottom: 1%
 }
 
+.card-text{
+  font-family: 'Kavivanar', cursive; 
+}
+
 .vertical-center {
   display: flex;
   justify-content: center;
