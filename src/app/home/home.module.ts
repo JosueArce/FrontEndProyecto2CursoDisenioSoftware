@@ -28,9 +28,6 @@ import {MatCardModule} from '@angular/material/card';
     PaymentComponent,
     ProductComponent,
     FilterDataPipe,
-    FilterByBrandPipe,
-    FilterByCategoryPipe,
-    FilterBySellerPipe,
     SellerRegistrationComponent,
     PaginationComponent,
     MyProductsComponent
@@ -43,10 +40,7 @@ import {MatCardModule} from '@angular/material/card';
   ],
   providers: [
     LoginService,
-    FilterDataPipe,
-    FilterByBrandPipe,
-    FilterByCategoryPipe,
-    FilterBySellerPipe
+    FilterDataPipe
   ]
 })
 export class HomeModule { }

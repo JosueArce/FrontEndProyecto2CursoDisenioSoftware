@@ -16,11 +16,11 @@
                             <div class="filters">
                                 <div class="filter-item">
                                     <h3>Categorías</h3>
-                                    <div class="form-check" *ngFor="let category of catalogHandler.categoryRecords"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">{{category.nombre}}</label></div>
+                                    <div class="form-check" *ngFor="let category of catalogHandler.categoryRecords"><input class="form-check-input" type="checkbox" id="formCheck-1" (click)="catalogHandler.filterByCategory(category.nombre)"><label class="form-check-label" for="formCheck-1">{{category.nombre}}</label></div>
                                 </div>
                                 <div class="filter-item">
                                     <h3>Marcas</h3>
-                                    <div class="form-check" *ngFor= "let brand of (catalogHandler.brandsRecords | filterByBrand : brand : productHandler.productRecords)"><input class="form-check-input" type="checkbox" id="formCheck-5" [(ngModel)]="brand.marca"><label class="form-check-label" for="formCheck-5">{{brand.marca}}</label></div>
+                                    <div class="form-check" *ngFor= "let brand of catalogHandler.brandsRecords"><input class="form-check-input" type="checkbox" id="formCheck-5"><label class="form-check-label" for="formCheck-5">{{brand.marca}}</label></div>
                                 </div>
                                 <div class="filter-item">
                                     <h3>Vendedores</h3>
