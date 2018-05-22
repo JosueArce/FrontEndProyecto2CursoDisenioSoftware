@@ -11,14 +11,17 @@ import { LayoutHome } from './home/layout.component';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
 
+//Angular Material
 import { 
   MatDialogModule,  
   MatListModule,
   MatSnackBarModule,
   MatFormFieldModule,
   MatInputModule,
-  MatChipsModule
+  MatChipsModule,
 } from "@angular/material";
+
+
 
 //services
 import { LoginService } from './login/login.service';
