@@ -16,15 +16,15 @@
                             <div class="filters">
                                 <div class="filter-item">
                                     <h3>Categorías</h3>
-                                    <div class="form-check" *ngFor="let category of catalogHandler.categoryRecords"><input class="form-check-input" type="checkbox" id="formCheck-1" (click)="catalogHandler.filterByCategory(category.nombre)"><label class="form-check-label" for="formCheck-1">{{category.nombre}}</label></div>
+                                    <div class="form-check" *ngFor="let category of catalogHandler.categoryRecords"><input class="form-check-input" type="checkbox" id="formCheck-1" [(ngModel)]="category.checked" (click)="getCheckedCategories(category.checked,category.nombre)"><label class="form-check-label" for="formCheck-1">{{category.nombre}}</label></div>
                                 </div>
                                 <div class="filter-item">
                                     <h3>Marcas</h3>
-                                    <div class="form-check" *ngFor= "let brand of catalogHandler.brandsRecords"><input class="form-check-input" type="checkbox" id="formCheck-5"><label class="form-check-label" for="formCheck-5">{{brand.marca}}</label></div>
+                                    <div class="form-check" *ngFor= "let brand of catalogHandler.brandsRecords"><input class="form-check-input" type="checkbox" id="formCheck-5" [(ngModel)]="brand.checked" (click)="getCheckedBrands(brand.checked,brand.marca)"><label class="form-check-label" for="formCheck-5">{{brand.marca}}</label></div>
                                 </div>
                                 <div class="filter-item">
                                     <h3>Vendedores</h3>
-                                    <div class="form-check" *ngFor="let category of catalogHandler.sellerRecords"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">{{category.Comercio}}</label></div>
+                                    <div class="form-check" *ngFor="let seller of catalogHandler.sellerRecords"><input class="form-check-input" type="checkbox" id="formCheck-1" [(ngModel)]="seller.checked" (click)="getCheckedSeller(seller.checked,seller.Comercio)"><label class="form-check-label" for="formCheck-1">{{seller.Comercio}}</label></div>
                                 </div>
                             </div>
                         </div>
@@ -51,18 +51,7 @@
                     <div class="col-sm-12 col-xs-12 col-md-9 col-lg-9">
                         <div class="products">
                             <div class="row no-gutters" style="max-height: 600px;overflow: auto;">                                
-                                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4" *ngFor = "let product of (productHandler.productRecords | filterData : queryString : productHandler.productRecords)">
-                                    <!-- <div class="clean-product-item"  (click)="selectedProduct(product)" [routerLink]="['/product']">
-                                        <div class="image"><a ><img class="img-fluid d-block mx-auto" src="{{product.imagen}}"></a></div>
-                                        <div class="product-name"><a ><strong>{{product.producto}}</strong>
-                                        <br>by {{product.vendedor}}
-                                        </a></div>
-                                        <div class="about">
-                                            <div class="price">
-                                                <h3>Precio  ${{product.precio}}</h3>
-                                            </div>
-                                        </div>
-                                    </div> -->
+                                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4" *ngFor = "let product of (productHandler.productRecords | filterData : queryString : productHandler.productRecords)">                                
                                     <mat-card class="card">
                                       <img  mat-card-image src="{{product.imagen}}">
                                       <mat-card-content>

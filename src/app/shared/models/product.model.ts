@@ -4,10 +4,11 @@ export interface ProductModel{
 	descripcion: string;
 	existencia : number;
 	precio : number;
-	categoría : string;
+	categoria : string;
 	duracionEnvio:number;
 	estado :  number;
 	imagen : string;
 	vendedor : string;
 	tarifaEnvio : number;
+	marca : string;
 }

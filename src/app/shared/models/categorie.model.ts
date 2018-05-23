@@ -1,3 +1,4 @@
 export interface category{
-	nombre : string
+	nombre : string,
+	checked : false;
 }
