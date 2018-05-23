@@ -34,6 +34,7 @@ export class AddProductComponent implements OnInit {
   }
 
   noCategorySelected(): boolean{
+  	console.log('selected',this.selected);
   	if(this.selected==''){
   		return true;
   	} else{
@@ -43,6 +44,7 @@ export class AddProductComponent implements OnInit {
 
   onSubmit(){//funcion para añadir producto a la lista de productos del vendedor
   	//validar si los datos son correcto para añadir o no el producto
+  	console.log('entre!')
   	if(this.form.valid){
   		this.dialogRef.close();
       this.openSnackBar('Producto agregado!', 'Ok');

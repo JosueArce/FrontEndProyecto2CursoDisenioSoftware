@@ -18,7 +18,6 @@ import { PaginationComponent } from './shared/pagination/pagination.component';
 import { MyProductsComponent } from './my-products/my-products.component';
 import { AddProductComponent } from './my-products/add-product/add-product.component';
 import { AddProductService } from './my-products/add-product/add-product.service';
-import { EditProductService } from './my-products/edit-product/edit-product.service';
 //Angular Material
 import {
   MatButtonModule, 
@@ -28,7 +27,6 @@ import {
   MatInputModule,
   MatSelectModule
 } from '@angular/material';
-import { EditProductComponent } from './my-products/edit-product/edit-product.component';
 
 
 @NgModule({
@@ -43,7 +41,6 @@ import { EditProductComponent } from './my-products/edit-product/edit-product.co
     PaginationComponent,
     MyProductsComponent,
     AddProductComponent,
-    EditProductComponent,
   ],
   imports: [
     HomeRoutingModule,
@@ -63,8 +60,7 @@ import { EditProductComponent } from './my-products/edit-product/edit-product.co
     FilterByBrandPipe,
     FilterByCategoryPipe,
     FilterBySellerPipe,
-    AddProductService,
-    EditProductService
+    AddProductService
   ],
   entryComponents: [
     AddProductComponent
