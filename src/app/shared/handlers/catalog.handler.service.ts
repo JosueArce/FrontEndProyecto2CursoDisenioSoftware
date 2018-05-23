@@ -1,12 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, } from '@angular/core';
 import { ProductHandlerService } from './product.handler.service';
 import { seller } from '../models/seller.model';
 import { brand } from '../models/brand.model';
 import { category } from '../models/categorie.model';
 import { Http_Requests } from '../http_request.service';
-import { FilterByBrandPipe } from '../pipes/filter-by-brand.pipe';
-import { FilterByCategoryPipe } from '../pipes/filter-by-category.pipe';
-import { FilterBySellerPipe } from '../pipes/filter-by-seller.pipe';
+import { ProductModel } from '../models/product.model';
 
 @Injectable()
 export class CatalogHandlerService {
@@ -14,27 +12,101 @@ export class CatalogHandlerService {
   public sellerRecords : Array<seller>;
   public categoryRecords : Array<category>;
   public brandsRecords : Array<brand>;
-  
+
+  public selectedBrands : Array<string>;
+  public selectedCategories :Array<string>;
+  public selectedSellers :Array<string>; 
+
   constructor(private productHandler : ProductHandlerService, 
-  	private http_request : Http_Requests,
-  	private filterBrand : FilterByBrandPipe,
-  	private filterCategory : FilterByCategoryPipe,
-  	private filterSeller : FilterBySellerPipe) { 
+  	private http_request : Http_Requests) { 
   	this.sellerRecords = new Array<seller>();
   	this.categoryRecords = new Array<category>();
   	this.brandsRecords = new Array<brand>();
+
+    this.selectedBrands = new Array<string>();
+    this.selectedSellers = new Array<string>();
+    this.selectedCategories = new Array<string>();
   }
 
-  public filterByBrand(brand : string){
-  	this.productHandler.productRecords = this.filterBrand.transform(this.productHandler.productRecords,brand);
+  public addSelectedBrand(marca : string){
+  	this.selectedBrands.push(marca);
   }
 
-  public filterByCategory(category : string){
-  	this.filterCategory.transform(this.productHandler.productRecords,category);
+  public getSelectedBrands(): string[]{
+  	return this.selectedBrands;
   }
 
-  public filterBySeller(seller : string){
-  	this.filterSeller.transform(this.productHandler.productRecords,seller);
+  public removeSelectedBrand(marca : string){
+  	for(let i = 0;i< this.selectedBrands.length;i++){
+  		if(this.selectedBrands[i] === marca){
+  			this.selectedBrands.splice(i,1);
+  		}
+  	}
+  }
+
+  public addSelectedCategory(categoria : string){
+  	this.selectedCategories.push(categoria);
+  }
+
+  public getSelectedCategories() : string[]{
+  	return this.selectedCategories;
+  }
+
+  public removeSelectedCategory(categoria : string){
+  	for(let i = 0;i< this.selectedCategories.length;i++){
+  		if(this.selectedCategories[i] === categoria){
+  			this.selectedCategories.splice(i,1);
+  		}
+  	}
+  }
+
+  public addSelectedSeller(seller : string){
+  	this.selectedSellers.push(seller);
+  }
+
+  public getSelectedSeller() : string[]{
+  	return this.selectedSellers;
+  }
+
+  public removeSelectedSeller(seller : string){
+  	for(let i = 0;i< this.selectedSellers.length;i++){
+  		if(this.selectedSellers[i] === seller){
+  			this.selectedSellers.splice(i,1);
+  		}
+  	}
+  }
+
+
+  public applyFilter(){
+    	this.productHandler.productRecords = this.productHandler.backUpProductRecrods.slice(0);
+
+    	for(let brand in this.selectedBrands)
+    	{
+    		this.filterSelection(2,this.selectedBrands[brand]);
+    	}
+
+    	for(let category in this.selectedCategories)
+    	{
+  		  this.filterSelection(1,this.selectedCategories[category]);
+    	}
+
+    	for(let seller in this.selectedSellers)
+    	{
+  		  this.filterSelection(3,this.selectedSellers[seller]);
+    	}
+  }
+
+  public filterSelection(checker : number, filtrador : string){
+    this.productHandler.productRecords = this.productHandler.productRecords.filter((producto : ProductModel) =>{
+  	 	switch (checker) {
+  	 		case 1://categorias  
+  	 			return producto.categoria === filtrador; 	
+  	 		case 2://marcas
+  	 			return producto.marca === filtrador;
+  	 		case 3://vendedores
+  	 			return producto.vendedor === filtrador;
+  	 	}
+  	});	
   }
 
   public getSellers() : void{
@@ -42,6 +114,9 @@ export class CatalogHandlerService {
 		.then(response => 
 		{
 			this.sellerRecords = response;
+      for(let item in this.sellerRecords){
+        this.sellerRecords[item].checked = false;
+      }
 		})
 		.catch(error => 
 			{
@@ -71,6 +146,9 @@ export class CatalogHandlerService {
 		.then(response => 
 		{
 			this.categoryRecords = response;
+      for(let item in this.categoryRecords){
+        this.categoryRecords[item].checked = false;
+      }
 		})
 		.catch(error => 
 			{
@@ -100,6 +178,9 @@ export class CatalogHandlerService {
 		.then(response => 
 		{
 			this.brandsRecords = response;
+			for(let item in this.brandsRecords){
+				this.brandsRecords[item].checked = false;
+			}
 		})
 		.catch(error => 
 			{

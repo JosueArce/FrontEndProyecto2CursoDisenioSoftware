@@ -10,23 +10,27 @@ export class ProductHandlerService {
 
   public onChange : EventEmitter<any> = new EventEmitter();
   public productRecords : ProductModel[];
+  public backUpProductRecrods : ProductModel[];
   public selectedProduct : ProductModel;
   public uploader : CloudinaryUploader;
 
   constructor(public http_request : Http_Requests) {
+    this.productRecords = []; 
+    this.backUpProductRecrods = [];
   	this.selectedProduct = {
   		idProducto : 0,
-		producto : '',
-		descripcion: '',
-		existencia : 0,
-		precio : 0,
-		categoría : '',
-		duracionEnvio:0,
-		estado :  0,
-		imagen : '',
-		vendedor : '',
-		tarifaEnvio : 0
-  	};
+  		producto : '',
+  		descripcion: '',
+  		existencia : 0,
+  		precio : 0,
+  		categoria : '',
+  		duracionEnvio:0,
+  		estado :  0,
+  		imagen : '',
+  		vendedor : '',
+  		tarifaEnvio : 0,
+      marca : ''
+    };
     this.uploader = new CloudinaryUploader(
       new CloudinaryOptions({
         cloudName : 'ddzutuizv',
@@ -39,7 +43,7 @@ export class ProductHandlerService {
   	this.http_request.getService('Productos')
   			.then(response => 
 				{
-					//this.onChange.emit({data : response});
+					this.backUpProductRecrods = response;
 					this.productRecords = response;
 				}
 			)
@@ -74,13 +78,14 @@ export class ProductHandlerService {
   	 this.selectedProduct = newProduct;
   }
 
-  public pushImageCloud(newImage):void{
+  public pushImageCloud():void{
   	this.uploader.uploadAll();
 
     this.uploader.onSuccessItem = 
     (item : any,response:string, status:number,headers:any):any=>
     {
-      console.log(response);
+      console.log(JSON.parse(response));
+      return JSON.parse(response).url;//retorna la imagen de la imagen subida a cloudinary para usarla en la base de datos
     };
 
     this.uploader.onErrorItem = function(fileItem, response, status, headers) {

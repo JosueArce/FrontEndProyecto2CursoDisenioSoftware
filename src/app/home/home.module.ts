@@ -10,18 +10,13 @@ import { ProductComponent } from './catalog/product/product.component';
 import { LoginService } from '../login/login.service';
 import {FormsModule, ReactiveFormsModule,FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { FilterDataPipe } from '../shared/pipes/filter-data.pipe';
-import { FilterByCategoryPipe } from '../shared/pipes/filter-by-category.pipe';
-import { FilterBySellerPipe } from '../shared/pipes/filter-by-seller.pipe';
-import { FilterByBrandPipe } from '../shared/pipes/filter-by-brand.pipe';
 import { SellerRegistrationComponent } from './seller-registration/seller-registration.component';
 import { PaginationComponent } from './shared/pagination/pagination.component';
 import { MyProductsComponent } from './my-products/my-products.component';
 import { AddProductComponent } from './my-products/add-product/add-product.component';
 import { AddProductService } from './my-products/add-product/add-product.service';
-/*import { CloudinaryModule,CloudinaryConfiguration,provideCloudinary } from '@cloudinary/angular-5.x';
-import { CloudinarySettings } from '../shared/models/CloudinarySettings.model';
-import * as Cloudinary from 'cloudinary-core';*/
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
+import { FileSelectDirective } from 'ng2-file-upload';
 
 //Angular Material
 import {
@@ -46,6 +41,7 @@ import {
     PaginationComponent,
     MyProductsComponent,
     AddProductComponent,
+    FileSelectDirective
   ],
   imports: [
     HomeRoutingModule,
@@ -63,9 +59,6 @@ import {
   providers: [
     LoginService,
     FilterDataPipe,
-    FilterByBrandPipe,
-    FilterByCategoryPipe,
-    FilterBySellerPipe,
     AddProductService
   ],
   entryComponents: [

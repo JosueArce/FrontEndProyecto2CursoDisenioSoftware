@@ -31,10 +31,6 @@ import { GlobalService } from './shared/handlers/global-service.service';
 import { Http_Requests } from './shared/http_request.service';
 import { CartService } from './shared/handlers/cart.handler.service';
 
-//pipes
-import { FilterByBrandPipe } from './shared/pipes/filter-by-brand.pipe';
-import { FilterByCategoryPipe } from './shared/pipes/filter-by-category.pipe';
-import { FilterBySellerPipe } from './shared/pipes/filter-by-seller.pipe';
 
 let config = new AuthServiceConfig([
   {
@@ -51,10 +47,7 @@ export function provideConfig() {
   declarations: [
     AppComponent,
     routingComponents,
-    LayoutHome,
-    FilterByBrandPipe,
-    FilterByCategoryPipe,
-    FilterBySellerPipe
+    LayoutHome
   ],
   imports: [
     BrowserModule,
@@ -79,12 +72,9 @@ export function provideConfig() {
     LoginModalService,
     Http_Requests,
     ProductHandlerService,
-    CatalogHandlerService,
     GlobalService,
     CartService,
-    FilterByBrandPipe,
-    FilterByCategoryPipe,
-    FilterBySellerPipe
+    CatalogHandlerService
   ],
   bootstrap: [AppComponent]
 })

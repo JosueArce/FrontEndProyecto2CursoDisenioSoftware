@@ -1,3 +1,4 @@
 export interface brand {
-	marca : string	
+	marca : string,
+	checked : false
 }

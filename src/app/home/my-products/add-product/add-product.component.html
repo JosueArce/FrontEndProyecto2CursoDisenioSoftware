@@ -4,7 +4,7 @@
                 <div class="col-md-4 relative">
                     <div class="avatar">
                         <div class="avatar-bg center"></div>
-                    </div><input type="file" class="form-control" name="avatar-file" >
+                    </div><input type="file" class="form-control" name="avatar-file" ng2FileSelect [uploader]="productHandler.uploader" accept="image/*;capture=camera">
                 </div>
                 <div class="col-md-8">
                     <h2>Agregar Producto</h2>
@@ -78,7 +78,6 @@
                             <mat-form-field>
                         		<mat-label>Categoría</mat-label>
                         		<mat-select required [(value)]="selected">
-							      <mat-option>-- None --</mat-option>
 							      <mat-option value="option">Option</mat-option>
 							    </mat-select>
                         		<mat-error *ngIf="noCategorySelected()">
@@ -102,7 +101,7 @@
                     <hr>
                     <div class="form-row">
                         <div class="col-md-12 content-center">
-                        	<button class="btn btn-primary form-btn" type="submit" style="width:100%;">AGREGAR</button>
+                        	<button class="btn btn-primary form-btn" type="submit" style="width:100%;" (click)="productHandler.pushImageCloud()">AGREGAR</button>
                         </div>
                     </div>
                 </div>
