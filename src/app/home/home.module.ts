@@ -19,6 +19,8 @@ import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { EditProductComponent } from './my-products/edit-product/edit-product.component';
 import { EditProductService } from './my-products/edit-product/edit-product.service';
+import { PaginationService } from '../shared/handlers/pagination.handler.service';
+
 //Angular Material
 import {
   MatButtonModule, 
@@ -63,7 +65,8 @@ import {
     LoginService,
     FilterDataPipe,
     AddProductService,
-    EditProductService
+    EditProductService,
+    PaginationService
   ],
   entryComponents: [
     AddProductComponent,

@@ -29,22 +29,19 @@
                             </div>
                         </div>
                         <div class="d-md-none"><a class="btn btn-link d-md-none filter-collapse" data-toggle="collapse" aria-expanded="false" aria-controls="filters" role="button" href="#filters">Filters<i class="icon-arrow-down filter-caret"></i></a>
-                            <div class="collapse"
-                                id="filters">
-                                <!-- <div class="filters">
-                                    <div class="filter-item">
-                                        <h3>Categorías</h3>
-                                        <div class="form-check" *ngFor="let category of catalogHandler.categoryRecords"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">{{category.nombre}}</label></div>
-                                    </div>
-                                    <div class="filter-item">
-                                        <h3>Marcas</h3>
-                                        <div class="form-check" *ngFor= "let brand of (catalogHandler.brandsRecords | filterByBrand : {{brand.marca}} : productHandler.productRecords)"><input class="form-check-input" type="checkbox" id="formCheck-5" [(ngModel)]="brand.marca"><label class="form-check-label" for="formCheck-5">{{brand.marca}}</label></div>
-                                    </div>
-                                    <div class="filter-item">
-                                        <h3>Vendedores</h3>
-                                        <div class="form-check" *ngFor="let category of catalogHandler.sellerRecords"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">{{category.Comercio}}</label></div>
-                                    </div>
-                                </div> -->
+                            <div class="collapse"id="filters">
+                                <div class="filter-item">
+                                    <h3>Categorías</h3>
+                                    <div class="form-check" *ngFor="let category of catalogHandler.categoryRecords"><input class="form-check-input" type="checkbox" id="formCheck-1" [(ngModel)]="category.checked" (click)="getCheckedCategories(category.checked,category.nombre)"><label class="form-check-label" for="formCheck-1">{{category.nombre}}</label></div>
+                                </div>
+                                <div class="filter-item">
+                                    <h3>Marcas</h3>
+                                    <div class="form-check" *ngFor= "let brand of catalogHandler.brandsRecords"><input class="form-check-input" type="checkbox" id="formCheck-5" [(ngModel)]="brand.checked" (click)="getCheckedBrands(brand.checked,brand.marca)"><label class="form-check-label" for="formCheck-5">{{brand.marca}}</label></div>
+                                </div>
+                                <div class="filter-item">
+                                    <h3>Vendedores</h3>
+                                    <div class="form-check" *ngFor="let seller of catalogHandler.sellerRecords"><input class="form-check-input" type="checkbox" id="formCheck-1" [(ngModel)]="seller.checked" (click)="getCheckedSeller(seller.checked,seller.Comercio)"><label class="form-check-label" for="formCheck-1">{{seller.Comercio}}</label></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -71,7 +68,10 @@
                         </div>
                     </div>
                 </div>
-                <app-pagination></app-pagination>
+                <app-pagination
+                *ngIf="productHandler.productRecords.length > 0"
+                [source]="productHandler.productRecords"
+                ></app-pagination>
             </div>
         </div>
     </section>

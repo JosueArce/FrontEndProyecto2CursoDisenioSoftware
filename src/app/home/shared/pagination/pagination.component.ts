@@ -1,5 +1,6 @@
 import { Component, OnInit,Input,Output } from '@angular/core';
-import { ProductModel } from '../../../shared/models/product.model';
+import { PaginationService } from '../../../shared/handlers/pagination.handler.service';
+import { ProductHandlerService } from '../../../shared/handlers/product.handler.service';
 
 @Component({
   selector: 'app-pagination',
@@ -9,43 +10,23 @@ import { ProductModel } from '../../../shared/models/product.model';
 export class PaginationComponent implements OnInit {
 
   @Input()
-  private page : number = 1;
+  public source : Array<any>;
 
-  @Input()
-  private totalPages : number = 0;
+  public backUpSource : Array<any>;
+  private pager : any = {};
 
-  @Output()
-  private filteredList : Array<ProductModel>;
-
-  constructor() { }
-
-
-  public onNext(){
-  	if(this.page !== this.totalPages)
-  		this.page++;
-  }
-
-  public onPrevious(){
-  	if(this.page !== 1){
-  		this.page--;
-  	}
-  }
-
-  public getTotalPages(){
-  	return this.totalPages;
-  }
-
-  public getCurrentPage(){
-  	return this.page;
-  }
-
-  public setPage(element){
-  	if(element !== this.page){
-  		this.page = element;
-  	}
+  constructor(private paginationHandler : PaginationService,private productHandler : ProductHandlerService) { 
+    this.source = new Array<any>();
+    this.backUpSource = new Array<any>();
   }
 
   ngOnInit() {
+    this.backUpSource = this.source.slice(0);
+    this.setPage(1);
   }
 
+  setPage(page : number)
+  {
+    this.pager = this.paginationHandler.getPager(this.backUpSource.length,page);
+    this.productHandler.productRecords = this.source.slice(this.pager.startIndex, this.pager.endIndex + 1);
 }
