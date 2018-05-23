@@ -1,7 +1,7 @@
 
-#border-circular, .block-heading{
+.block-heading{
 	border-radius: 10px;
-	border: 5px solid #98cef6;
+	border: 5px solid #21D8D8;
 	background-color: white;
 }
 
