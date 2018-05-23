@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
+import {FormsModule} from "@angular/forms";
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
@@ -21,8 +21,6 @@ import {
   MatChipsModule,
 } from "@angular/material";
 
-
-
 //services
 import { LoginService } from './login/login.service';
 import { LoginModalService } from './login/loginModal.service';
@@ -31,6 +29,11 @@ import { CatalogHandlerService } from './shared/handlers/catalog.handler.service
 import { GlobalService } from './shared/handlers/global-service.service';
 import { Http_Requests } from './shared/http_request.service';
 import { CartService } from './shared/handlers/cart.handler.service';
+
+//pipes
+import { FilterByBrandPipe } from './shared/pipes/filter-by-brand.pipe';
+import { FilterByCategoryPipe } from './shared/pipes/filter-by-category.pipe';
+import { FilterBySellerPipe } from './shared/pipes/filter-by-seller.pipe';
 
 let config = new AuthServiceConfig([
   {
@@ -47,10 +50,14 @@ export function provideConfig() {
   declarations: [
     AppComponent,
     routingComponents,
-    LayoutHome
+    LayoutHome,
+    FilterByBrandPipe,
+    FilterByCategoryPipe,
+    FilterBySellerPipe
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     SocialLoginModule,
     HttpModule,
@@ -73,7 +80,10 @@ export function provideConfig() {
     ProductHandlerService,
     CatalogHandlerService,
     GlobalService,
-    CartService
+    CartService,
+    FilterByBrandPipe,
+    FilterByCategoryPipe,
+    FilterBySellerPipe
   ],
   bootstrap: [AppComponent]
 })

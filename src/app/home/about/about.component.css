@@ -1,4 +1,19 @@
-.clean-block .clean-hero{
-	background-image:url("../../../assets/img/super1.jpg");
-	color:rgba(9, 162, 255, 0.85);
+
+
+
+#first_section{
+	height: 700px;
+	background-image: url('https://res.cloudinary.com/ddzutuizv/image/upload/v1527023782/super1.jpg');
+	background-repeat: no-repeat;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: sepia(70%);
+}
+
+.text{
+	color: blue;
+	filter: contrast(100%);
+    text-align: center;
+    padding-top: 330px;
 }

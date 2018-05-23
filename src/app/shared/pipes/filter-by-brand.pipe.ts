@@ -5,12 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterByBrandPipe implements PipeTransform {
 
-  transform(value: any, input: string) {
-      console.log(value,input);
+    public transform(value: any, input: string) {
         if (input) {
             input = input.toLowerCase();
             return value.filter(function (element: any) {
-                return element.categoría.toLowerCase().indexOf(input) > -1;
+                return element.marca.toLowerCase().indexOf(input) > -1;
             })
         }
         return value;

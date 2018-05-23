@@ -5,8 +5,9 @@ import { Injectable } from '@angular/core';
 
 import { AuthService, SocialUser } from "angularx-social-login";
 import {  GoogleLoginProvider } from "angularx-social-login";
-
+import { MatDialog, MatDialogRef,MatDialogClose } from '@angular/material';
 import { MatSnackBar } from '@angular/material';
+import { LoginModalService } from './loginModal.service';
 
 @Injectable()
 
@@ -15,14 +16,12 @@ export class LoginService{
   private user : SocialUser;
   private loggedIn : boolean;
 
-  constructor(private authService : AuthService, public snackBar: MatSnackBar){}
+  constructor(private authService : AuthService, public snackBar: MatSnackBar,private closeModal : LoginModalService){}
 
   signInWithGoogle() : void {
   	this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-  	this.authService.authState.subscribe((user) => {
-  		this.user = user;
-      this.openSnackBar('Has iniciado sesión!', 'Ok');
-  		this.loggedIn = (user != null);
+  	this.authService.authState.subscribe((user) => {		
+      if(user){this.closeModal.dialogRef.close();this.openSnackBar('Has iniciado sesión!', 'Ok');this.user = user;this.loggedIn = (user != null);}
   	})
     
   }

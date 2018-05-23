@@ -5,8 +5,14 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterByCategoryPipe implements PipeTransform {
 
-  transform(value: any, args?: any): any {
-    return null;
-  }
+    public transform(value: any, input: string) {
+        if (input) {
+            input = input.toLowerCase();
+            return value.filter(function (element: any) {
+                return element.categoría.toLowerCase().indexOf(input) > -1;
+            })
+        }
+        return value;
+    }
 
 }
