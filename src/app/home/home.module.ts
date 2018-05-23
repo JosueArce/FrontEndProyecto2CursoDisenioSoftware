@@ -8,7 +8,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { PaymentComponent } from './shopping-cart/payment/payment.component';
 import { ProductComponent } from './catalog/product/product.component';
 import { LoginService } from '../login/login.service';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule,FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { FilterDataPipe } from '../shared/pipes/filter-data.pipe';
 import { FilterByCategoryPipe } from '../shared/pipes/filter-by-category.pipe';
 import { FilterBySellerPipe } from '../shared/pipes/filter-by-seller.pipe';
@@ -18,6 +18,11 @@ import { PaginationComponent } from './shared/pagination/pagination.component';
 import { MyProductsComponent } from './my-products/my-products.component';
 import { AddProductComponent } from './my-products/add-product/add-product.component';
 import { AddProductService } from './my-products/add-product/add-product.service';
+/*import { CloudinaryModule,CloudinaryConfiguration,provideCloudinary } from '@cloudinary/angular-5.x';
+import { CloudinarySettings } from '../shared/models/CloudinarySettings.model';
+import * as Cloudinary from 'cloudinary-core';*/
+import { Ng2CloudinaryModule } from 'ng2-cloudinary';
+
 //Angular Material
 import {
   MatButtonModule, 
@@ -52,7 +57,8 @@ import {
     MatFormFieldModule,
     MatDialogModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    Ng2CloudinaryModule
   ],
   providers: [
     LoginService,

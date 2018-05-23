@@ -9,7 +9,7 @@ export class FilterByCategoryPipe implements PipeTransform {
         if (input) {
             input = input.toLowerCase();
             return value.filter(function (element: any) {
-                return element.categoría.toLowerCase().indexOf(input) > -1;
+                return element.categoria.toLowerCase().indexOf(input) > -1;
             })
         }
         return value;

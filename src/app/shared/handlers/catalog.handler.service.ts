@@ -26,17 +26,15 @@ export class CatalogHandlerService {
   }
 
   public filterByBrand(brand : string){
-  	console.log(brand);
-  	this.filterBrand.transform(this.productHandler.productRecords,brand);
+  	this.productHandler.productRecords = this.filterBrand.transform(this.productHandler.productRecords,brand);
   }
 
   public filterByCategory(category : string){
-  	console.log(category);
-  	console.log(this.filterCategory.transform(this.productHandler.productRecords,category));
+  	this.filterCategory.transform(this.productHandler.productRecords,category);
   }
 
-  public filterBySeller(){
-
+  public filterBySeller(seller : string){
+  	this.filterSeller.transform(this.productHandler.productRecords,seller);
   }
 
   public getSellers() : void{

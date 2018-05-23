@@ -2,14 +2,16 @@ import { Injectable,EventEmitter } from '@angular/core';
 import { Http_Requests } from '../http_request.service';
 import { ProductModel } from '../models/product.model';
 import { Observable } from 'rxjs';
+import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
+
 
 @Injectable()
 export class ProductHandlerService {
 
   public onChange : EventEmitter<any> = new EventEmitter();
   public productRecords : ProductModel[];
-  public selectedProduct : ProductModel
-
+  public selectedProduct : ProductModel;
+  public uploader : CloudinaryUploader;
 
   constructor(public http_request : Http_Requests) {
   	this.selectedProduct = {
@@ -25,6 +27,12 @@ export class ProductHandlerService {
 		vendedor : '',
 		tarifaEnvio : 0
   	};
+    this.uploader = new CloudinaryUploader(
+      new CloudinaryOptions({
+        cloudName : 'ddzutuizv',
+        uploadPreset : 'iwbl3gws'
+      })
+    );
   }
 
   public getProducts() : void{
@@ -67,10 +75,20 @@ export class ProductHandlerService {
   }
 
   public pushImageCloud(newImage):void{
-  	
+  	this.uploader.uploadAll();
+
+    this.uploader.onSuccessItem = 
+    (item : any,response:string, status:number,headers:any):any=>
+    {
+      console.log(response);
+    };
+
+    this.uploader.onErrorItem = function(fileItem, response, status, headers) {
+      console.info('onErrorItem', fileItem, response, status, headers);
+    };
   }
 
-  public getImageCloud() : string{
+  public getImageCloud(imagen) : string{
   	return null;
   }
 

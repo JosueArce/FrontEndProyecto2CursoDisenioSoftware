@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar } from '@angular/material';
+import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
+import { ProductHandlerService } from '../../../shared/handlers/product.handler.service';
 
 @Component({
   selector: 'app-add-product',
@@ -13,6 +15,7 @@ export class AddProductComponent implements OnInit {
   form: FormGroup;
   selected = '';
   constructor(
+    private productHandler : ProductHandlerService,
   	public dialogRef: MatDialogRef<AddProductComponent>,
   	formBuilder: FormBuilder,
   	public snackBar: MatSnackBar) { 
