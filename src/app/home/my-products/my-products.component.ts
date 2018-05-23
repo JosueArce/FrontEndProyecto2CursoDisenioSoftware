@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AddProductService } from './add-product/add-product.service';
-
+import { EditProductService } from './edit-product/edit-product.service';
 
 @Component({
   selector: 'app-my-products',
@@ -10,15 +10,21 @@ import { AddProductService } from './add-product/add-product.service';
 export class MyProductsComponent implements OnInit {
 
 	
-  constructor(public addProductService: AddProductService) {
+  constructor(
+    public addProductService: AddProductService,
+    public editProductService: EditProductService) {
     
   }
 
   ngOnInit() {
   }
 
-  openDialog(){
+  openAddDialog(){
   	this.addProductService.openDialog();
+  }
+
+  openEditDialog(){
+    this.editProductService.openDialog();
   }
 
 }

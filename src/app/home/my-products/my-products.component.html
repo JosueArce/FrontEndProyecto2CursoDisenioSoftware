@@ -7,6 +7,10 @@
                 <mat-card-content>
                     Descripcción
                 </mat-card-content>
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" (click)="openEditDialog()">Editar</button>
+                    <button mat-raised-button color="warn">Eliminar</button>
+                </mat-card-actions>
             </mat-card>
             <mat-card class="elemento">
                 <mat-card-title>Nombre Producto</mat-card-title>
@@ -44,7 +48,7 @@
             </ul>
         </nav>
         <div class="add-product-btn">
-            <button mat-stroked-button class="background-green" (click)="openDialog()">Agregar Producto</button>
+            <button mat-stroked-button class="background-green" (click)="openAddDialog()">Agregar Producto</button>
         </div>
     </div>
     

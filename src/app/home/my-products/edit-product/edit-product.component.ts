@@ -6,18 +6,23 @@ import { ProductHandlerService } from '../../../shared/handlers/product.handler.
 import { CatalogHandlerService } from '../../../shared/handlers/catalog.handler.service';
 
 @Component({
-  selector: 'app-add-product',
-  templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.css']
+  selector: 'app-edit-product',
+  templateUrl: './edit-product.component.html',
+  styleUrls: ['./edit-product.component.css']
 })
-export class AddProductComponent implements OnInit {
-  public title: string;
-  public message: string;
+export class EditProductComponent implements OnInit {
   form: FormGroup;
-  selected = '';
+  product = {//prducto quemado, debería ser el producto seleccionado de la lista de productos del vendedor
+    nombre: 'Nombre de prueba',
+    cantidad: 12,
+    descripcion: 'Descripcion de prueba',
+    precio: 23000,
+    duracion: 12,
+    tarifa: 2500,
+  };
   constructor(
     private productHandler : ProductHandlerService,
-  	public dialogRef: MatDialogRef<AddProductComponent>,
+  	public dialogRef: MatDialogRef<EditProductComponent>,
   	formBuilder: FormBuilder,
   	public snackBar: MatSnackBar,
     private catalogHandler : CatalogHandlerService) { 
@@ -35,8 +40,6 @@ export class AddProductComponent implements OnInit {
   }
 
   ngOnInit() {
-  	this.title = ""
-    this.message = ""
   }
 
   onSubmit(){//funcion para añadir producto a la lista de productos del vendedor

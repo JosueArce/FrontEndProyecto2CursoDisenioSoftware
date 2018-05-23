@@ -17,7 +17,8 @@ import { AddProductComponent } from './my-products/add-product/add-product.compo
 import { AddProductService } from './my-products/add-product/add-product.service';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { FileSelectDirective } from 'ng2-file-upload';
-
+import { EditProductComponent } from './my-products/edit-product/edit-product.component';
+import { EditProductService } from './my-products/edit-product/edit-product.service';
 //Angular Material
 import {
   MatButtonModule, 
@@ -27,6 +28,7 @@ import {
   MatInputModule,
   MatSelectModule
 } from '@angular/material';
+
 
 
 @NgModule({
@@ -41,7 +43,8 @@ import {
     PaginationComponent,
     MyProductsComponent,
     AddProductComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    EditProductComponent
   ],
   imports: [
     HomeRoutingModule,
@@ -59,10 +62,12 @@ import {
   providers: [
     LoginService,
     FilterDataPipe,
-    AddProductService
+    AddProductService,
+    EditProductService
   ],
   entryComponents: [
-    AddProductComponent
+    AddProductComponent,
+    EditProductComponent
   ]
 })
 export class HomeModule { }
