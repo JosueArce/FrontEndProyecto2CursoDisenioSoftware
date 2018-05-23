@@ -47,8 +47,19 @@ export class AddProductComponent implements OnInit {
   	console.log('entre!')
   	if(this.form.valid){
   		this.dialogRef.close();
-  	}
+      this.openSnackBar('Producto agregado!', 'Ok');
+  	} else {
+      this.openSnackBar('Credenciales Incorrectas!', 'Ok');
+    }
   	
+  }
+
+  openSnackBar(message: string, action: string) {
+    let extraClasses=['background-grey'];
+      this.snackBar.open(message, action, {
+        duration: 2000,
+        extraClasses: extraClasses
+    });
   }
 
 }
