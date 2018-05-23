@@ -1,0 +1,116 @@
+<div class="container profile profile-view" id="profile">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-row profile-row">
+                <div class="col-md-4 relative">
+                    <div class="avatar">
+                        <div class="avatar-bg center"></div>
+                    </div><input type="file" class="form-control" name="avatar-file"></div>
+                <div class="col-md-8">
+                    <h2>Editar Producto</h2>
+                    <hr>
+                    <div class="form-row">
+                        <div class="col-sm-12 col-md-6">
+                        	<mat-form-field>
+                        		<mat-label>Nombre Producto</mat-label>
+                        		<input 
+                        		matInput placeholder="Nombre" 
+                        		value="Prueba"  
+                        		[formControl]="form.controls['nameFormControl']" #name>
+                        		<mat-error *ngIf="form.controls['nameFormControl'].hasError('required')">
+							        Campo <strong>requerido</strong>
+							    </mat-error>
+                        	</mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <mat-form-field>
+                        		<mat-label>Cantidad</mat-label>
+                        		<input 
+                        		matInput type="number" placeholder="Cantidad" 
+                        		value="123" 
+                        		[formControl]="form.controls['quantityFormControl']" #quantity>
+                        		<mat-hint align="end">No puede ser negativo</mat-hint>
+                        		<mat-error *ngIf="form.get('quantityFormControl')?.invalid">
+							        Valor no válido o vacío
+							    </mat-error>
+                        	</mat-form-field>
+                        </div>
+                    </div>
+		            <div class="form-row">
+			        	<div class="col-12">
+			        		<mat-form-field>
+	                    		<mat-label>Descripción del Producto</mat-label>
+	                    		<textarea matInput placeholder="Descripción" 
+	                    		value="Prueba" 
+	                    		[formControl]="form.controls['descriptionFormControl']"
+	                    		#description></textarea> 
+	                    		
+	                    		<mat-error *ngIf="form.controls['descriptionFormControl'].hasError('required')">
+							        Campo <strong>requerido</strong>
+							    </mat-error>
+	                    	</mat-form-field>
+			        	</div>    	
+		            </div>        
+                    <div class="form-row">
+                        <div class="col-sm-12 col-md-6">
+                            <mat-form-field>
+                        		<mat-label>Precio (Colones)</mat-label>
+                        		<input 
+                        		matInput type="number" placeholder="Precio" 
+                        		value="123" 
+                        		[formControl]="form.controls['priceFormControl']" #price>
+                        		<span matPrefix>₡&nbsp;</span>
+							    <span matSuffix>.00</span>
+							    <mat-hint align="end">No puede ser negativo</mat-hint>
+                        		<mat-error *ngIf="form.get('priceFormControl')?.invalid">
+							        Campo <strong>requerido</strong>
+							    </mat-error>
+                        	</mat-form-field>
+                            <mat-form-field>
+                        		<mat-label>Duración de Envío (Horas)</mat-label>
+                        		<input 
+                        		matInput type="number" placeholder="Duración" 
+                        		value="123" 
+                        		[formControl]="form.controls['shippingTimeFormControl']" #shippingTime>
+                        		<span matSuffix>horas</span>
+                        		<mat-hint align="end">No puede ser negativo. Se recomienda que no sea 0</mat-hint>
+                        		<mat-error *ngIf="form.get('shippingTimeFormControl')?.invalid">
+							        Campo <strong>requerido</strong>
+							    </mat-error>
+                        	</mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <mat-form-field>
+                        		<mat-label>Categoría</mat-label>
+                        		<mat-select required [(value)]="selected">
+							      <mat-option>-- None --</mat-option>
+							      <mat-option value="option">Option</mat-option>
+							    </mat-select>
+                        		<mat-error *ngIf="noCategorySelected()">
+							        Campo <strong>requerido</strong>
+							    </mat-error>
+                        	</mat-form-field>
+                            <mat-form-field>
+                        		<mat-label>Tarifa de Envío (Colones)</mat-label>
+                        		<input   
+                        		matInput type="number" placeholder="Tarifa" 
+                        		value="123" 
+                        		[formControl]="form.controls['shippingFeeFormControl']" #shippingFee>
+                        		<span matPrefix>₡&nbsp;</span>
+							    <span matSuffix>.00</span>
+							    <mat-hint align="end">No puede ser negativo</mat-hint>
+                        		<mat-error *ngIf="form.get('shippingFeeFormControl')?.invalid">
+							        Campo <strong>requerido</strong>
+							    </mat-error>
+                        	</mat-form-field>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-row">
+                        <div class="col-md-12 content-center">
+                        	<button class="btn btn-primary form-btn" type="submit" style="width:100%;">EDITAR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>

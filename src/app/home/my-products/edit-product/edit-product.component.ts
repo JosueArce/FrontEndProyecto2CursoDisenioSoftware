@@ -3,17 +3,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar } from '@angular/material';
 
 @Component({
-  selector: 'app-add-product',
-  templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.css']
+  selector: 'app-edit-product',
+  templateUrl: './edit-product.component.html',
+  styleUrls: ['./edit-product.component.css']
 })
-export class AddProductComponent implements OnInit {
-  public title: string;
-  public message: string;
+export class EditProductComponent implements OnInit {
   form: FormGroup;
-  selected = '';
   constructor(
-  	public dialogRef: MatDialogRef<AddProductComponent>,
+  	public dialogRef: MatDialogRef<EditProductComponent>,
   	formBuilder: FormBuilder,
   	public snackBar: MatSnackBar) { 
   	this.form= formBuilder.group({
@@ -29,23 +26,13 @@ export class AddProductComponent implements OnInit {
   }
 
   ngOnInit() {
-  	this.title = ""
-    this.message = ""
-  }
-
-  noCategorySelected(): boolean{
-  	if(this.selected==''){
-  		return true;
-  	} else{
-  		return false;
-  	}
   }
 
   onSubmit(){//funcion para añadir producto a la lista de productos del vendedor
   	//validar si los datos son correcto para añadir o no el producto
   	if(this.form.valid){
   		this.dialogRef.close();
-      this.openSnackBar('Producto agregado!', 'Ok');
+      this.openSnackBar('Producto editado!', 'Ok');
   	} else {
       this.openSnackBar('Credenciales Incorrectas!', 'Ok');
     }
