@@ -17,3 +17,20 @@
 .elemento{
 	background-color: #F5F5F5;
 }
+
+.titulo{
+	
+}
+
+.boton{
+	margin: auto;
+	width: 50%;
+}
+
+.card-image{
+	height: 150px;
+	width: 150px;
+	margin: auto;
+	padding-top: 10px;
+	border-radius: 50%;
+}
