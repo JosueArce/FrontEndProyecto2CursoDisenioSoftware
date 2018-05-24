@@ -20,8 +20,6 @@
                     Descripcción
                 </mat-card-content>
             </mat-card>
-        </div>
-        <div class="row" style="padding:30px;">
             <mat-card class="elemento">
                 <mat-card-title>Nombre Producto</mat-card-title>
                 <mat-card-subtitle>Cantidad</mat-card-subtitle>
@@ -38,15 +36,7 @@
             </mat-card>
         </div>
         <nav class="d-flex justify-content-center align-items-center" style="padding-top:21px;background-color:#ffffff;">
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                <li class="page-item"><a class="page-link">1</a></li>
-                <li class="page-item"><a class="page-link">2</a></li>
-                <li class="page-item"><a class="page-link">3</a></li>
-                <li class="page-item"><a class="page-link">4</a></li>
-                <li class="page-item"><a class="page-link">5</a></li>
-                <li class="page-item"><a class="page-link" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-            </ul>
+            <app-pagination ></app-pagination>
         </nav>
         <div class="add-product-btn">
             <button mat-stroked-button class="background-green" (click)="openAddDialog()">Agregar Producto</button>

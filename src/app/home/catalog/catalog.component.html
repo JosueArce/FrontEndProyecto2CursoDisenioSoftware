@@ -6,7 +6,7 @@
                 <p>Catálogo de productos.</p>
             </div>
             <div class="input-group">
-                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div><input class="form-control" type="text" placeholder="I am looking for.." [(ngModel)]="queryString">
+                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div><input class="form-control" type="text" placeholder="Estoy buscando" [(ngModel)]="queryString">
                 <div class="input-group-append"><button class="btn btn-light" type="button">Search </button></div>
             </div>
             <div class="content">
@@ -66,12 +66,16 @@
                             </div>
                             
                         </div>
+                        <div class="row">
+                            <div class="center">
+                                <app-pagination
+                                *ngIf="productHandler.productRecords.length > 0"
+                                [source]="productHandler.productRecords"
+                                ></app-pagination>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <app-pagination
-                *ngIf="productHandler.productRecords.length > 0"
-                [source]="productHandler.productRecords"
-                ></app-pagination>
             </div>
         </div>
     </section>
