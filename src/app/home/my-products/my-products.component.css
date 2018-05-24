@@ -4,6 +4,10 @@ h2{
   color: #17a2b8;
 }
 
+.elemento{
+	margin: 5px;
+}
+
 .add-product-btn{
   justify-content: center;
   align-items: center;
