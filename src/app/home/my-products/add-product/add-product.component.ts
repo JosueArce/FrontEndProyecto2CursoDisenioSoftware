@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatSnackBar } from '@angular/material';
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
@@ -13,9 +13,7 @@ import { AuthService, SocialUser } from "angularx-social-login";
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.css']
 })
-export class AddProductComponent implements OnInit {
-  public title: string;
-  public message: string;
+export class AddProductComponent {
   form: FormGroup;
   selected = '';
   newProduct : ProductModel;
@@ -42,12 +40,6 @@ export class AddProductComponent implements OnInit {
     this.newProduct = this.productHandler.selectedProduct;
     this.newProduct.estado = 1;
   }
-
-  ngOnInit() {
-  	this.title = ""
-    this.message = ""
-  }
-
   openSnackBar(message: string, action: string) {
     let extraClasses=['background-grey'];
       this.snackBar.open(message, action, {
@@ -58,8 +50,8 @@ export class AddProductComponent implements OnInit {
 
   onSubmit(newProduct : ProductModel,marca,idCategoria){
     if(this.form.valid){      
-      newProduct.marca = marca; newProduct.categoria = idCategoria;
-      this.productHandler.pushImageCloud(newProduct, this.globalHandler.userData.id);
+      newProduct.marca = marca; newProduct.categoria = idCategoria; newProduct.vendedor = this.globalHandler.userData.id;
+      this.productHandler.pushImageCloud(newProduct);
       this.openSnackBar('Producto agregado!', 'Ok');
       this.dialogRef.close();
     } else {

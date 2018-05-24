@@ -19,6 +19,8 @@ export class CatalogHandlerService {
 
   constructor(private productHandler : ProductHandlerService, 
   	private http_request : Http_Requests) { 
+    this.productHandler.getProducts();
+
   	this.sellerRecords = new Array<seller>();
   	this.categoryRecords = new Array<category>();
   	this.brandsRecords = new Array<brand>();

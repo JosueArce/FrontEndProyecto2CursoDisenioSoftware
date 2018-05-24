@@ -78,14 +78,17 @@ export class ProductHandlerService {
   	 this.selectedProduct = newProduct;
   }
 
-  public pushImageCloud(newProduct : ProductModel, id : string) : boolean{
+  public pushImageCloud(newProduct : ProductModel) : boolean{
   	this.uploader.uploadAll();
 
     this.uploader.onSuccessItem = 
     (item : any,response:string, status:number,headers:any):any=>
     {
-      newProduct.vendedor = id;
-      newProduct.imagen = JSON.parse(response).url
+      if(newProduct)
+        newProduct.imagen = JSON.parse(response).url;
+      else newProduct.imagen = "http://www.royallepagesudbury.ca/images/no-image.png";
+      
+      console.log(newProduct);
       this.postProducts(newProduct);
       return true;
     };

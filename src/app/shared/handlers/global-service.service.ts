@@ -45,7 +45,7 @@ export class GlobalService {
 
   isLoggedIn(){
     this.authService.authState.subscribe((user) => {
-      if(user) {this.userLogged.emit(true);this.loggedIn = true;this.user.emit(user);this.userData = user;console.log(user.id);}
+      if(user) {this.userLogged.emit(true);this.loggedIn = true;this.user.emit(user);this.userData = user;}
     })
   }
  

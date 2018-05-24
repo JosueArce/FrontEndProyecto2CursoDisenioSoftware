@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 
 export class PaginationService {
- 	getPager(totalItems: number, currentPage: number = 1, pageSize: number = 6) {
+ 	getPager(totalItems: number, currentPage: number = 1, pageSize: number = 4) {
         // cuantos elementos se van a mostrar
         let totalPages = Math.ceil(totalItems / pageSize);
 

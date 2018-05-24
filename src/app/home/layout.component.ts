@@ -4,6 +4,7 @@ import { ProductHandlerService } from '../shared/handlers/product.handler.servic
 import { GlobalService } from '../shared/handlers/global-service.service';
 import { Router } from '@angular/router';
 import { AuthService, SocialUser } from "angularx-social-login";
+import { SellersHandlerService } from '../shared/handlers/sellers.handler.service';
 
 
 @Component({
@@ -22,9 +23,11 @@ export class LayoutHome{
 		public globalService: GlobalService,
 		public loginModalService: LoginModalService,
 		private router: Router,
-		private authService : AuthService){	
+		private authService : AuthService,
+		private sellerHandler : SellersHandlerService){	
 		this.producHandler.getProducts();
 		this.globalService.isLoggedIn();
+		this.sellerHandler.getProducts();
 		this.isLoggedIn();
 	}
 	

@@ -48,7 +48,7 @@
                     <div class="col-sm-12 col-xs-12 col-md-9 col-lg-9">
                         <div class="products">
                             <div class="row no-gutters" style="max-height: 600px;overflow: auto;">                                
-                                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4" *ngFor = "let product of (productHandler.productRecords | filterData : queryString : productHandler.productRecords)">                                
+                                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 col-xl-3" *ngFor = "let product of (productHandler.productRecords | filterData : queryString : productHandler.productRecords)">                                
                                     <mat-card class="card">
                                       <img  mat-card-image src="{{product.imagen}}">
                                       <mat-card-content>
@@ -69,7 +69,7 @@
                         <div class="row">
                             <div class="center">
                                 <app-pagination
-                                *ngIf="productHandler.productRecords.length > 0"
+                                *ngIf="productHandler.productRecords?.length > 0"
                                 [source]="productHandler.productRecords"
                                 ></app-pagination>
                             </div>
