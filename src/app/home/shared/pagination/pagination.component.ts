@@ -29,4 +29,5 @@ export class PaginationComponent implements OnInit {
   {
     this.pager = this.paginationHandler.getPager(this.backUpSource.length,page);
     this.productHandler.productRecords = this.source.slice(this.pager.startIndex, this.pager.endIndex + 1);
+  }
 }
