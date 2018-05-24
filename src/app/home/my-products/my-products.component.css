@@ -13,3 +13,7 @@ h2{
   width: 100%;
   background-color: #24AE00;
 }
+
+.center{
+  margin: auto;
+}

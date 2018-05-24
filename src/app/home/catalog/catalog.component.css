@@ -6,6 +6,11 @@ h3{
   font-family: 'Quicksand', sans-serif;
 }
 
+.center{
+  margin: auto;
+}
+
+
 .search-form {
   margin:40px 5px;
   font:normal 12px sans-serif;
