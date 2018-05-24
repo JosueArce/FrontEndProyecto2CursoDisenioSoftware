@@ -20,6 +20,8 @@ import { FileSelectDirective } from 'ng2-file-upload';
 import { EditProductComponent } from './my-products/edit-product/edit-product.component';
 import { EditProductService } from './my-products/edit-product/edit-product.service';
 import { PaginationService } from '../shared/handlers/pagination.handler.service';
+import { AdministrateHandlerService } from '../shared/handlers/administrate.handler.service';
+import { SellersHandlerService } from '../shared/handlers/sellers.handler.service';
 
 //Angular Material
 import {
@@ -66,7 +68,9 @@ import {
     FilterDataPipe,
     AddProductService,
     EditProductService,
-    PaginationService
+    PaginationService,
+    AdministrateHandlerService,
+    SellersHandlerService
   ],
   entryComponents: [
     AddProductComponent,

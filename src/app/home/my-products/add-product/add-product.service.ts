@@ -3,6 +3,7 @@ import { AddProductComponent } from './add-product.component';
 import { MatDialog, MatDialogRef } from '@angular/material';
 
 
+
 @Injectable()
 
 export class AddProductService{
@@ -17,4 +18,9 @@ export class AddProductService{
     }); 
     return this.dialogRef.afterClosed()
   }
+
+
+
+  
+
 }

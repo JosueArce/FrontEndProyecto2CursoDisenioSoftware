@@ -17,8 +17,6 @@ export class PaginationService {
         } else if (currentPage > totalPages) { 
             currentPage = totalPages; 
         }
-
-        console.log("current page:",currentPage);
         
         let startPage: number, endPage: number;
         if (totalPages <= 10) {

@@ -56,7 +56,7 @@ export class ProductHandlerService {
   }
 
   public postProducts(newProduct : ProductModel) : void{
-  	this.http_request.postService(newProduct,'insertProducts')
+  	this.http_request.postService(newProduct,'insertarProducto')
   			.then(response => 
 				{
 					this.onChange.emit({data : response.data});
@@ -78,19 +78,24 @@ export class ProductHandlerService {
   	 this.selectedProduct = newProduct;
   }
 
-  public pushImageCloud():void{
+  public pushImageCloud(newProduct : ProductModel, id : string) : boolean{
   	this.uploader.uploadAll();
 
     this.uploader.onSuccessItem = 
     (item : any,response:string, status:number,headers:any):any=>
     {
-      console.log(JSON.parse(response));
-      return JSON.parse(response).url;//retorna la imagen de la imagen subida a cloudinary para usarla en la base de datos
+      newProduct.vendedor = id;
+      newProduct.imagen = JSON.parse(response).url
+      this.postProducts(newProduct);
+      return true;
     };
 
     this.uploader.onErrorItem = function(fileItem, response, status, headers) {
       console.info('onErrorItem', fileItem, response, status, headers);
+      return false;
     };
+
+    return null;
   }
 
   public getImageCloud(imagen) : string{
