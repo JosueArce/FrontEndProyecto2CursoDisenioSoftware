@@ -19,17 +19,17 @@
 }
 
 .titulo{
-	
+	font-family: 'Modern Antiqua', cursive;
+	text-align: justify;
 }
 
-.boton{
-	margin: auto;
-	width: 50%;
+#boton{
+	width: 100%;
 }
 
 .card-image{
-	height: 150px;
-	width: 150px;
+	height: 110px;
+	width: 110px;
 	margin: auto;
 	padding-top: 10px;
 	border-radius: 50%;

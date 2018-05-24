@@ -30,7 +30,8 @@ import {
   MatFormFieldModule,
   MatDialogModule,
   MatInputModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDividerModule
 } from '@angular/material';
 
 
@@ -61,7 +62,8 @@ import {
     MatDialogModule,
     MatInputModule,
     MatSelectModule,
-    Ng2CloudinaryModule
+    Ng2CloudinaryModule,
+    MatDividerModule
   ],
   providers: [
     LoginService,
