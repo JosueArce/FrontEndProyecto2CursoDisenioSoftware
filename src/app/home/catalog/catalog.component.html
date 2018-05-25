@@ -6,7 +6,7 @@
                 <p>Catálogo de productos.</p>
             </div>
             <div class="input-group">
-                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div><input class="form-control" type="text" placeholder="I am looking for.." [(ngModel)]="queryString">
+                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div><input class="form-control" type="text" placeholder="Estoy buscando" [(ngModel)]="queryString">
                 <div class="input-group-append"><button class="btn btn-light" type="button">Search </button></div>
             </div>
             <div class="content">
@@ -24,39 +24,36 @@
                                 </div>
                                 <div class="filter-item">
                                     <h3>Vendedores</h3>
-                                    <div class="form-check" *ngFor="let seller of catalogHandler.sellerRecords"><input class="form-check-input" type="checkbox" id="formCheck-1" [(ngModel)]="seller.checked" (click)="getCheckedSeller(seller.checked,seller.Comercio)"><label class="form-check-label" for="formCheck-1">{{seller.Comercio}}</label></div>
+                                    <div class="form-check" *ngFor="let seller of catalogHandler.sellerRecords"><input class="form-check-input" type="checkbox" id="formCheck-1" [(ngModel)]="seller.checked" (click)="getCheckedSeller(seller.checked,seller.comercio)"><label class="form-check-label" for="formCheck-1">{{seller.comercio}}</label></div>
                                 </div>
                             </div>
                         </div>
                         <div class="d-md-none"><a class="btn btn-link d-md-none filter-collapse" data-toggle="collapse" aria-expanded="false" aria-controls="filters" role="button" href="#filters">Filters<i class="icon-arrow-down filter-caret"></i></a>
-                            <div class="collapse"
-                                id="filters">
-                                <!-- <div class="filters">
-                                    <div class="filter-item">
-                                        <h3>Categorías</h3>
-                                        <div class="form-check" *ngFor="let category of catalogHandler.categoryRecords"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">{{category.nombre}}</label></div>
-                                    </div>
-                                    <div class="filter-item">
-                                        <h3>Marcas</h3>
-                                        <div class="form-check" *ngFor= "let brand of (catalogHandler.brandsRecords | filterByBrand : {{brand.marca}} : productHandler.productRecords)"><input class="form-check-input" type="checkbox" id="formCheck-5" [(ngModel)]="brand.marca"><label class="form-check-label" for="formCheck-5">{{brand.marca}}</label></div>
-                                    </div>
-                                    <div class="filter-item">
-                                        <h3>Vendedores</h3>
-                                        <div class="form-check" *ngFor="let category of catalogHandler.sellerRecords"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">{{category.Comercio}}</label></div>
-                                    </div>
-                                </div> -->
+                            <div class="collapse"id="filters">
+                                <div class="filter-item">
+                                    <h3>Categorías</h3>
+                                    <div class="form-check" *ngFor="let category of catalogHandler.categoryRecords"><input class="form-check-input" type="checkbox" id="formCheck-1" [(ngModel)]="category.checked" (click)="getCheckedCategories(category.checked,category.nombre)"><label class="form-check-label" for="formCheck-1">{{category.nombre}}</label></div>
+                                </div>
+                                <div class="filter-item">
+                                    <h3>Marcas</h3>
+                                    <div class="form-check" *ngFor= "let brand of catalogHandler.brandsRecords"><input class="form-check-input" type="checkbox" id="formCheck-5" [(ngModel)]="brand.checked" (click)="getCheckedBrands(brand.checked,brand.marca)"><label class="form-check-label" for="formCheck-5">{{brand.marca}}</label></div>
+                                </div>
+                                <div class="filter-item">
+                                    <h3>Vendedores</h3>
+                                    <div class="form-check" *ngFor="let seller of catalogHandler.sellerRecords"><input class="form-check-input" type="checkbox" id="formCheck-1" [(ngModel)]="seller.checked" (click)="getCheckedSeller(seller.checked,seller.comercio)"><label class="form-check-label" for="formCheck-1">{{seller.comercio}}</label></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-12 col-xs-12 col-md-9 col-lg-9">
                         <div class="products">
                             <div class="row no-gutters" style="max-height: 600px;overflow: auto;">                                
-                                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4" *ngFor = "let product of (productHandler.productRecords | filterData : queryString : productHandler.productRecords)">                                
+                                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 col-xl-3" *ngFor = "let product of (productHandler.productRecords | filterData : queryString : productHandler.productRecords)">                                
                                     <mat-card class="card">
                                       <img  mat-card-image src="{{product.imagen}}">
                                       <mat-card-content>
                                         <div class="product-name"><a (click)="selectedProduct(product)" [routerLink]="['/product']"><strong>{{product.producto}}</strong>
-                                        <br>by {{product.vendedor}}
+                                        <br>by {{product.nComercio}}
                                         </a></div>
                                       </mat-card-content>
                                       <mat-card-footer>
@@ -69,9 +66,16 @@
                             </div>
                             
                         </div>
+                        <div class="row">
+                            <div class="center">
+                                <!-- <app-pagination
+                                *ngIf="productHandler.productRecords?.length > 0"
+                                [source]="productHandler.productRecords"
+                                ></app-pagination> -->
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <app-pagination></app-pagination>
             </div>
         </div>
     </section>

@@ -4,6 +4,10 @@ h2{
   color: #17a2b8;
 }
 
+.elemento{
+	margin: 5px;
+}
+
 .add-product-btn{
   justify-content: center;
   align-items: center;
@@ -12,4 +16,14 @@ h2{
 .background-green{
   width: 100%;
   background-color: #24AE00;
+}
+
+.center{
+  margin: auto;
+}
+
+.card-image{
+	height: 200px;
+	width: 200px;
+	margin: auto;
 }

@@ -19,6 +19,10 @@ import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { EditProductComponent } from './my-products/edit-product/edit-product.component';
 import { EditProductService } from './my-products/edit-product/edit-product.service';
+import { AdministrateHandlerService } from '../shared/handlers/administrate.handler.service';
+import { DeleteProductComponent } from './my-products/delete-product/delete-product.component';
+import { DeleteProductService } from './my-products/delete-product/delete-product.service';
+
 //Angular Material
 import {
   MatButtonModule, 
@@ -26,8 +30,10 @@ import {
   MatFormFieldModule,
   MatDialogModule,
   MatInputModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDividerModule
 } from '@angular/material';
+
 
 
 
@@ -44,7 +50,8 @@ import {
     MyProductsComponent,
     AddProductComponent,
     FileSelectDirective,
-    EditProductComponent
+    EditProductComponent,
+    DeleteProductComponent
   ],
   imports: [
     HomeRoutingModule,
@@ -57,17 +64,21 @@ import {
     MatDialogModule,
     MatInputModule,
     MatSelectModule,
-    Ng2CloudinaryModule
+    Ng2CloudinaryModule,
+    MatDividerModule
   ],
   providers: [
     LoginService,
     FilterDataPipe,
     AddProductService,
-    EditProductService
+    EditProductService,
+    AdministrateHandlerService,
+    DeleteProductService
   ],
   entryComponents: [
     AddProductComponent,
-    EditProductComponent
+    EditProductComponent,
+    DeleteProductComponent
   ]
 })
 export class HomeModule { }

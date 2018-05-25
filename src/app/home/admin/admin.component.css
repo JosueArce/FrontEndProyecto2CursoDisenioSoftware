@@ -17,3 +17,20 @@
 .elemento{
 	background-color: #F5F5F5;
 }
+
+.titulo{
+	font-family: 'Modern Antiqua', cursive;
+	text-align: justify;
+}
+
+#boton{
+	width: 100%;
+}
+
+.card-image{
+	height: 110px;
+	width: 110px;
+	margin: auto;
+	padding-top: 10px;
+	border-radius: 50%;
+}

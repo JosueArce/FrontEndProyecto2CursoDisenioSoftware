@@ -8,7 +8,8 @@ export interface ProductModel{
 	duracionEnvio:number;
 	estado :  number;
 	imagen : string;
-	vendedor : string;
 	tarifaEnvio : number;
 	marca : string;
+	idVendedor : string;
+	nComercio : string;
 }

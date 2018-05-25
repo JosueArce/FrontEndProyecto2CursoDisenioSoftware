@@ -1,5 +1,5 @@
 export interface seller {
-	Comercio : string,
+	comercio : string,
 	Representante : string,
 	Email : string,
 	Registrado : Date,

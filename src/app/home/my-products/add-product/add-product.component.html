@@ -1,5 +1,5 @@
 <div class="container profile profile-view" id="profile">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(newProduct,brand,category)">
         <div class="form-row profile-row">
             <div class="col-md-4 relative">
                 <div class="avatar">
@@ -15,7 +15,7 @@
                     		<mat-label>Nombre Producto</mat-label>
                     		<input 
                     		matInput placeholder="Nombre" 
-                    		[formControl]="form.controls['nameFormControl']" #name>
+                    		[formControl]="form.controls['nameFormControl']" #name [(ngModel)]="newProduct.producto">
                     		<mat-error *ngIf="form.controls['nameFormControl'].hasError('required')">
 						        Campo <strong>requerido</strong>
 						    </mat-error>
@@ -24,7 +24,7 @@
                     <div class="col-sm-12 col-md-6">
                         <mat-form-field>
                     		<mat-label>Cantidad</mat-label>
-                    		<input 
+                    		<input [(ngModel)]="newProduct.existencia"
                     		matInput type="number" placeholder="Cantidad" 
                     		[formControl]="form.controls['quantityFormControl']" #quantity>
                     		<mat-hint align="end">No puede ser negativo</mat-hint>
@@ -35,10 +35,10 @@
                     </div>
                 </div>
 	            <div class="form-row">
-		        	<div class="col-12">
+		        	<div class="col-sm-12 col-md-6">
 		        		<mat-form-field>
                     		<mat-label>Descripción del Producto</mat-label>
-                    		<textarea matInput placeholder="Descripción" 
+                    		<textarea matInput placeholder="Descripción"  [(ngModel)]="newProduct.descripcion"
                     		[formControl]="form.controls['descriptionFormControl']"
                     		#description></textarea> 
                     		
@@ -46,13 +46,27 @@
 						        Campo <strong>requerido</strong>
 						    </mat-error>
                     	</mat-form-field>
-		        	</div>    	
+		        	</div>    
+
+                    <div class="col-sm-12 col-md-6">
+                        <mat-form-field>
+                            <mat-label>Marca</mat-label>
+                            <mat-select required [(ngModel)]="brand"  [formControl]="form.controls['brandFormControl']">
+                              <mat-option *ngFor="let brand of catalogHandler.brandsRecords" [value]="brand.marca">
+                                {{ brand.marca }}
+                              </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="form.controls['brandFormControl'].hasError('required')">
+                                Debe seleccionar una Marca
+                            </mat-error>
+                        </mat-form-field>
+                    </div> 	                    
 	            </div>        
                 <div class="form-row">
                     <div class="col-sm-12 col-md-6">
                         <mat-form-field>
                     		<mat-label>Precio (Colones)</mat-label>
-                    		<input 
+                    		<input [(ngModel)]="newProduct.precio"
                     		matInput type="number" placeholder="Precio" 
                     		[formControl]="form.controls['priceFormControl']" #price>
                     		<span matPrefix>₡&nbsp;</span>
@@ -64,7 +78,7 @@
                     	</mat-form-field>
                         <mat-form-field>
                     		<mat-label>Duración de Envío (Horas)</mat-label>
-                    		<input 
+                    		<input [(ngModel)]="newProduct.duracionEnvio"
                     		matInput type="number" placeholder="Duración" 
                     		[formControl]="form.controls['shippingTimeFormControl']" #shippingTime>
                     		<span matSuffix>horas</span>
@@ -77,8 +91,8 @@
                     <div class="col-sm-12 col-md-6">
                         <mat-form-field>
                     		<mat-label>Categoría</mat-label>
-                    		<mat-select required [(value)]="selected" [formControl]="form.controls['categoryFormControl']" #category>
-						      <mat-option *ngFor="let category of catalogHandler.categoryRecords" [value]="category.nombre">
+                    		<mat-select required [(ngModel)]="category"  [formControl]="form.controls['categoryFormControl']" >
+						      <mat-option *ngFor="let category of catalogHandler.categoryRecords"  [(value)]="category.idCategoria">
                                 {{ category.nombre }}
                               </mat-option>
 						    </mat-select>
@@ -88,7 +102,7 @@
                     	</mat-form-field>
                         <mat-form-field>
                     		<mat-label>Tarifa de Envío (Colones)</mat-label>
-                    		<input   
+                    		<input   [(ngModel)]="newProduct.tarifaEnvio"
                     		matInput type="number" placeholder="Tarifa" 
                     		[formControl]="form.controls['shippingFeeFormControl']" #shippingFee>
                     		<span matPrefix>₡&nbsp;</span>
@@ -103,7 +117,7 @@
                 <hr>
                 <div class="form-row">
                     <div class="col-md-12 content-center">
-                    	<button class="btn btn-primary form-btn" type="submit" style="width:100%;" (click)="productHandler.pushImageCloud()">AGREGAR</button>
+                    	<button class="btn btn-primary form-btn" type="submit()" style="width:100%;">AGREGAR</button>
                     </div>
                 </div>
             </div>

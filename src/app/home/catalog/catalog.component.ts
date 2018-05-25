@@ -17,6 +17,7 @@ export class CatalogComponent {
     this.catalogHandler.getSellers();
     this.catalogHandler.getBrands();
     this.catalogHandler.getCategories();
+    
   }
 
   selectedProduct(product){

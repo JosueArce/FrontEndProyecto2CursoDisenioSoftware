@@ -49,9 +49,10 @@ export class Http_Requests {
 
 	/*Removes data from the DB when endPoint is called*/
 	public deleteService(params:any,endPoint:string) : Promise<any>{
-		let ID = JSON.stringify(params);
+		let body = JSON.stringify(params);
+		console.log(body);
 		return this.http
-			.delete(this.apiURL+endPoint+'/?ID='+params.ID,this.options)
+			.post(this.apiURL+endPoint,body,this.options)
 			.toPromise()
 			.then(this.extractData)
 			.catch(this.handleError)

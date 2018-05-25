@@ -9,6 +9,7 @@ import { LoginModalService } from '../../login/loginModal.service';
 export class GlobalService {
   openLogin: boolean; 
   public user : EventEmitter<SocialUser> = new EventEmitter<SocialUser>();
+  public userData : SocialUser;
   public loggedIn : boolean;
   public userLogged : EventEmitter<any> = new EventEmitter<any>();
   constructor(private route: Router,
@@ -31,6 +32,7 @@ export class GlobalService {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
     this.authService.authState.subscribe((user) => {
       this.user.emit(user);
+      this.userData = user;
      // this.loggedIn = (user != null);
     })
     this.loginModalService.dialogRef.close();
@@ -43,10 +45,9 @@ export class GlobalService {
 
   isLoggedIn(){
     this.authService.authState.subscribe((user) => {
-      if(user) {this.userLogged.emit(true);this.loggedIn = true;this.user.emit(user)}
+      if(user) {this.userLogged.emit(true);this.loggedIn = true;this.user.emit(user);this.userData = user;}
     })
   }
-
-  
+ 
 
 }

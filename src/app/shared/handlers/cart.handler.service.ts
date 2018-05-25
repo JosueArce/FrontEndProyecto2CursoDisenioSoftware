@@ -31,7 +31,7 @@ export class CartService {
         idProducto : producto.idProducto,
         producto : producto.producto,
         imagen : producto.imagen,
-        vendedor : producto.vendedor,
+        vendedor : producto.nComercio,
         descripcion : producto.descripcion,
         tarifa : producto.tarifaEnvio,
         duracion : producto.tarifaEnvio,

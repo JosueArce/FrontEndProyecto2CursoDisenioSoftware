@@ -1,56 +1,32 @@
 <div style="padding:30px;">
-    <h2 class="container align-content-center">Productos</h2>
-    <div class="container align-content-center" style="padding:25px;padding-top:60px;;background-color:#ffffff;">
-        <div class="row" style="padding:30px;">
-            <mat-card class="elemento">
-                <mat-card-title>Nombre Producto</mat-card-title>
-                <mat-card-subtitle>Cantidad</mat-card-subtitle>
-                <mat-card-content>
-                    Descripcción
-                </mat-card-content>
-                <mat-card-actions>
-                    <button mat-raised-button color="primary" (click)="openEditDialog()">Editar</button>
-                    <button mat-raised-button color="warn">Eliminar</button>
-                </mat-card-actions>
-            </mat-card>
-            <mat-card class="elemento">
-                <mat-card-title>Nombre Producto</mat-card-title>
-                <mat-card-subtitle>Cantidad</mat-card-subtitle>
-                <mat-card-content>
-                    Descripcción
-                </mat-card-content>
-            </mat-card>
+    <h2 class="container-fluid align-content-center">Productos</h2>
+    <div class="container-fluid align-content-center" style="padding:25px;padding-top:60px;;background-color:#ffffff;">
+        <div class="add-product-btn">
+            <button mat-raised-button color="accent" style="width: 100%" (click)="openAddDialog()">Agregar Producto</button>
         </div>
         <div class="row" style="padding:30px;">
-            <mat-card class="elemento">
-                <mat-card-title>Nombre Producto</mat-card-title>
-                <mat-card-subtitle>Cantidad</mat-card-subtitle>
-                <mat-card-content>
-                    Descripcción
-                </mat-card-content>
-            </mat-card>
-            <mat-card class="elemento">
-                <mat-card-title>Nombre Producto</mat-card-title>
-                <mat-card-subtitle>Cantidad</mat-card-subtitle>
-                <mat-card-content>
-                    Descripcción
-                </mat-card-content>
-            </mat-card>
+            <div class="col-sm-6 col-xs-6 col-md-3 col-lg-3 col-xl-3" *ngFor="let product of productHandler.sellerRecords">
+                <mat-card class="elemento" >
+                    <mat-card-title> {{product.producto}}</mat-card-title>
+                    <mat-card-subtitle>Existencia: {{product.existencia}}</mat-card-subtitle>
+                    <mat-card-content>
+                         {{product.descripcion}}
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" (click)="openEditDialog(product)">Editar</button>
+                        <button mat-raised-button color="warn" (click)="openDeleteDialog(product)">Eliminar</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+            
+            
         </div>
         <nav class="d-flex justify-content-center align-items-center" style="padding-top:21px;background-color:#ffffff;">
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                <li class="page-item"><a class="page-link">1</a></li>
-                <li class="page-item"><a class="page-link">2</a></li>
-                <li class="page-item"><a class="page-link">3</a></li>
-                <li class="page-item"><a class="page-link">4</a></li>
-                <li class="page-item"><a class="page-link">5</a></li>
-                <li class="page-item"><a class="page-link" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-            </ul>
+            <!-- <app-pagination                
+                [source]="sellerHandler.sellerProducts"
+            ></app-pagination> -->
         </nav>
-        <div class="add-product-btn">
-            <button mat-stroked-button class="background-green" (click)="openAddDialog()">Agregar Producto</button>
-        </div>
+        
     </div>
     
 </div>
