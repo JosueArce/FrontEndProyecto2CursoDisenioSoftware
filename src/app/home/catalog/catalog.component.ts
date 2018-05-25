@@ -14,7 +14,6 @@ export class CatalogComponent {
   constructor(private productHandler : ProductHandlerService, 
   	private catalogHandler : CatalogHandlerService) 
   { 
-    this.productHandler.getProducts();
     this.catalogHandler.getSellers();
     this.catalogHandler.getBrands();
     this.catalogHandler.getCategories();

@@ -70,11 +70,11 @@ export function provideConfig() {
       provide : AuthServiceConfig,
       useFactory : provideConfig
     },
+    GlobalService,
     LoginService,
     LoginModalService,
     Http_Requests,
     ProductHandlerService,
-    GlobalService,
     CartService,
     CatalogHandlerService,
     PaginationService,

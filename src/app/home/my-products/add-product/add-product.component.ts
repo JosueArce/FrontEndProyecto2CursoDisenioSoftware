@@ -7,6 +7,7 @@ import { CatalogHandlerService } from '../../../shared/handlers/catalog.handler.
 import { ProductModel } from '../../../shared/models/product.model';
 import { GlobalService } from '../../../shared/handlers/global-service.service';
 import { AuthService, SocialUser } from "angularx-social-login";
+import { SellersHandlerService } from '../../../shared/handlers/sellers.handler.service';
 
 @Component({
   selector: 'app-add-product',
@@ -18,6 +19,7 @@ export class AddProductComponent {
   selected = '';
   newProduct : ProductModel;
   constructor(
+    private sellerHandler : SellersHandlerService,
     private productHandler : ProductHandlerService,
   	public dialogRef: MatDialogRef<AddProductComponent>,
   	formBuilder: FormBuilder,
@@ -50,7 +52,7 @@ export class AddProductComponent {
 
   onSubmit(newProduct : ProductModel,marca,idCategoria){
     if(this.form.valid){      
-      newProduct.marca = marca; newProduct.categoria = idCategoria; newProduct.vendedor = this.globalHandler.userData.id;
+      newProduct.marca = marca; newProduct.categoria = idCategoria; newProduct.idVendedor = this.globalHandler.userData.id;
       this.productHandler.pushImageCloud(newProduct);
       this.openSnackBar('Producto agregado!', 'Ok');
       this.dialogRef.close();

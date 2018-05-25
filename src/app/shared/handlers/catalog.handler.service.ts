@@ -106,7 +106,7 @@ export class CatalogHandlerService {
   	 		case 2://marcas
   	 			return producto.marca === filtrador;
   	 		case 3://vendedores
-  	 			return producto.vendedor === filtrador;
+  	 			return producto.nComercio === filtrador;
   	 	}
   	});	
   }
@@ -115,7 +115,7 @@ export class CatalogHandlerService {
   	this.http_request.getService('Vendedores')
 		.then(response => 
 		{
-			this.sellerRecords = response;
+			this.sellerRecords = response[0];
       for(let item in this.sellerRecords){
         this.sellerRecords[item].checked = false;
       }

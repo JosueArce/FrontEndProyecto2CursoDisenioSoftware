@@ -27,7 +27,6 @@ export class LayoutHome{
 		private sellerHandler : SellersHandlerService){	
 		this.producHandler.getProducts();
 		this.globalService.isLoggedIn();
-		this.sellerHandler.getProducts();
 		this.isLoggedIn();
 	}
 	

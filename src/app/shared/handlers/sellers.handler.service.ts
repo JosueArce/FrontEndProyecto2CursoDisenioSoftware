@@ -14,6 +14,7 @@ export class SellersHandlerService {
 
   constructor(private http_request : Http_Requests, private productHandler : ProductHandlerService,private globalHandler : GlobalService) { 	
     this.sellerProducts = new Array<ProductModel>();
+    
   }
   
   public sendSellerRequest(request : sellerRequest){
@@ -25,20 +26,25 @@ export class SellersHandlerService {
   	})
   }
 
-  public getProducts() : void{
-    this.http_request.getService('Productos')
+
+  public deleteProduct(parameterName:any){
+    console.log(parameterName);
+    this.http_request.deleteService({ 'idProducto' : parameterName}, "eliminarProducto")
         .then(response => 
-        {
-          this.sellerProducts = response;
-        }
-      )
-      .catch(error => 
-        {
-          //this.sharedMethods.openSnackBar("Mensaje de aviso!",error.message);
-          console.log("Error: ",error)
-        }
-      )
+          {
+            //ya sirve
+            this.productHandler.getProducts();
+          }
+        )
+        .catch(error => console.log("Error: ",error))
   }
 
+  public  editProduct(newProduct : any){
+    this.http_request.putService(newProduct,'editarProducto')
+      .then(response=>{
+        console.log(response);
+      })
+      .catch(error=> console.log("Error:",error))
+  }
 
 }

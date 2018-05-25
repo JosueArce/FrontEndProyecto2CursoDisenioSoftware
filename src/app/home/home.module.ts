@@ -20,6 +20,8 @@ import { FileSelectDirective } from 'ng2-file-upload';
 import { EditProductComponent } from './my-products/edit-product/edit-product.component';
 import { EditProductService } from './my-products/edit-product/edit-product.service';
 import { AdministrateHandlerService } from '../shared/handlers/administrate.handler.service';
+import { DeleteProductComponent } from './my-products/delete-product/delete-product.component';
+import { DeleteProductService } from './my-products/delete-product/delete-product.service';
 
 //Angular Material
 import {
@@ -31,6 +33,7 @@ import {
   MatSelectModule,
   MatDividerModule
 } from '@angular/material';
+
 
 
 
@@ -47,7 +50,8 @@ import {
     MyProductsComponent,
     AddProductComponent,
     FileSelectDirective,
-    EditProductComponent
+    EditProductComponent,
+    DeleteProductComponent
   ],
   imports: [
     HomeRoutingModule,
@@ -68,11 +72,13 @@ import {
     FilterDataPipe,
     AddProductService,
     EditProductService,
-    AdministrateHandlerService
+    AdministrateHandlerService,
+    DeleteProductService
   ],
   entryComponents: [
     AddProductComponent,
-    EditProductComponent
+    EditProductComponent,
+    DeleteProductComponent
   ]
 })
 export class HomeModule { }

@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
 import { EditProductComponent } from './edit-product.component';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { ProductModel } from '../../../shared/models/product.model';
 
 @Injectable()
 
 export class EditProductService{
-  	dialogRef: MatDialogRef<EditProductComponent>;
-	constructor(private dialog: MatDialog){
-	}
 
-	openDialog(){
-  	this.dialogRef = this.dialog.open(EditProductComponent, {
-        width: '90%',
-        data: { name: 'Ups!' }
-    }); 
-    return this.dialogRef.afterClosed()
-  }	
+ public _selectedProducto : ProductModel;
+
+	constructor() {}
+
+  public set setProduct(product : ProductModel){
+    this._selectedProducto = product;    
+  }
+
+  public get getSelectedProduct() : ProductModel{
+    return this._selectedProducto;
+  }
 }
+
+

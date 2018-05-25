@@ -27,7 +27,7 @@ export class PaginationComponent implements OnInit {
 
   setPage(page : number)
   {
-    this.pager = this.paginationHandler.getPager(this.backUpSource.length,page);
-    this.productHandler.productRecords = this.backUpSource.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    //this.pager = this.paginationHandler.getPager(this.backUpSource.length,page);
+    //this.productHandler.productRecords = this.backUpSource.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 }
