@@ -5,6 +5,7 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import { MatInput } from '@angular/material';
 import { SellerRegistrationHandlerService } from '../../shared/handlers/seller-registration.handler.service';
 import { seller } from '../../shared/models/seller.model';
+import { GlobalService } from '../../shared/handlers/global-service.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -24,7 +25,9 @@ export class SellerRegistrationComponent implements OnInit {
    company: string;
    companyNames: Array<string>;
    sellers: Array<seller>;
-  constructor(public snackBar: MatSnackBar, private sellerRegistrationService: SellerRegistrationHandlerService) {
+  constructor(public snackBar: MatSnackBar, 
+    private sellerRegistrationService: SellerRegistrationHandlerService,
+    private globalService: GlobalService) {
     this.company="";
     this.sellers=new Array<seller>();
     this.sellerRegistrationService.getSellers();
@@ -40,11 +43,12 @@ export class SellerRegistrationComponent implements OnInit {
   }
 
   onSubmit(){
+
     if(this.companyNameFormControl.valid){
       if (!this.isUnique()) {
         this.openSnackBar('Ya existe una compañía con ese nombre!', 'Ok');
       }else{
-        this.sellerRegistrationService.sendSellerRequest({idVendedor:"", Comercio:this.company})
+        this.sellerRegistrationService.sendSellerRequest({idVendedor:this.globalService.userData.id, Comercio:this.company})
         this.openSnackBar('Solicitud Enviada!', 'Ok');
       }
       
