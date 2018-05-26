@@ -32,7 +32,7 @@ import { Http_Requests } from './shared/http_request.service';
 import { CartService } from './shared/handlers/cart.handler.service';
 import { PaginationService } from './shared/handlers/pagination.handler.service';
 import { SellersHandlerService } from './shared/handlers/sellers.handler.service';
-
+import { SellerRegistrationHandlerService } from './shared/handlers/seller-registration.handler.service';
 
 let config = new AuthServiceConfig([
   {
@@ -78,7 +78,8 @@ export function provideConfig() {
     CartService,
     CatalogHandlerService,
     PaginationService,
-    SellersHandlerService
+    SellersHandlerService,
+    SellerRegistrationHandlerService
   ],
   bootstrap: [AppComponent]
 })

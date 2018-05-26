@@ -6,37 +6,78 @@
                 <p>Estás a sólo un paso de completar tu pedido. Por favor elige un método de pago.&nbsp;</p>
             </div>
             <form>
-                <div class="products">
-                    <h3 class="title">Checkout</h3>
-                    <div class="item"><img class="img-fluid" src="assets/img/tech/image3.png" width="65"><span class="price">$200</span>
-                        <p class="item-name">Producto 1</p>
-                        <p class="item-description">Lorem ipsum dolor sit amet</p>
-                    </div>
-                    <div class="item"><span class="price">$120</span><img class="img-fluid" src="assets/img/tech/image3.png" width="65">
-                        <p class="item-name">Producto 2</p>
-                        <p class="item-description">Lorem ipsum dolor sit amet</p>
-                    </div>
-                    <div class="total"><img class="img-fluid" src="assets/img/tech/image3.png" width="65"><span>Total</span><span class="price">$320</span></div>
+                <h3 class="title">Checkout</h3>
+                <mat-divider></mat-divider>
+                <div class="products" *ngFor="let product of cartHandler.getFromCartElementList()">
+                    <mat-card class="item">
+                        <mat-card-title><img class="img-fluid" src="{{product.imagen}}" width="65"></mat-card-title>
+                        <mat-card-subtitle>{{product.producto}}</mat-card-subtitle>
+                        <mat-card-content>{{product.descripcion}}</mat-card-content>
+                        <mat-card-footer>₡{{product.precio}}</mat-card-footer>
+                    </mat-card>
                 </div>
+                <mat-divider></mat-divider>
+                <mat-card class="total">
+                    <mat-card-title>Total</mat-card-title>
+                    <mat-card-subtitle>₡{{cartHandler.getTotal()}}</mat-card-subtitle>
+                </mat-card>
+                <mat-divider></mat-divider>
                 <div class="card-details">
                     <h3 class="title">Información de la tarjeta</h3>
-                    <div class="form-row">
-                        <div class="col-sm-7">
-                            <div class="form-group"><label for="card-holder">Card Holder</label><input class="form-control" type="text" placeholder="Card Holder"></div>
-                        </div>
-                        <div class="col-sm-5">
-                            <div class="form-group"><label>Fecha expiración</label>
-                                <div class="input-group expiration-date"><input class="form-control" type="text" placeholder="MM"><input class="form-control" type="text" placeholder="YY"></div>
+                    <form [formGroup]="form">
+                        <div class="form-row">
+                            <div class="col-sm-3">
+                                <mat-form-field>
+                                    <mat-label>Card Holder</mat-label>
+                                    <input matInput placeholder="Card Holder" [formControl]="form.controls['holderFormControl']">
+                                    <mat-error *ngIf="form.controls['holderFormControl'].hasError('required')">
+                                        Campo requerido
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-3">
+                                <mat-form-field>
+                                  <mat-label>Fecha Expiración</mat-label>
+                                  <input matInput [matDatepicker]="dp" placeholder="Month and Year" [formControl]="date">
+                                  <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                                  <mat-datepicker #dp
+                                                  startView="multi-year"
+                                                  (yearSelected)="chosenYearHandler($event)"
+                                                  (monthSelected)="chosenMonthHandler($event, dp)"
+                                                  panelClass="example-month-picker">
+                                  </mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-3">
+                                <mat-form-field>
+                                    <mat-label>Número tarjeta</mat-label>
+                                    <input matInput type="number" placeholder="Sin Guiones" [formControl]="form.controls['cardNumberFormControl']" [errorStateMatcher]="matcher">
+                                    <mat-error *ngIf="form.get('cardNumberFormControl')?.invalid">
+                                        <div *ngIf="form.controls['cardNumberFormControl'].hasError('required')">Campo requerido</div>
+                                        <div *ngIf="(form.controls['cardNumberFormControl'].hasError('max') || form.controls['cardNumberFormControl'].hasError('min')) && !form.controls['cardNumberFormControl'].hasError('required')">El número es de 16 dígitos</div>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-3">
+                                <mat-form-field>
+                                    <mat-label>CVC</mat-label>
+                                    <input matInput type="number" placeholder="CVC" [formControl]="form.controls['cvcFormControl']" [errorStateMatcher]="matcher">
+                                    <mat-error *ngIf="form.controls['cvcFormControl'].hasError('required')">
+                                        Campo requerido
+                                    </mat-error>
+                                    <mat-error *ngIf="(form.controls['cvcFormControl'].hasError('max') || form.controls['cvcFormControl'].hasError('min')) && !form.controls['cvcFormControl'].hasError('required')">
+                                        El CVC es un número de 3 dígitos
+                                    </mat-error>
+                                </mat-form-field>
                             </div>
                         </div>
-                        <div class="col-sm-8">
-                            <div class="form-group"><label for="card-number">número tarjeta</label><input class="form-control" type="text" placeholder="Card Number" id="card-number"></div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group"><label for="cvc">CVC</label><input class="form-control" type="text" placeholder="CVC" id="cvc"></div>
-                        </div>
+                        
+                        
+                    </form>
+                    
+                    <div class="form-row" style="margin-top: 10px;">
                         <div class="col-sm-12">
-                            <div class="form-group"><button class="btn btn-primary btn-block" type="button">Proceder</button></div>
+                            <div class="form-group"><button class="btn btn-primary btn-block" type="button" (click)="onSubmit()">Proceder</button></div>
                         </div>
                     </div>
                 </div>

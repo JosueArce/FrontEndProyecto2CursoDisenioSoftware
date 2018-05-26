@@ -10,9 +10,10 @@
                     <input 
                     matInput placeholder="Nombre Compañía" 
                     [formControl]="companyNameFormControl" 
-                    [errorStateMatcher]="matcher">
-                    <mat-error *ngIf="companyNameFormControl.hasError('email') && !companyNameFormControl.hasError('required')">
-                        Esa compañía ya existe
+                    [errorStateMatcher]="matcher"
+                    [(ngModel)]="company">
+                    <mat-error *ngIf="!isUnique() && !companyNameFormControl.hasError('required')">
+                        {{company}} ya existe
                     </mat-error>
                     <mat-error *ngIf="companyNameFormControl.hasError('required')">
                         Campo requerido
