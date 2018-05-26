@@ -1,9 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
 
+.titulo-bienvenida{
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 68px;
+    color: black;
+    background-color: #fff9;
+}
+
+h2{
+    font-family: 'Indie Flower', cursive;
+    font-size: 3rem;
+}
 
 
 #first_section{
 	height: 700px;
 	background-image: url('https://res.cloudinary.com/ddzutuizv/image/upload/v1527023782/super1.jpg');
+    color: #1ebcb9;
 	background-repeat: no-repeat;
     background-position: center;
     background-repeat: no-repeat;

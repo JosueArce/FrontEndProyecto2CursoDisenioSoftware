@@ -31,9 +31,11 @@ import {
   MatDialogModule,
   MatInputModule,
   MatSelectModule,
-  MatDividerModule
+  MatDividerModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 } from '@angular/material';
-
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
 
 
 
@@ -65,7 +67,10 @@ import {
     MatInputModule,
     MatSelectModule,
     Ng2CloudinaryModule,
-    MatDividerModule
+    MatDividerModule,
+    MatMomentDateModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     LoginService,

@@ -6,3 +6,7 @@ h2{
 h3{
 	font-family: 'Quicksand', cursive;
 }
+
+.total .price{
+	font-size: 16px;
+}
