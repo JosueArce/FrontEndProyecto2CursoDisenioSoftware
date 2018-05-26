@@ -21,7 +21,9 @@ export class AdministrateHandlerService {
 
   public getSellerRequests(){
   	this.http_request.getService('Solicitudes')
-  	.then(response => {this.solicitudes = response})
+  	.then(response => {
+      this.solicitudes = response;
+    })
   	.catch(error =>{
   		console.log("Error: ",error)
   	})
