@@ -19,7 +19,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./seller-registration.component.css']
 })
 export class SellerRegistrationComponent implements OnInit {
-   companyNameFormControl = new FormControl('', [Validators.required, Validators.email]);
+   companyNameFormControl = new FormControl('', [Validators.required]);
    matcher = new MyErrorStateMatcher();
    company: string;
    companyNames: Array<string>;
@@ -41,7 +41,13 @@ export class SellerRegistrationComponent implements OnInit {
 
   onSubmit(){
     if(this.companyNameFormControl.valid){
-      this.openSnackBar('Solicitud Enviada!', 'Ok');
+      if (!this.isUnique()) {
+        this.openSnackBar('Ya existe una compañía con ese nombre!', 'Ok');
+      }else{
+        this.sellerRegistrationService.sendSellerRequest({idVendedor:"", Comercio:this.company})
+        this.openSnackBar('Solicitud Enviada!', 'Ok');
+      }
+      
     } else{
       this.openSnackBar('Credenciales Incorrectas!', 'Ok');
     }

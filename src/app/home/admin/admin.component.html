@@ -11,9 +11,10 @@
     </div>
     <div id="seccion">
         <div class="container align-content-center" style="padding:0px;background-color:#ffffff;">
-            <div class="row" style="padding:30px;">
+            <p *ngIf="adminHandler.solicitudes.length === 0">No hay solicitudes en este momento.</p>
+            <div class="row" *ngFor="let solicitud of adminHandler.solicitudes" style="padding:30px;">
                 <mat-card class="elemento">
-                    <mat-card-title>Título</mat-card-title>
+                    <mat-card-title>{{solicitud.comercio}}</mat-card-title>
                     <mat-card-subtitle>Solicitante</mat-card-subtitle>
                     <mat-card-content>
                         Descripcción
@@ -40,9 +41,11 @@
     </div>
     <div id="seccion">
         <div class="container align-content-center" style="padding:0px;background-color:#ffffff;">
-            <div class="row" style="padding:30px;">
+            <p *ngIf="adminHandler.solicitudes.length === 0">No hay vendedores en este momento.</p>
+            <div class="row" *ngFor="let vendedor of adminHandler.sellerList" style="padding:30px;">
                 <mat-card class="elemento">
-                    <mat-card-title class="titulo">Nombre</mat-card-title>
+                    <mat-card-title class="titulo">{{vendedor.comercio}}</mat-card-title>
+                    <mat-card-subtitle>{{vendedor.representante}}</mat-card-subtitle>
                     <mat-card-content>
                         <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu" class="card-image">
                     </mat-card-content>
