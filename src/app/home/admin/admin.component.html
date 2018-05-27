@@ -9,21 +9,24 @@
             </div>
         </div>
     </div>
-    <div id="seccion">
+    <div id="seccion" style="height: 400px;overflow: auto;overflow-x: auto;overflow-y: auto;">
         <div class="container align-content-center" style="padding:0px;background-color:#ffffff;">
-            <p *ngIf="adminHandler.solicitudes.length === 0">No hay solicitudes en este momento.</p>
-            <div class="row" *ngFor="let solicitud of adminHandler.solicitudes" style="padding:30px;">
-                <mat-card class="elemento">
-                    <mat-card-title>{{solicitud.comercio}}</mat-card-title>
-                    <mat-card-subtitle>Solicitante</mat-card-subtitle>
-                    <mat-card-content>
-                        Descripcción
-                    </mat-card-content>
-                    <mat-card-actions>
-                        <button mat-raised-button color="primary">Aceptar</button>
-                        <button mat-raised-button color="warn">Rechazar</button>
-                    </mat-card-actions>
-                </mat-card>
+            <p *ngIf="adminHandler.solicitudesVendedores.length === 0">No hay solicitudes en este momento.</p>
+            <div class="row"  style="padding:30px;">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" *ngFor="let solicitud of adminHandler.solicitudesVendedores">
+                    <mat-card class="elemento">
+                        <mat-card-title>{{solicitud.comercio}}</mat-card-title>
+                        <mat-card-subtitle>Solicitante : {{solicitud.idVendedor}}</mat-card-subtitle>
+                        <mat-card-content>
+                            {{solicitud.descripcion}}
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-raised-button color="primary" (click)="aceptarSolicitud(solicitud)">Aceptar</button>
+                            <button mat-raised-button color="warn" (click)="rechazarSolicitud(solicitud)">Rechazar</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+                
             </div>
             <nav class="d-flex justify-content-center align-items-center" style="padding-top:21px;background-color:#ffffff;">
                 <app-pagination ></app-pagination>
@@ -39,9 +42,9 @@
             </div>
         </div>
     </div>
-    <div id="seccion">
+    <div id="seccion" style="height: 400px;overflow: auto;overflow-x: auto;overflow-y: auto;">
         <div class="container align-content-center" style="padding:0px;background-color:#ffffff;">
-            <p *ngIf="adminHandler.solicitudes.length === 0">No hay vendedores en este momento.</p>
+            <p *ngIf="adminHandler.sellerList.length === 0">No hay vendedores en este momento.</p>
             <div class="row" *ngFor="let vendedor of adminHandler.sellerList" style="padding:30px;">
                 <mat-card class="elemento">
                     <mat-card-title class="titulo">{{vendedor.comercio}}</mat-card-title>

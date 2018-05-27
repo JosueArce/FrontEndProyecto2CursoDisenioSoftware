@@ -48,7 +48,7 @@ export class SellerRegistrationComponent implements OnInit {
       if (!this.isUnique()) {
         this.openSnackBar('Ya existe una compañía con ese nombre!', 'Ok');
       }else{
-        this.sellerRegistrationService.sendSellerRequest({idVendedor:this.globalService.userData.id, Comercio:this.company})
+        this.sellerRegistrationService.sendSellerRequest({idVendedor:this.globalService.userData.id,descripcion :'Solicitud para ser Vendedor!', nComercio:this.company})
         this.openSnackBar('Solicitud Enviada!', 'Ok');
       }
       

@@ -6,11 +6,12 @@ import { seller } from '../models/seller.model';
 @Injectable()
 export class AdministrateHandlerService {
 
-  public solicitudes : Array<sellerRequest>;	
+  public solicitudesVendedores : Array<sellerRequest>;	
   public sellerList : Array<seller>;
   constructor(private http_request : Http_Requests) { 
-  	this.solicitudes = new Array<sellerRequest>();
+  	this.solicitudesVendedores = new Array<sellerRequest>();
     this.sellerList = new Array<seller>();
+    setInterval(()=>{this.getSellerRequests();this.getSellers()},1000);
   }
 
 
@@ -22,7 +23,7 @@ export class AdministrateHandlerService {
   public getSellerRequests(){
   	this.http_request.getService('Solicitudes')
   	.then(response => {
-      this.solicitudes = response;
+      this.solicitudesVendedores = response;
     })
   	.catch(error =>{
   		console.log("Error: ",error)
@@ -37,6 +38,22 @@ export class AdministrateHandlerService {
     .catch(error => {
       console.log('Error: ',error);
     })
+  }
+
+  public acceptDeclineRequest(request){
+    this.http_request.postService(request,'decidirVendedor')
+    .then(response => {console.log(response);
+       //llamar al snackbar aqui
+    })
+    .catch(error => console.log("Error:",error))
+  }
+
+  public deleteSeller(sellerID){
+    this.http_request.postService(sellerID,'borrarVendedor')
+    .then(response => {
+      //llamar al snackbar aqui
+    })
+    .catch(error => console.log("Error",error))
   }
 
 }
