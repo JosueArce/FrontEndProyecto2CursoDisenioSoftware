@@ -17,6 +17,7 @@ export class LayoutHome{
 
 	private isLogged : boolean = false;
 	private user : SocialUser = null;
+	private userType : number = -1; //2=comprador 1=vendedor 0=admin 
 
 	constructor(
 		private producHandler : ProductHandlerService,
@@ -39,8 +40,11 @@ export class LayoutHome{
       			this.isLogged = true;
       			this.globalService.user.subscribe({
       				next : (user : SocialUser) =>{
-      					if(user)
+      					if(user){
+      						this.userType = -1;
       						this.user = user;
+      					}
+      						
       					else this.user = null;
       				}
       			});
