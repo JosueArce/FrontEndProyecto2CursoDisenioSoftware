@@ -6,6 +6,7 @@ import { MatInput } from '@angular/material';
 import { SellerRegistrationHandlerService } from '../../shared/handlers/seller-registration.handler.service';
 import { seller } from '../../shared/models/seller.model';
 import { GlobalService } from '../../shared/handlers/global-service.service';
+import { LoginModalService } from '../../login/loginModal.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -27,7 +28,8 @@ export class SellerRegistrationComponent implements OnInit {
    sellers: Array<seller>;
   constructor(public snackBar: MatSnackBar, 
     private sellerRegistrationService: SellerRegistrationHandlerService,
-    private globalService: GlobalService) {
+    private globalService: GlobalService,
+    private loginModalService: LoginModalService) {
     this.company="";
     this.sellers=new Array<seller>();
     this.sellerRegistrationService.getSellers();
@@ -44,17 +46,20 @@ export class SellerRegistrationComponent implements OnInit {
 
   onSubmit(){
 
-    if(this.companyNameFormControl.valid){
-      if (!this.isUnique()) {
-        this.openSnackBar('Ya existe una compañía con ese nombre!', 'Ok');
-      }else{
-        this.sellerRegistrationService.sendSellerRequest({idVendedor:this.globalService.userData.id,descripcion :'Solicitud para ser Vendedor!', nComercio:this.company})
-        this.openSnackBar('Solicitud Enviada!', 'Ok');
+    if(this.globalService.loggedIn){
+      if(this.companyNameFormControl.valid){
+        if (!this.isUnique()) {
+          this.openSnackBar('Ya existe una compañía con ese nombre!', 'Ok');
+        }else{
+          this.sellerRegistrationService.sendSellerRequest({idVendedor:this.globalService.userData.id,descripcion :'Solicitud para ser Vendedor!', nComercio:this.company})
+          this.openSnackBar('Solicitud Enviada!', 'Ok');
+        }
+        
+      } else{
+        this.openSnackBar('Credenciales Incorrectas!', 'Ok');
       }
-      
-    } else{
-      this.openSnackBar('Credenciales Incorrectas!', 'Ok');
     }
+    else this.loginModalService.openDialog();
     
   }
 
