@@ -14,4 +14,8 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit() {
   }
 
+  irACheckout(cantidad: number){
+  	console.log(cantidad);
+  }
+
 }

@@ -62,7 +62,7 @@ export class LayoutHome{
 
 	logOut(){
 		this.globalService.signOut();
-	}	
+	}
 
 }
 

@@ -1,6 +1,8 @@
 import { Injectable,EventEmitter } from '@angular/core';
 import { Http_Requests } from '../http_request.service';
 import { ProductModel } from '../models/product.model';
+import { UserHandlerService } from './user.handler.service';
+import { MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -8,20 +10,30 @@ export class CartService {
 
   public cartElements : Array<ProductModel>;
   public backUpCartElements : Array<any>;
+  public lista : Array<any>;
 
-
-  constructor() {
+  constructor(
+    public snackBar: MatSnackBar, 
+    private http_request: Http_Requests, 
+    private userHandler: UserHandlerService) {
   	 this.cartElements = new Array<ProductModel>();
      this.backUpCartElements = new Array<any>();
+     this.lista = new Array<any>();
   }
 
 
   public pushToCartElementList(newElement : ProductModel) : void{
     for(let item in this.cartElements){
       if(this.cartElements[item].idProducto === newElement.idProducto){
-         return null;//poner mensaje de que ya existe
+        return this.openSnackBar('Ese producto ya estaba en el carrito!', 'Ok');
       }
     }
+    this.http_request.postService({
+      'idProducto':newElement.idProducto,
+      'idUsuario':this.userHandler.user.idUsuario,
+      'cantidad':1,
+      'precio':newElement.precio
+      },'agregarAlCarrito');
     this.cartElements.push(newElement); this.copyList(newElement);
   }
 
@@ -51,6 +63,9 @@ export class CartService {
 
     index = this.backUpCartElements.indexOf(producto,0);
     this.backUpCartElements.splice(index,1);
+    this.http_request.postService({
+      'idUsuario':this.userHandler.user.idUsuario,
+      'idProducto':producto.idProducto },'borrarDelCarrito');
   }
 
   public getSubTotal() : number{
@@ -81,6 +96,14 @@ export class CartService {
       totalEnvio += this.cartElements[item].tarifaEnvio;
     }
     return totalEnvio;
+  }
+
+  openSnackBar(message: string, action: string) {
+    let extraClasses=['background-grey'];
+      this.snackBar.open(message, action, {
+        duration: 2000,
+        extraClasses: extraClasses
+    });
   }
 
 }
