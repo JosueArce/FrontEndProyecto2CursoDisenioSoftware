@@ -10,7 +10,7 @@ export class CartService {
 
   public cartElements : Array<ProductModel>;
   public backUpCartElements : Array<any>;
-  public lista : Array<any>;
+  public lista : Array<{id:number,cant:number}>;
 
   constructor(
     public snackBar: MatSnackBar, 
@@ -18,7 +18,7 @@ export class CartService {
     private userHandler: UserHandlerService) {
   	 this.cartElements = new Array<ProductModel>();
      this.backUpCartElements = new Array<any>();
-     this.lista = new Array<any>();
+     this.lista = new Array<{id:number,cant:number}>();
   }
 
 
@@ -33,8 +33,15 @@ export class CartService {
       'idUsuario':this.userHandler.user.idUsuario,
       'cantidad':1,
       'precio':newElement.precio
-      },'agregarAlCarrito');
+      },'agregarAlCarrito')
+    .then(response => {
+      console.log('response:',response);
+    })
+    .catch(error =>{
+      console.log("Error: ",error)
+    })
     this.cartElements.push(newElement); this.copyList(newElement);
+    this.lista.push({id : newElement.idProducto, cant: 1});
   }
 
   private copyList(producto : ProductModel){
@@ -65,7 +72,13 @@ export class CartService {
     this.backUpCartElements.splice(index,1);
     this.http_request.postService({
       'idUsuario':this.userHandler.user.idUsuario,
-      'idProducto':producto.idProducto },'borrarDelCarrito');
+      'idProducto':producto.idProducto },'borrarDelCarrito')
+    .then(response => {
+      console.log('response:',response);
+    })
+    .catch(error =>{
+      console.log("Error: ",error)
+    })
   }
 
   public getSubTotal() : number{
@@ -77,10 +90,12 @@ export class CartService {
   }
 
   public onChangeQuantity(producto, cantidadActual : number){
+    
     for(let item in this.cartElements){
       if(producto.idProducto === this.cartElements[item].idProducto)
         {
         this.cartElements[item].precio = this.backUpCartElements[item].precio * cantidadActual;
+        this.lista[item].cant=cantidadActual;
         return;
       }
     }
