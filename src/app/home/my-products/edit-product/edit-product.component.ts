@@ -25,7 +25,6 @@ export class EditProductComponent implements OnInit {
     private editHandler : EditProductService,
     private sellerHandler : SellersHandlerService,
     private editProductService : EditProductService) { 
-    console.log(this.editHandler._selectedProducto.marca);
   	this.form= formBuilder.group({
   		'nameFormControl': [null, Validators.required],
         'quantityFormControl': [null, Validators.compose([Validators.required, Validators.min(0)])],
@@ -49,10 +48,8 @@ export class EditProductComponent implements OnInit {
   	if(this.form.valid){
       //this.editProductService.getSelectedProduct.idVendedor = buscarVendedor(this.editProductService.getSelectedProduct.ve);
       this.editProductService.getSelectedProduct.categoria = this.buscarCategoria(this.editProductService.getSelectedProduct.categoria);
-      let result = this.productHandler.editImageProduct(this.editProductService.getSelectedProduct);
-      if(result)
-        this.openSnackBar('Producto editado con éxito!', 'Ok');
-      else this.openSnackBar('Error al editar el producto!', 'Ok');
+      this.productHandler.editImageProduct(this.editProductService.getSelectedProduct);
+      this.openSnackBar('Producto editado con éxito!', 'Ok');
   	} else {
       this.openSnackBar('Credenciales Incorrectas!', 'Ok');
     }

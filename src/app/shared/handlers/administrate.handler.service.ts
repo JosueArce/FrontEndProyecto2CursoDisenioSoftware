@@ -11,7 +11,7 @@ export class AdministrateHandlerService {
   constructor(private http_request : Http_Requests) { 
   	this.solicitudesVendedores = new Array<sellerRequest>();
     this.sellerList = new Array<seller>();
-    setInterval(()=>{this.getSellerRequests();this.getSellers()},1000);
+    setInterval(()=>{this.getSellerRequests();this.getSellers()},10000);
   }
 
 

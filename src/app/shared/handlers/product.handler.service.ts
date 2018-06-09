@@ -6,6 +6,8 @@ import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import { SellersHandlerService } from './sellers.handler.service';
 import { GlobalService } from './global-service.service';
 import { AuthService, SocialUser } from "angularx-social-login";
+import {  MatSnackBar } from '@angular/material';
+import { UserHandlerService } from './user.handler.service';
 
 @Injectable()
 export class ProductHandlerService {
@@ -17,7 +19,7 @@ export class ProductHandlerService {
   public uploader : CloudinaryUploader;
   private user : SocialUser;
 
-  constructor(public http_request : Http_Requests, private globalHandler : GlobalService,private sellerHandler: SellersHandlerService) {
+  constructor(private userHandler:UserHandlerService, public http_request : Http_Requests, private globalHandler : GlobalService,private sellerHandler: SellersHandlerService,public snackBar: MatSnackBar) {
     this.productRecords = []; 
     this.backUpProductRecrods = [];
     this.sellerRecords = [];
@@ -48,26 +50,32 @@ export class ProductHandlerService {
         this.user = user;          
       }
     }); 
-    setInterval(()=>this.getProducts(),1000); 
+  }
+
+  //permite abrir un mensaje de texto en pantalla
+  openSnackBar(message: string, action: string) {
+    let extraClasses=['background-grey'];
+      this.snackBar.open(message, action, {
+        duration: 2000,
+        extraClasses: extraClasses
+    });
   }
 
   //obtiene los productos actuales
   public getProducts() : void{
-
   	this.http_request.getService('ProductosDisponibles')
   			.then(response => 
 				{
 					this.backUpProductRecrods = response[0];
 					this.productRecords = response[0];
           this.sellerRecords = [];
- 
-          if(this.globalHandler.loggedIn){
+           
+          if(this.userHandler.user.tipoUsuario==1 && this.globalHandler.loggedIn){
               for(let index = 0;index<this.productRecords.length;index++){
                 if(this.productRecords[index].idVendedor == this.user.id)
                   this.sellerRecords.push(this.productRecords[index]);
             }
-          } 
-          
+          }           
 				}
 			)
 			.catch(error => 
@@ -163,6 +171,7 @@ export class ProductHandlerService {
 
     this.uploader.onErrorItem = function(fileItem, response, status, headers) {
       console.info('onErrorItem', fileItem, response, status, headers);
+      this.openSnackBar('Error al editar el producto!', 'Ok');
       return false;
     };
   }

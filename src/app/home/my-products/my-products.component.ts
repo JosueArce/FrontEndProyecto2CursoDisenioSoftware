@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AddProductService } from './add-product/add-product.service';
 import { EditProductService } from './edit-product/edit-product.service';
 import { SellersHandlerService } from '../../shared/handlers/sellers.handler.service';
@@ -17,13 +17,13 @@ import {ISubscription} from "rxjs/Subscription";
   templateUrl: './my-products.component.html',
   styleUrls: ['./my-products.component.css']
 })
-export class MyProductsComponent{
+export class MyProductsComponent implements OnDestroy{
 
   public sellerProducts : Array<ProductModel>;
   public dialogRefEdit: MatDialogRef<EditProductComponent>;
   public dialogRefDelete: MatDialogRef<DeleteProductComponent>;
   private subscriber : ISubscription;
-  
+  private interval : any;
 
   constructor(
     public addProductService: AddProductService,
@@ -34,6 +34,7 @@ export class MyProductsComponent{
     private productHandler : ProductHandlerService,
     private deleteService : DeleteProductService,
     public dialog: MatDialog) {
+    this.interval = setInterval(()=>{console.log("PREGUNTÉ");this.productHandler.getProducts()},10000);
   }
 
 
@@ -57,6 +58,10 @@ export class MyProductsComponent{
         data: { name: 'Ups!' }
     }); 
     return this.dialogRefDelete.afterClosed();
+  }
+
+  ngOnDestroy(){
+    clearInterval(this.interval);
   }
 
 }

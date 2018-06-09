@@ -13,7 +13,7 @@ export class UserHandlerService{
 			apellido : '',
 			nComercio : '',
 			email : '',
-			tipoUsuario : 1,
+			tipoUsuario : 0,
 			fechaRegistro : new Date(),
 			estado : 0
 		};
@@ -23,6 +23,7 @@ export class UserHandlerService{
 		this.http_requests.postService({'idUsuario': userId},'cargarUsuario')
 		.then(response => {
 			this.user=response[0];
+			console.log(this.user);this.user.tipoUsuario=1;
 		})
 		.catch(error => {
 			console.log(error);
