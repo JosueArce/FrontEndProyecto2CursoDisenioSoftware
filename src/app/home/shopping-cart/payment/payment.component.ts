@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CartService } from '../../../shared/handlers/cart.handler.service';
+import { ProductModel } from '../../../shared/models/product.model';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators, FormControl } from '@angular/forms';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MatDatepicker} from '@angular/material/datepicker';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import * as _moment from 'moment';
 import {default as _rollupMoment, Moment} from 'moment';
 
@@ -42,6 +44,7 @@ export class PaymentComponent implements OnInit {
   date = new FormControl(moment());
   form: FormGroup;
   matcher = new MyErrorStateMatcher();
+  tipoEntrega: any;
   constructor(private cartHandler: CartService, formBuilder: FormBuilder,) { 
   	this.form= formBuilder.group({
   		'holderFormControl': [null, Validators.required],
@@ -54,6 +57,16 @@ export class PaymentComponent implements OnInit {
   ngOnInit() {
 
   }
+
+  //Obtiene la cantidad de items del mismo producto requerido por el usuario a partir del id del producto
+  getCantidad(productId: number): number{
+    
+    for(let item in this.cartHandler.lista){
+      if(this.cartHandler.lista[item].id === productId)
+        return this.cartHandler.lista[item].cant;
+    }
+  }
+
   chosenYearHandler(normalizedYear: Moment) {
     const ctrlValue = this.date.value;
     ctrlValue.year(normalizedYear.year());

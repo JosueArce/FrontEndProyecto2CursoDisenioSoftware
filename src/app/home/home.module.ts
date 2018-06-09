@@ -26,6 +26,7 @@ import { DeleteProductService } from './my-products/delete-product/delete-produc
 //Angular Material
 import {
   MatButtonModule, 
+  MatButtonToggleModule,
   MatCardModule,
   MatFormFieldModule,
   MatDialogModule,
@@ -70,7 +71,8 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     MatDividerModule,
     MatMomentDateModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatButtonToggleModule
   ],
   providers: [
     LoginService,
