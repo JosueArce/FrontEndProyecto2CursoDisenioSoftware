@@ -4,11 +4,11 @@
             <ul class="pagination" >
                 <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
                 	<a class="page-link" aria-label="Previous">
-                		<span aria-hidden="true"  (click)="setPage(pager.currentPage - 1)">« Previous</span>
+                		<span aria-hidden="true"  (click)="previousPage()">« Previous</span>
                 	</a>
             	</li>
                 <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
-                	<a class="page-link" aria-label="Next"  (click)="setPage(pager.currentPage + 1)">
+                	<a class="page-link" aria-label="Next"   (click)="nextPage()">
                 		<span aria-hidden="true">Next »</span>
                 	</a>
                 </li>

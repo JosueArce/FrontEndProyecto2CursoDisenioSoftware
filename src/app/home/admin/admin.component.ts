@@ -15,7 +15,7 @@ export class AdminComponent {
   	adminHandler.getSellers();
 
     this.globalHandler.user.subscribe({
-      next : (user : any) => {console.log("me subscribí!",user);
+      next : (user : any) => {
         this.user = user;          
       }
     }); 

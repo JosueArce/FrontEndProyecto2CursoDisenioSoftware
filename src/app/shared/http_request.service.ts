@@ -29,6 +29,7 @@ export class Http_Requests {
 
 	/*Inserts information through an endPoint*/
 	public postService(params:any,endPoint:string) : Promise<any>{
+		console.log(params,endPoint);
 		let body = JSON.stringify(params);
 		return this.http
 			.post(this.apiURL+endPoint,body,this.options)

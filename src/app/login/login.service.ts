@@ -30,7 +30,7 @@ export class LoginService{
         this.closeModal.dialogRef.close();
         this.openSnackBar('Has iniciado sesión!', 'Ok');
         this.user = user;
-        this.userHandler.getUser(user.id);
+        //this.userHandler.getUser(user.id);
         this.loggedIn = (user != null);
 
       }
