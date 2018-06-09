@@ -15,15 +15,28 @@ export class PaginationComponent implements OnInit {
   public backUpSource : Array<any>;
   private pager : any = {};
 
+  public index :number;
+
   constructor(private paginationHandler : PaginationService,private productHandler : ProductHandlerService) { 
     this.source = new Array<any>();
     this.backUpSource = new Array<any>();
+    this.index = 1;
   }
 
   ngOnInit() {
-    this.backUpSource = this.source.slice(0);
-    this.setPage(1);
+    //this.backUpSource = this.source.slice(0);
+    //this.setPage(1);
   }
+
+
+  /*previousPage(){
+    if(this.index<1)
+      this.index--;
+  }
+
+  nextPage(){
+    this.index++;
+  }*/
 
   setPage(page : number)
   {
