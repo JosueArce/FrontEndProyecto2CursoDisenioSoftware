@@ -64,7 +64,7 @@ export class CartService {
   public onChangeQuantity(producto, cantidadActual : number){
     for(let item in this.cartElements){
       if(producto.idProducto === this.cartElements[item].idProducto)
-        {debugger;
+        {
         this.cartElements[item].precio = this.backUpCartElements[item].precio * cantidadActual;
         return;
       }

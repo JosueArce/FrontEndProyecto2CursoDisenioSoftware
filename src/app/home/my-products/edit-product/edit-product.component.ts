@@ -23,7 +23,8 @@ export class EditProductComponent implements OnInit {
   	public snackBar: MatSnackBar,
     private catalogHandler : CatalogHandlerService,
     private editHandler : EditProductService,
-    private sellerHandler : SellersHandlerService) { 
+    private sellerHandler : SellersHandlerService,
+    private editProductService : EditProductService) { 
     console.log(this.editHandler._selectedProducto.marca);
   	this.form= formBuilder.group({
   		'nameFormControl': [null, Validators.required],
@@ -46,7 +47,12 @@ export class EditProductComponent implements OnInit {
   onSubmit(){//funcion para añadir producto a la lista de productos del vendedor
   	//validar si los datos son correctos para añadir o no el producto
   	if(this.form.valid){
-      this.openSnackBar('Producto agregado!', 'Ok');
+      //this.editProductService.getSelectedProduct.idVendedor = buscarVendedor(this.editProductService.getSelectedProduct.ve);
+      this.editProductService.getSelectedProduct.categoria = this.buscarCategoria(this.editProductService.getSelectedProduct.categoria);
+      let result = this.productHandler.editImageProduct(this.editProductService.getSelectedProduct);
+      if(result)
+        this.openSnackBar('Producto editado con éxito!', 'Ok');
+      else this.openSnackBar('Error al editar el producto!', 'Ok');
   	} else {
       this.openSnackBar('Credenciales Incorrectas!', 'Ok');
     }
@@ -61,26 +67,10 @@ export class EditProductComponent implements OnInit {
     });
   }
 
-  buscarCategoria(categoria) : number{
+  buscarCategoria(categoria) : string{
     for (var i = 0; i<this.catalogHandler.categoryRecords.length;i++) {
       if(this.catalogHandler.categoryRecords[i].nombre == categoria)
-        return this.catalogHandler.categoryRecords[i].idCategoria;
+        return this.catalogHandler.categoryRecords[i].idCategoria.toString();
     }
   }
-
-  editProduct(){
-    this.sellerHandler.editProduct({
-      idProducto : this.editHandler._selectedProducto.idProducto,
-      idCategoria : this.buscarCategoria(this.editHandler._selectedProducto.categoria),
-      marca : this.editHandler._selectedProducto.marca,
-      nombre : this.editHandler._selectedProducto.producto,
-      descripcion : this.editHandler._selectedProducto.descripcion,
-      precio : this.editHandler._selectedProducto.precio,
-      existencia : this.editHandler._selectedProducto.existencia,
-      duracionEnvio : this.editHandler._selectedProducto.duracionEnvio,
-      tarifaEnvio : this.editHandler._selectedProducto.tarifaEnvio,
-      imagen : this.editHandler._selectedProducto.imagen
-    });
-  }
-
 }

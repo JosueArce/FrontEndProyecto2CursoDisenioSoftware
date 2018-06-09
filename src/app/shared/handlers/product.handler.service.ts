@@ -17,7 +17,7 @@ export class ProductHandlerService {
   public uploader : CloudinaryUploader;
   private user : SocialUser;
 
-  constructor(public http_request : Http_Requests, private globalHandler : GlobalService) {
+  constructor(public http_request : Http_Requests, private globalHandler : GlobalService,private sellerHandler: SellersHandlerService) {
     this.productRecords = []; 
     this.backUpProductRecrods = [];
     this.sellerRecords = [];
@@ -51,6 +51,7 @@ export class ProductHandlerService {
     setInterval(()=>this.getProducts(),1000); 
   }
 
+  //obtiene los productos actuales
   public getProducts() : void{
 
   	this.http_request.getService('ProductosDisponibles')
@@ -77,7 +78,8 @@ export class ProductHandlerService {
 			)
   }
 
-  public postProducts(newProduct : ProductModel) : void{
+  //inserta un nuevo registro
+  public postProducts(newProduct : any) : void{
   	this.http_request.postService(newProduct,'insertarProducto')
   			.then(response => 
 				{
@@ -92,6 +94,28 @@ export class ProductHandlerService {
 			)
   }
 
+  //elimina el producto a partir de su ID
+  public deleteProduct(parameterName:any){
+    this.http_request.deleteService({ 'idProducto' : parameterName}, "eliminarProducto")
+        .then(response => 
+          {
+            //ya sirve
+            this.getProducts();
+          }
+        )
+        .catch(error => console.log("Error: ",error))
+  }
+
+  //edita el producto
+  public  editProduct(newProduct : any){
+    this.http_request.putService(newProduct,'editarProducto')
+      .then(response=>{
+        console.log(response);
+        this.getProducts();
+      })
+      .catch(error=> console.log("Error:",error))
+  }
+
   public getSelectedProduct(){
   	return this.selectedProduct;
   }
@@ -100,7 +124,8 @@ export class ProductHandlerService {
   	 this.selectedProduct = newProduct;
   }
 
-  public pushImageCloud(newProduct : ProductModel) : boolean{
+  //permite insertar un nuevo registro producto
+  public pushImageCloud(newProduct : ProductModel){
   	this.uploader.uploadAll();
 
     this.uploader.onSuccessItem = 
@@ -111,6 +136,28 @@ export class ProductHandlerService {
       else newProduct.imagen = "http://www.royallepagesudbury.ca/images/no-image.png";
      
       this.postProducts(newProduct);
+    };
+
+    this.uploader.onErrorItem = function(fileItem, response, status, headers) {
+      console.info('onErrorItem', fileItem, response, status, headers);
+      return false;
+    };
+
+    return true;
+  }
+
+  //permite editar un producto existente
+  public editImageProduct(newProduct : any){
+
+    this.uploader.uploadAll();
+
+    this.uploader.onSuccessItem = 
+    (item : any,response:string, status:number,headers:any):any=>
+    {
+      if(newProduct.imagen != JSON.parse(response).url)
+        newProduct.imagen = JSON.parse(response).url;
+
+      this.editProduct(newProduct);//se llama al metodo que para que edite el producto en el servidor
       return true;
     };
 
@@ -118,28 +165,6 @@ export class ProductHandlerService {
       console.info('onErrorItem', fileItem, response, status, headers);
       return false;
     };
-
-    return null;
-  }
-
-  public editImageProduct(newProduct : ProductModel){
-    this.uploader.uploadAll();
-
-    this.uploader.onSuccessItem = 
-    (item : any,response:string, status:number,headers:any):any=>
-    {
-      if(newProduct.imagen == '')
-        return JSON.parse(response).url;
-
-      return false;
-    };
-
-    this.uploader.onErrorItem = function(fileItem, response, status, headers) {
-      console.info('onErrorItem', fileItem, response, status, headers);
-      return false;
-    };
-
-    return null;
   }
 
 

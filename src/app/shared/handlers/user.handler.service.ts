@@ -13,7 +13,7 @@ export class UserHandlerService{
 			apellido : '',
 			nComercio : '',
 			email : '',
-			tipoUsuario : 0,
+			tipoUsuario : 1,
 			fechaRegistro : new Date(),
 			estado : 0
 		};

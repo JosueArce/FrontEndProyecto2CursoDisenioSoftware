@@ -27,7 +27,8 @@ export class LayoutHome{
 		private router: Router,
 		private authService : AuthService,
 		private sellerHandler : SellersHandlerService,
-		private userHandler : UserHandlerService){	
+		private userHandler : UserHandlerService
+		){	
 		this.producHandler.getProducts();
 		this.globalService.isLoggedIn();
 		this.isLoggedIn();
@@ -44,8 +45,7 @@ export class LayoutHome{
       				next : (user : SocialUser) =>{
       					if(user){
       						this.user = user;
-      					}
-      						
+      					}      						
       					else this.user = null;
       				}
       			});
@@ -62,10 +62,7 @@ export class LayoutHome{
 
 	logOut(){
 		this.globalService.signOut();
-		this.userType = -1;
-	}
-
-	
+	}	
 
 }
 
