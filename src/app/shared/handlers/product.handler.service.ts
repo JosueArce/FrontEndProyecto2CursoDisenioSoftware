@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import { SellersHandlerService } from './sellers.handler.service';
 import { GlobalService } from './global-service.service';
+import { AuthService, SocialUser } from "angularx-social-login";
 
 @Injectable()
 export class ProductHandlerService {
@@ -14,7 +15,7 @@ export class ProductHandlerService {
   public backUpProductRecrods : ProductModel[];
   public selectedProduct : ProductModel;
   public uploader : CloudinaryUploader;
-  
+  private user : SocialUser;
 
   constructor(public http_request : Http_Requests, private globalHandler : GlobalService) {
     this.productRecords = []; 
@@ -35,12 +36,19 @@ export class ProductHandlerService {
   		tarifaEnvio : 0,
       marca : ''
     };
+
     this.uploader = new CloudinaryUploader(
       new CloudinaryOptions({
         cloudName : 'ddzutuizv',
         uploadPreset : 'iwbl3gws'
       })
     );
+    this.globalHandler.user.subscribe({
+      next : (user : any) => {
+        this.user = user;          
+      }
+    }); 
+    setInterval(()=>this.getProducts(),1000); 
   }
 
   public getProducts() : void{
@@ -50,15 +58,14 @@ export class ProductHandlerService {
 				{
 					this.backUpProductRecrods = response[0];
 					this.productRecords = response[0];
-
-          this.globalHandler.user.subscribe({
-            next : (user : any) => {
-                for(let index = 0;index<this.productRecords.length;index++){
-                  if(this.productRecords[index].idVendedor == user.id)
-                    this.sellerRecords.push(this.productRecords[index]);
-                }
+          this.sellerRecords = [];
+ 
+          if(this.globalHandler.loggedIn){
+              for(let index = 0;index<this.productRecords.length;index++){
+                if(this.productRecords[index].idVendedor == this.user.id)
+                  this.sellerRecords.push(this.productRecords[index]);
             }
-          });     
+          } 
           
 				}
 			)
@@ -74,7 +81,6 @@ export class ProductHandlerService {
   	this.http_request.postService(newProduct,'insertarProducto')
   			.then(response => 
 				{
-					//this.onChange.emit({data : response.data});
           this.getProducts();
 				}
 			)

@@ -2,18 +2,26 @@ import { Injectable } from '@angular/core';
 import { Http_Requests } from '../http_request.service';
 import { sellerRequest } from '../models/sellerRequest.model';
 import { seller } from '../models/seller.model';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class SellerRegistrationHandlerService{
 	sellerList: Array<seller>;
-	constructor(private http_request: Http_Requests){
+	constructor(private http_request: Http_Requests,private snackBar: MatSnackBar){
 		this.sellerList=new Array<seller>();
 	}
 
-	public sendSellerRequest(request: sellerRequest){
+	openSnackBar(message: string, action: string) {
+	    this.snackBar.open(message, action, {
+	        duration: 2000,
+	    });
+	}
+
+	public sendSellerRequest(request: any){
+		console.log(request);
 		this.http_request.postService(request, 'SolicitarVender')
 		.then(response => {
-			console.log("funciona!");
+			this.openSnackBar("Solicitud enviada!","Ok!");
 		})
 		.catch(error => {
 			console.log('Error: ',error);

@@ -13,9 +13,7 @@ export class SellersHandlerService {
   public sellerProducts : Array<ProductModel>;	
 
   constructor(private http_request : Http_Requests, private productHandler : ProductHandlerService,private globalHandler : GlobalService) { 	
-    this.sellerProducts = new Array<ProductModel>();
-    
-  }
+    this.sellerProducts = new Array<ProductModel>();      }
   
   public sendSellerRequest(request : sellerRequest){
   	this.http_request.postService(request,'insertarSolicitud')
@@ -28,7 +26,6 @@ export class SellersHandlerService {
 
 
   public deleteProduct(parameterName:any){
-    console.log(parameterName);
     this.http_request.deleteService({ 'idProducto' : parameterName}, "eliminarProducto")
         .then(response => 
           {

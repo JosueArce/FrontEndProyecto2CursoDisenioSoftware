@@ -5,7 +5,7 @@
             <button mat-raised-button color="accent" style="width: 100%" (click)="openAddDialog()">Agregar Producto</button>
         </div>
         <div class="row" style="padding:30px;">
-            <div class="col-sm-6 col-xs-6 col-md-3 col-lg-3 col-xl-3" *ngFor="let product of productHandler.sellerRecords">
+            <div class="col-sm-6 col-xs-6 col-md-4 col-lg-4 col-xl-4" *ngFor="let product of productHandler.sellerRecords">
                 <mat-card class="elemento" >
                     <mat-card-title> {{product.producto}}</mat-card-title>
                     <mat-card-subtitle>Existencia: {{product.existencia}}</mat-card-subtitle>

@@ -12,9 +12,9 @@
                     [formControl]="companyNameFormControl" 
                     [errorStateMatcher]="matcher"
                     [(ngModel)]="company">
-                    <mat-error *ngIf="!isUnique() && !companyNameFormControl.hasError('required')">
+                    <!-- <mat-error *ngIf="!isUnique() && !companyNameFormControl.hasError('required')">
                         {{company}} ya existe
-                    </mat-error>
+                    </mat-error> -->
                     <mat-error *ngIf="companyNameFormControl.hasError('required')">
                         Campo requerido
                     </mat-error>
