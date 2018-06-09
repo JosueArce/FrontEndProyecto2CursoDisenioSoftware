@@ -62,7 +62,6 @@ export class LayoutHome{
 
 	logOut(){
 		this.globalService.signOut();
-		this.userType = -1;
 	}
 
 	
