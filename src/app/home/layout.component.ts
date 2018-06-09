@@ -7,6 +7,7 @@ import { AuthService, SocialUser } from "angularx-social-login";
 import { SellersHandlerService } from '../shared/handlers/sellers.handler.service';
 
 
+
 @Component({
 	selector : 'layout-home',
 	templateUrl : './layout.component.html',
@@ -41,7 +42,7 @@ export class LayoutHome{
       			this.globalService.user.subscribe({
       				next : (user : SocialUser) =>{
       					if(user){
-      						this.userType = -1;
+      						this.userType = 0;
       						this.user = user;
       					}
       						
@@ -61,6 +62,7 @@ export class LayoutHome{
 
 	logOut(){
 		this.globalService.signOut();
+		this.userType = -1;
 	}
 
 	
