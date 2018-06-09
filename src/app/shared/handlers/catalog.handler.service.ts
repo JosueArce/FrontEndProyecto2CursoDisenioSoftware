@@ -147,6 +147,7 @@ export class CatalogHandlerService {
   	this.http_request.getService('Categorias')
 		.then(response => 
 		{
+      console.log(response);
 			this.categoryRecords = response;
       for(let item in this.categoryRecords){
         this.categoryRecords[item].checked = false;
@@ -179,6 +180,7 @@ export class CatalogHandlerService {
   	this.http_request.getService('Marcas')
 		.then(response => 
 		{
+      console.log(response[0]);
 			this.brandsRecords = response[0];
 			for(let item in this.brandsRecords){
 				this.brandsRecords[item].checked = false;

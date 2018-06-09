@@ -12,7 +12,7 @@ export class SellersHandlerService {
 
   public sellerProducts : Array<ProductModel>;	
 
-  constructor(private http_request : Http_Requests, private productHandler : ProductHandlerService,private globalHandler : GlobalService) { 	
+  constructor(private http_request : Http_Requests, private globalHandler : GlobalService) { 	
     this.sellerProducts = new Array<ProductModel>();      }
   
   public sendSellerRequest(request : sellerRequest){
@@ -24,24 +24,5 @@ export class SellersHandlerService {
   	})
   }
 
-
-  public deleteProduct(parameterName:any){
-    this.http_request.deleteService({ 'idProducto' : parameterName}, "eliminarProducto")
-        .then(response => 
-          {
-            //ya sirve
-            this.productHandler.getProducts();
-          }
-        )
-        .catch(error => console.log("Error: ",error))
-  }
-
-  public  editProduct(newProduct : any){
-    this.http_request.putService(newProduct,'editarProducto')
-      .then(response=>{
-        console.log(response);
-      })
-      .catch(error=> console.log("Error:",error))
-  }
 
 }
