@@ -3,6 +3,7 @@ import { ActivatedRoute, UrlSegment,Router } from '@angular/router';
 import { AuthService, SocialUser } from "angularx-social-login";
 import {  GoogleLoginProvider } from "angularx-social-login";
 import { LoginModalService } from '../../login/loginModal.service';
+import { UserHandlerService } from './user.handler.service';
 
 
 @Injectable()
@@ -14,7 +15,8 @@ export class GlobalService {
   public userLogged : EventEmitter<any> = new EventEmitter<any>();
   constructor(private route: Router,
     private authService : AuthService, 
-    public loginModalService: LoginModalService) { }
+    public loginModalService: LoginModalService,
+    private userHandler : UserHandlerService) { }
 
   public pushToLocalStorage(nombre : string, data : any) : void{
   	localStorage.setItem(nombre,JSON.stringify(data));
@@ -33,6 +35,7 @@ export class GlobalService {
     this.authService.authState.subscribe((user) => {
       this.user.emit(user);
       this.userData = user;
+      this.userHandler.getUser(user.id);
      // this.loggedIn = (user != null);
     })
     this.loginModalService.dialogRef.close();
@@ -40,12 +43,12 @@ export class GlobalService {
 
   signOut() : void {
     this.authService.signOut()
-    .then(response=>{ this.userLogged.emit(false);this.loggedIn = false;this.user.emit(null)});
+    .then(response=>{ this.userLogged.emit(false);this.loggedIn = false;this.user.emit(null);this.userHandler.user.tipoUsuario = 0;});
   }
 
   isLoggedIn(){
     this.authService.authState.subscribe((user) => {
-      if(user) {this.userLogged.emit(true);this.loggedIn = true;this.user.emit(user);this.userData = user;}
+      if(user) {this.userLogged.emit(true);this.loggedIn = true;this.user.emit(user);this.userData = user;this.userHandler.getUser(user.id);}
     })
   }
  

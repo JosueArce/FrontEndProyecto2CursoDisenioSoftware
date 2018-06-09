@@ -5,6 +5,7 @@ import { GlobalService } from '../shared/handlers/global-service.service';
 import { Router } from '@angular/router';
 import { AuthService, SocialUser } from "angularx-social-login";
 import { SellersHandlerService } from '../shared/handlers/sellers.handler.service';
+import { UserHandlerService } from '../shared/handlers/user.handler.service';
 
 
 
@@ -18,7 +19,6 @@ export class LayoutHome{
 
 	private isLogged : boolean = false;
 	private user : SocialUser = null;
-	private userType : number = -1; //2=comprador 1=vendedor 0=admin 
 
 	constructor(
 		private producHandler : ProductHandlerService,
@@ -26,7 +26,8 @@ export class LayoutHome{
 		public loginModalService: LoginModalService,
 		private router: Router,
 		private authService : AuthService,
-		private sellerHandler : SellersHandlerService){	
+		private sellerHandler : SellersHandlerService,
+		private userHandler : UserHandlerService){	
 		this.producHandler.getProducts();
 		this.globalService.isLoggedIn();
 		this.isLoggedIn();
@@ -42,7 +43,6 @@ export class LayoutHome{
       			this.globalService.user.subscribe({
       				next : (user : SocialUser) =>{
       					if(user){
-      						this.userType = 0;
       						this.user = user;
       					}
       						
@@ -62,7 +62,6 @@ export class LayoutHome{
 
 	logOut(){
 		this.globalService.signOut();
-		this.userType = -1;
 	}
 
 	
