@@ -1,6 +1,7 @@
 import { Injectable,EventEmitter } from '@angular/core';
 import { Http_Requests } from '../http_request.service';
 import { UserHandlerService } from './user.handler.service';
+import { CartService } from './cart.handler.service';
 
 
 @Injectable()
@@ -10,8 +11,10 @@ export class PurchaseService{
 	public cantones : Array<any>;
 	public distritos : Array<any>;
 	public comprasUsuario : Array<any>;
+	public idDireccion: string;
+	public idCompra: string;
 
-	constructor(private http_request: Http_Requests,private userHandler: UserHandlerService){
+	constructor(private http_request: Http_Requests,private userHandler: UserHandlerService, private cartHandler: CartService){
 		this.provincias = new Array<any>();
 		this.cantones = new Array<any>();
 		this.distritos = new Array<any>();
@@ -66,6 +69,51 @@ export class PurchaseService{
 	    .catch(error =>{
 	      console.log("Error: ",error)
 	    })
+	}
+
+	public insertarDireccion(idUsuario: string, idDistrito: number, dExacta: string){
+		this.http_request.postService({
+			'idUsuario':idUsuario, 
+			'idDistrito':idDistrito,
+			'dExacta':dExacta},'insertarDireccion')
+		.then(response => {
+			this.idDireccion=response[0].idDireccion;
+		})
+		.catch(error => {
+			console.log('Error:',error)
+		})
+
+	}
+
+	public realizarCompra(idUsuario: string, idDireccion: string, tipoEntrega: number, guia: number){
+		this.cartHandler.getFromCartElementList();
+		this.http_request.postService({
+			'idUsuario':idUsuario,
+			'idDireccion':idDireccion,
+			'tipoEntrega':tipoEntrega,
+			'guia':guia},'insertarCompra')
+		.then(response => {
+			this.idCompra = response[0].idCompra;
+		})
+		.catch(error => {
+			console.log('Error: ',error);
+		})
+		for(let item in this.cartHandler.getFromCartElementList()){
+			this.http_request.postService({
+				'idCompra':this.idCompra,
+				'idProducto':this.cartHandler.getFromCartElementList()[item].idProducto,
+				'cantidad':this.cartHandler.lista[item].cant,
+				'precio':this.cartHandler.getFromCartElementList()[item].precio
+				},'asociarCompra')
+			.then(response => {
+				console.log(response)
+			})
+			.catch(error => {
+				console.log(error)
+			})
+		}
+		
+
 	}
 
 }
