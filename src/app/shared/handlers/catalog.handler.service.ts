@@ -161,7 +161,7 @@ export class CatalogHandlerService {
   }
 
   public postCategory(category : any) : void{
-  	this.http_request.postService(category,'insertProducts')
+  	this.http_request.postService(category,'SolicitarCategoria')
 		.then(response => 
 		{
 			//this.onChange.emit({data : response.data});

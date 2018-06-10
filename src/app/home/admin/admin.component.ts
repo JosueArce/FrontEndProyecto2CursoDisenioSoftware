@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AdministrateHandlerService } from '../../shared/handlers/administrate.handler.service';
 import { seller } from '../../shared/models/seller.model';
 import { GlobalService } from '../../shared/handlers/global-service.service';
-import { AuthService, SocialUser } from "angularx-social-login";
 
 @Component({
   selector: 'app-admin',
@@ -10,27 +9,27 @@ import { AuthService, SocialUser } from "angularx-social-login";
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent {
-  private user : SocialUser;
   constructor(private adminHandler: AdministrateHandlerService,private globalHandler : GlobalService) {
-  	adminHandler.getSellers();
-
-    this.globalHandler.user.subscribe({
-      next : (user : any) => {
-        this.user = user;          
-      }
-    }); 
+  	this.adminHandler.getSellers();
   }
 
   aceptarSolicitud(solicitud){
     if(this.globalHandler.loggedIn)
-      this.adminHandler.acceptDeclineRequest({idSolicitud : solicitud.idSolicitud, idUsuario : this.user.id, decision : 1});
+      if(solicitud.tipoSolicitud == 0)
+            this.adminHandler.acceptRequestCategory({idSolicitud : solicitud.idSolicitud,categoria: solicitud.descripcion,decision : 1});
+      else if(solicitud.tipoSolicitud == 1)
+        this.adminHandler.acceptSellerRequest({idSolicitud : solicitud.idSolicitud, idUsuario : this.globalHandler.userData.id, decision : 1});
+                
     //else 
       //decirle al usuario que tiene que logearse primero
   }
 
   rechazarSolicitud(solicitud){
     if(this.globalHandler.loggedIn)
-       this.adminHandler.acceptDeclineRequest({idSolicitud : solicitud.idSolicitud, idUsuario : this.user.id, decision : 0});
+      if(solicitud.tipoSolicitud == 0)
+        this.adminHandler.declineRequestCategory({idSolicitud : solicitud.idSolicitud,categoria:solicitud.descripcion, decision : 0});
+      else if(solicitud.tipoSolicitud == 1)
+       this.adminHandler.declineRequestSeller({idSolicitud : solicitud.idSolicitud, idUsuario : this.globalHandler.userData.id, decision : 0});
      //else 
       //decirle al usuario que tiene que logearse primero
   }

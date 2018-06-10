@@ -16,17 +16,7 @@
                         Campo requerido
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field class="full-width">
-                    <input 
-                    matInput placeholder="Descripción" 
-                    [formControl]="descriptionNameFormControl" 
-                    [errorStateMatcher]="matcher"
-                    [(ngModel)]="descripcion">
-                    <mat-error *ngIf="descriptionNameFormControl.hasError('required')">
-                        Campo requerido
-                    </mat-error>
-                </mat-form-field>
-                <button mat-button class="full-width aplicar" (click)="onSubmit(categoria,descripcion)">Enviar Solicitud</button>
+                <button mat-button class="full-width aplicar" (click)="onSubmit(categoria)">Enviar Solicitud</button>
             </form>
         </div>
     </section>

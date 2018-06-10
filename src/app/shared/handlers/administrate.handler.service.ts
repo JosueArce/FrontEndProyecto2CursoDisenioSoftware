@@ -6,10 +6,10 @@ import { seller } from '../models/seller.model';
 @Injectable()
 export class AdministrateHandlerService {
 
-  public solicitudesVendedores : Array<sellerRequest>;	
+  public solicitudes : Array<sellerRequest>;	
   public sellerList : Array<seller>;
   constructor(private http_request : Http_Requests) { 
-  	this.solicitudesVendedores = new Array<sellerRequest>();
+  	this.solicitudes = new Array<sellerRequest>();
     this.sellerList = new Array<seller>();
     setInterval(()=>{this.getSellerRequests();this.getSellers()},10000);
   }
@@ -23,7 +23,7 @@ export class AdministrateHandlerService {
   public getSellerRequests(){
   	this.http_request.getService('Solicitudes')
   	.then(response => {
-      this.solicitudesVendedores = response;
+      this.solicitudes = response[0];
     })
   	.catch(error =>{
   		console.log("Error: ",error)
@@ -40,16 +40,32 @@ export class AdministrateHandlerService {
     })
   }
 
-  public acceptDeclineRequest(request){
-    this.http_request.postService(request,'decidirVendedor')
+  public acceptRequestSeller(requestID){
+    this.http_request.postService(requestID,'decidirVendedor')
     .then(response => {console.log(response);
        //llamar al snackbar aqui
     })
     .catch(error => console.log("Error:",error))
   }
 
-  public deleteSeller(sellerID){
-    this.http_request.postService(sellerID,'borrarVendedor')
+  public declineRequestSeller(requestID){
+    this.http_request.deleteService(requestID,'borrarVendedor')
+    .then(response => {
+      //llamar al snackbar aqui
+    })
+    .catch(error => console.log("Error",error))
+  }
+
+  public acceptRequestCategory(requestID){
+    this.http_request.postService(requestID,'decidirVendedor')
+    .then(response => {console.log(response);
+       //llamar al snackbar aqui
+    })
+    .catch(error => console.log("Error:",error))
+  }
+
+  public declineRequestCategory(requestID){
+    this.http_request.deleteService(requestID,'borrarVendedor')
     .then(response => {
       //llamar al snackbar aqui
     })

@@ -24,7 +24,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class CategoryRegistrationComponent {
 
   categoryNameFormControl = new FormControl('', [Validators.required]);
-  descriptionNameFormControl = new FormControl('', [Validators.required]);
   matcher = new MyErrorStateMatcher();
 
 
@@ -43,16 +42,16 @@ export class CategoryRegistrationComponent {
   }
 
   //permtie enviar una nueva solicitud al servidor de tipo categoria
-  onSubmit(categoria,descripcion){
+  onSubmit(categoria){
     if(this.globalService.loggedIn){
-      if(this.categoryNameFormControl.valid && this.descriptionNameFormControl.valid){
+      if(this.categoryNameFormControl.valid){
         for (var i = this.catalogHandler.categoryRecords.length - 1; i >= 0; i--) {
           if(this.catalogHandler.categoryRecords[i]===categoria){
             this.openSnackBar('Ya existe una categoría con este nombre!', 'Ok');
           }
         }
         //enviar solicitud
-        this.catalogHandler.postCategory({categoria:categoria,descripcion:descripcion});
+        this.catalogHandler.postCategory({idVendedor: this.globalService.userData.id, descripcion:categoria});
         this.openSnackBar('Solicitud enviada!', 'Ok');
       }
     }
