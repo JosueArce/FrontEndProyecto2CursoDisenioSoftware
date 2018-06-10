@@ -13,7 +13,7 @@ import { LoginModalService } from '../../login/loginModal.service';
 export class AdminComponent implements OnDestroy{
   public interval : any;
   constructor(private loginHandler:LoginModalService ,public snackBar: MatSnackBar,private adminHandler: AdministrateHandlerService,private globalHandler : GlobalService) {
-  	this.interval = setInterval(()=>{this.adminHandler.getSellerRequests();this.adminHandler.getSellers()},3000);
+  	this.interval = setInterval(()=>{this.adminHandler.getSellerRequests();this.adminHandler.getSellers()},5000);
   }
 
   openSnackBar(message: string, action: string) {
