@@ -15,15 +15,17 @@
                 <div class="products" *ngFor="let product of cartHandler.getFromCartElementList()">
                     <mat-card class="item">
                         <mat-card-title><img class="img-fluid" src="{{product.imagen}}" width="65"></mat-card-title>
-                        <mat-card-subtitle *ngIf="tipoEntrega==0">{{product.producto}} ({{getCantidad(product.idProducto)}})</mat-card-subtitle>
+                        <mat-card-subtitle>{{product.producto}} ({{getCantidad(product.idProducto)}})</mat-card-subtitle>
                         <mat-card-content>{{product.descripcion}}</mat-card-content>
-                        <mat-card-footer>₡{{product.precio}}</mat-card-footer>
+                        <mat-card-footer *ngIf="tipoEntrega!=0">₡{{product.precio}}</mat-card-footer>
+                        <mat-card-footer *ngIf="tipoEntrega==0">₡{{product.precio}} (₡{{product.tarifa}} de envío)</mat-card-footer>
                     </mat-card>
                 </div>
                 <mat-divider></mat-divider>
                 <mat-card class="total">
                     <mat-card-title>Total</mat-card-title>
-                    <mat-card-subtitle>₡{{cartHandler.getTotal()}}</mat-card-subtitle>
+                    <mat-card-subtitle *ngIf="tipoEntrega!=0">₡{{getTotal(false)}}</mat-card-subtitle>
+                    <mat-card-subtitle *ngIf="tipoEntrega==0">₡{{getTotal(true)}}</mat-card-subtitle>
                 </mat-card>
                 <div *ngIf="tipoEntrega==0">
                     <h3>Por favor provea una dirección para la entrega</h3>
