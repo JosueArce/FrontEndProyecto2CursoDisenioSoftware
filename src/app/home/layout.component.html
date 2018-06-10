@@ -15,19 +15,19 @@
                 <li class="nav-item" [routerLinkActive]="['active']" role="presentation">
                     <a class="nav-link" routerLink="/catalog">Catálogo</a>
                 </li>
-                <li class="nav-item" [routerLinkActive]="['active']" *ngIf="userHandler.user.tipoUsuario == 0" role="presentation">
+                <li class="nav-item" [routerLinkActive]="['active']" *ngIf="userHandler.user.tipoUsuario == 0 || userHandler.user.tipoUsuario==1" role="presentation">
                     <a class="nav-link" routerLink="/cart">Carrito</a>
                 </li>
 
-                <li class="nav-item" *ngIf="userHandler.user.tipoUsuario==2" role="presentation">
+                <li class="nav-item" *ngIf="userHandler.user.tipoUsuario==0" role="presentation">
                     <a class="nav-link" routerLink="/seller-registration">Registrarse como Vendedor</a>
                 </li>
 
-                <li class="nav-item" *ngIf="userHandler.user.tipoUsuario==2" role="presentation">
+                <li class="nav-item" *ngIf="userHandler.user.tipoUsuario==1" role="presentation">
                     <a class="nav-link" routerLink="/category-registration">Registrar Nueva Categoría</a>
                 </li>
 
-                <li class="nav-item" *ngIf="userHandler.user.tipoUsuario===2" role="presentation">
+                <li class="nav-item" *ngIf="userHandler.user.tipoUsuario===1" role="presentation">
                     <a class="nav-link" routerLink="/my-products">Mis Productos</a>
                 </li>
 

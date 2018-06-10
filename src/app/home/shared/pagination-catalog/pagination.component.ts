@@ -10,20 +10,13 @@ import { GlobalService } from '../../../shared/handlers/global-service.service';
 })
 export class PaginationComponent implements OnInit {
 
-  /*@Input()
-  public source : Array<any>;*/
-
-  //public backUpSource : Array<any>;
   private allItems: any[];
   private pager : any = {};
 
   constructor(private globalHandler : GlobalService,private paginationHandler : PaginationService,private productHandler : ProductHandlerService) { 
-    //this.source = new Array<any>();
-    //this.backUpSource = new Array<any>();
   }
 
   ngOnInit() {
-    //this.backUpSource = this.source.slice(0);
     this.productHandler.recordsEmiter.subscribe({
       next:(data)=>{
         this.allItems = data;

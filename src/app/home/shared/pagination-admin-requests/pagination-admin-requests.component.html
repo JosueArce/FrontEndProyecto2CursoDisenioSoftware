@@ -1,3 +1,18 @@
-<p>
-  pagination-admin-requests works!
-</p>
+<div class="row">
+    <div class="col-12 col-md-12 col-lg-12">
+        <nav>
+            <ul class="pagination" >
+                <li [ngClass]="{disabled:pager.currentPage === 1||pager.totalPages===0}" class="page-item">
+                	<a class="page-link" aria-label="Previous">
+                		<span aria-hidden="true"  (click)="setPage(pager.currentPage - 1)">« Previous</span>
+                	</a>
+            	</li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages||pager.totalPages===0}" class="page-item">
+                	<a class="page-link" aria-label="Next"   (click)="setPage(pager.currentPage + 1)">
+                		<span aria-hidden="true">Next »</span>
+                	</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

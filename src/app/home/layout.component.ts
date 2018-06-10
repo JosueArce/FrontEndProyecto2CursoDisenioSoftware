@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { LoginModalService } from '../login/loginModal.service';
 import { ProductHandlerService } from '../shared/handlers/product.handler.service';
 import { GlobalService } from '../shared/handlers/global-service.service';
-import { Router } from '@angular/router';
 import { AuthService, SocialUser } from "angularx-social-login";
 import { SellersHandlerService } from '../shared/handlers/sellers.handler.service';
 import { UserHandlerService } from '../shared/handlers/user.handler.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 
@@ -19,18 +19,30 @@ export class LayoutHome{
 
 	private isLogged : boolean = false;
 	private user : SocialUser = null;
+	private state : boolean = false;
 
 	constructor(
 		private producHandler : ProductHandlerService,
 		public globalService: GlobalService,
 		public loginModalService: LoginModalService,
-		private router: Router,
 		private authService : AuthService,
 		private sellerHandler : SellersHandlerService,
-		private userHandler : UserHandlerService
+		private userHandler : UserHandlerService,
+		private route: ActivatedRoute,
+        private router: Router
 		){	
 		this.globalService.isLoggedIn();
 		this.isLoggedIn();
+		/*setInterval(()=>{
+			if(!this.globalService.loggedIn)
+				{this.router.navigate(['']);}
+			else if(this.userHandler.user.tipoUsuario==0)
+				{this.router.navigate(['catalog']);}
+			else if(this.userHandler.user.tipoUsuario==1)
+				{this.router.navigate(['my-products']);}
+			else if(this.userHandler.user.tipoUsuario==2)
+				{this.router.navigate(['admin']);}
+		},500);*/
 	}
 	
 	isLoggedIn(){
