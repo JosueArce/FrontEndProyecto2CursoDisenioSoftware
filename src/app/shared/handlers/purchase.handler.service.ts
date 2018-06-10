@@ -10,7 +10,7 @@ export class PurchaseService{
 	public provincias : Array<any>;
 	public cantones : Array<any>;
 	public distritos : Array<any>;
-	public comprasUsuario : Array<any>;
+	public comprasUsuario : EventEmitter<any> = new EventEmitter<any>();
 	public idDireccion: string;
 	public idCompra: string;
 
@@ -18,7 +18,6 @@ export class PurchaseService{
 		this.provincias = new Array<any>();
 		this.cantones = new Array<any>();
 		this.distritos = new Array<any>();
-		this.comprasUsuario = new Array<any>();
 
 		this.getProvincias();
 		this.getCantones();
@@ -64,7 +63,7 @@ export class PurchaseService{
 		this.http_request.postService({idUsuario:this.userHandler.user.idUsuario},'ComprasUsuario')
 	    .then(response => {	    	
 	        console.log(response);
-	        this.comprasUsuario = response[0];
+	        this.comprasUsuario.emit(response[0]);
 	    })
 	    .catch(error =>{
 	      console.log("Error: ",error)
