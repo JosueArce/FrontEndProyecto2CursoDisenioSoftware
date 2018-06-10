@@ -49,12 +49,14 @@ export class PaymentComponent implements OnInit {
   cantonFormControl = new FormControl('', [Validators.required]);
   distritoFormControl = new FormControl('', [Validators.required]);
   matcher = new MyErrorStateMatcher();
+  nuevaDireccion=false;
   tipoEntrega: any;
   provincias: Array<any>;
   provinciaSeleccionada: any;
   cantonSeleccionado: any;
   cantones: Array<any>;
   distritos: Array<any>;
+  
   constructor(private cartHandler: CartService, formBuilder: FormBuilder,private http_request: Http_Requests) { 
   	this.form= formBuilder.group({
   		'holderFormControl': [null, Validators.required],
@@ -122,6 +124,22 @@ export class PaymentComponent implements OnInit {
       if(this.cartHandler.lista[item].id === productId)
         return this.cartHandler.lista[item].cant;
     }
+  }
+  //retorna el precio del producto, si es a domicilio se le suma la tarifa de envio
+  getPrecio(producto: any, domicilio: boolean): number{
+    if(domicilio){
+      return producto.precio+producto.tarifa;
+    } else{
+      return producto.precio;
+    }
+  }
+
+  getTotal(domicilio: boolean):number{
+    let total=0;
+    for (let item in this.cartHandler.getFromCartElementList()) {
+      total+= this.getPrecio(this.cartHandler.getFromCartElementList()[item],domicilio);
+    }
+    return total
   }
 
   chosenYearHandler(normalizedYear: Moment) {

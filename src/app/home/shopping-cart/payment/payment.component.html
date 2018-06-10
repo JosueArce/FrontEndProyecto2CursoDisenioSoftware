@@ -15,54 +15,59 @@
                 <div class="products" *ngFor="let product of cartHandler.getFromCartElementList()">
                     <mat-card class="item">
                         <mat-card-title><img class="img-fluid" src="{{product.imagen}}" width="65"></mat-card-title>
-                        <mat-card-subtitle *ngIf="tipoEntrega==0">{{product.producto}} ({{getCantidad(product.idProducto)}})</mat-card-subtitle>
+                        <mat-card-subtitle>{{product.producto}} ({{getCantidad(product.idProducto)}})</mat-card-subtitle>
                         <mat-card-content>{{product.descripcion}}</mat-card-content>
-                        <mat-card-footer>₡{{product.precio}}</mat-card-footer>
+                        <mat-card-footer *ngIf="tipoEntrega!=0">₡{{product.precio}}</mat-card-footer>
+                        <mat-card-footer *ngIf="tipoEntrega==0">₡{{product.precio}} (₡{{product.tarifa}} de envío)</mat-card-footer>
                     </mat-card>
                 </div>
                 <mat-divider></mat-divider>
                 <mat-card class="total">
                     <mat-card-title>Total</mat-card-title>
-                    <mat-card-subtitle>₡{{cartHandler.getTotal()}}</mat-card-subtitle>
+                    <mat-card-subtitle *ngIf="tipoEntrega!=0">₡{{getTotal(false)}}</mat-card-subtitle>
+                    <mat-card-subtitle *ngIf="tipoEntrega==0">₡{{getTotal(true)}}</mat-card-subtitle>
                 </mat-card>
                 <div *ngIf="tipoEntrega==0">
-                    <h3>Por favor provea una dirección para la entrega</h3>
-                    <mat-form-field>
-                        <mat-label>Provincia</mat-label>
-                      <mat-select [(ngModel)]="provinciaSeleccionada" [formControl]="provinciaFormControl">
-                        <mat-option required *ngFor="let provincia of provincias" [value]="provincia.idProvincia">{{provincia.nombre}}</mat-option>
-                      </mat-select>
-                      <mat-error *ngIf="provinciaFormControl.hasError('required')">
-                          Provincia <strong>requerida</strong>
-                        </mat-error>
-                    </mat-form-field>
+                    <h3>Por favor elija una dirección para la entrega</h3>
+                    <mat-slide-toggle color="primary" [checked]="nuevaDireccion" (change)="nuevaDireccion=!nuevaDireccion">Agregar nueva dirección</mat-slide-toggle>
+                    <div *ngIf="nuevaDireccion==true">
+                        <mat-form-field>
+                            <mat-label>Provincia</mat-label>
+                          <mat-select [(ngModel)]="provinciaSeleccionada" [formControl]="provinciaFormControl">
+                            <mat-option required *ngFor="let provincia of provincias" [value]="provincia.idProvincia">{{provincia.nombre}}</mat-option>
+                          </mat-select>
+                          <mat-error *ngIf="provinciaFormControl.hasError('required')">
+                              Provincia <strong>requerida</strong>
+                            </mat-error>
+                        </mat-form-field>
 
-                    <mat-form-field>
-                        <mat-label>Cantón</mat-label>
-                      <mat-select [(ngModel)]="cantonSeleccionado" [formControl]="cantonFormControl">
-                        <mat-option required *ngFor="let canton of filtrarCantones(provinciaSeleccionada)" [value]="canton.idCanton">{{canton.nombre}}</mat-option>
-                      </mat-select>
-                      <mat-error *ngIf="cantonFormControl.hasError('required')">
-                          Cantón <strong>requerido</strong>
-                        </mat-error>
-                    </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Cantón</mat-label>
+                          <mat-select [(ngModel)]="cantonSeleccionado" [formControl]="cantonFormControl">
+                            <mat-option required *ngFor="let canton of filtrarCantones(provinciaSeleccionada)" [value]="canton.idCanton">{{canton.nombre}}</mat-option>
+                          </mat-select>
+                          <mat-error *ngIf="cantonFormControl.hasError('required')">
+                              Cantón <strong>requerido</strong>
+                            </mat-error>
+                        </mat-form-field>
 
-                    <mat-form-field>
-                        <mat-label>Distrito</mat-label>
-                      <mat-select required [(value)]="distrito" [formControl]="distritoFormControl">
-                        <mat-option *ngFor="let distrito of filtrarDistritos(cantonSeleccionado)" [value]="distrito.idDistrito">{{distrito.nombre}}</mat-option>
-                      </mat-select>
-                      <mat-error *ngIf="distritoFormControl.hasError('required')">
-                          Distrito <strong>requerido</strong>
-                        </mat-error>
-                    </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Distrito</mat-label>
+                          <mat-select required [(value)]="distrito" [formControl]="distritoFormControl">
+                            <mat-option *ngFor="let distrito of filtrarDistritos(cantonSeleccionado)" [value]="distrito.idDistrito">{{distrito.nombre}}</mat-option>
+                          </mat-select>
+                          <mat-error *ngIf="distritoFormControl.hasError('required')">
+                              Distrito <strong>requerido</strong>
+                            </mat-error>
+                        </mat-form-field>
 
-                    <mat-form-field>
-                        <textarea matInput placeholder="Dirección exacta" [formControl]="direccionFormControl"></textarea>
-                        <mat-error *ngIf="direccionFormControl.hasError('required')">
-                          Dirección <strong>requerida</strong>
-                        </mat-error>
-                    </mat-form-field>
+                        <mat-form-field>
+                            <textarea matInput placeholder="Dirección exacta" [formControl]="direccionFormControl"></textarea>
+                            <mat-error *ngIf="direccionFormControl.hasError('required')">
+                              Dirección <strong>requerida</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
                 </div>
                 <mat-divider></mat-divider>
                 <div class="card-details">
