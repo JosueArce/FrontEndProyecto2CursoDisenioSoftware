@@ -6,6 +6,8 @@ import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import { SellersHandlerService } from './sellers.handler.service';
 import { GlobalService } from './global-service.service';
 import { AuthService, SocialUser } from "angularx-social-login";
+import {  MatSnackBar } from '@angular/material';
+import { UserHandlerService } from './user.handler.service';
 
 @Injectable()
 export class ProductHandlerService {
@@ -17,7 +19,7 @@ export class ProductHandlerService {
   public uploader : CloudinaryUploader;
   private user : SocialUser;
 
-  constructor(public http_request : Http_Requests, private globalHandler : GlobalService) {
+  constructor(private userHandler:UserHandlerService, public http_request : Http_Requests, private globalHandler : GlobalService,private sellerHandler: SellersHandlerService,public snackBar: MatSnackBar) {
     this.productRecords = []; 
     this.backUpProductRecrods = [];
     this.sellerRecords = [];
@@ -48,25 +50,32 @@ export class ProductHandlerService {
         this.user = user;          
       }
     }); 
-    setInterval(()=>this.getProducts(),1000); 
   }
 
-  public getProducts() : void{
+  //permite abrir un mensaje de texto en pantalla
+  openSnackBar(message: string, action: string) {
+    let extraClasses=['background-grey'];
+      this.snackBar.open(message, action, {
+        duration: 2000,
+        extraClasses: extraClasses
+    });
+  }
 
+  //obtiene los productos actuales
+  public getProducts() : void{
   	this.http_request.getService('ProductosDisponibles')
   			.then(response => 
 				{
 					this.backUpProductRecrods = response[0];
 					this.productRecords = response[0];
           this.sellerRecords = [];
- 
-          if(this.globalHandler.loggedIn){
+           
+          if(this.userHandler.user.tipoUsuario==1 && this.globalHandler.loggedIn){
               for(let index = 0;index<this.productRecords.length;index++){
                 if(this.productRecords[index].idVendedor == this.user.id)
                   this.sellerRecords.push(this.productRecords[index]);
             }
-          } 
-          
+          }           
 				}
 			)
 			.catch(error => 
@@ -77,7 +86,8 @@ export class ProductHandlerService {
 			)
   }
 
-  public postProducts(newProduct : ProductModel) : void{
+  //inserta un nuevo registro
+  public postProducts(newProduct : any) : void{
   	this.http_request.postService(newProduct,'insertarProducto')
   			.then(response => 
 				{
@@ -92,6 +102,28 @@ export class ProductHandlerService {
 			)
   }
 
+  //elimina el producto a partir de su ID
+  public deleteProduct(parameterName:any){
+    this.http_request.deleteService({ 'idProducto' : parameterName}, "eliminarProducto")
+        .then(response => 
+          {
+            //ya sirve
+            this.getProducts();
+          }
+        )
+        .catch(error => console.log("Error: ",error))
+  }
+
+  //edita el producto
+  public  editProduct(newProduct : any){
+    this.http_request.putService(newProduct,'editarProducto')
+      .then(response=>{
+        console.log(response);
+        this.getProducts();
+      })
+      .catch(error=> console.log("Error:",error))
+  }
+
   public getSelectedProduct(){
   	return this.selectedProduct;
   }
@@ -100,7 +132,8 @@ export class ProductHandlerService {
   	 this.selectedProduct = newProduct;
   }
 
-  public pushImageCloud(newProduct : ProductModel) : boolean{
+  //permite insertar un nuevo registro producto
+  public pushImageCloud(newProduct : ProductModel){
   	this.uploader.uploadAll();
 
     this.uploader.onSuccessItem = 
@@ -111,7 +144,6 @@ export class ProductHandlerService {
       else newProduct.imagen = "http://www.royallepagesudbury.ca/images/no-image.png";
      
       this.postProducts(newProduct);
-      return true;
     };
 
     this.uploader.onErrorItem = function(fileItem, response, status, headers) {
@@ -119,27 +151,29 @@ export class ProductHandlerService {
       return false;
     };
 
-    return null;
+    return true;
   }
 
-  public editImageProduct(newProduct : ProductModel){
+  //permite editar un producto existente
+  public editImageProduct(newProduct : any){
+
     this.uploader.uploadAll();
 
     this.uploader.onSuccessItem = 
     (item : any,response:string, status:number,headers:any):any=>
     {
-      if(newProduct.imagen == '')
-        return JSON.parse(response).url;
+      if(newProduct.imagen != JSON.parse(response).url)
+        newProduct.imagen = JSON.parse(response).url;
 
-      return false;
+      this.editProduct(newProduct);//se llama al metodo que para que edite el producto en el servidor
+      return true;
     };
 
     this.uploader.onErrorItem = function(fileItem, response, status, headers) {
       console.info('onErrorItem', fileItem, response, status, headers);
+      this.openSnackBar('Error al editar el producto!', 'Ok');
       return false;
     };
-
-    return null;
   }
 
 

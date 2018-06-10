@@ -16,7 +16,7 @@ export class GlobalService {
   constructor(private route: Router,
     private authService : AuthService, 
     public loginModalService: LoginModalService,
-    private userHandler : UserHandlerService) { }
+    private userHandler : UserHandlerService) {this.loggedIn=false; }
 
   public pushToLocalStorage(nombre : string, data : any) : void{
   	localStorage.setItem(nombre,JSON.stringify(data));
@@ -36,7 +36,7 @@ export class GlobalService {
       this.user.emit(user);
       this.userData = user;
       this.userHandler.getUser(user.id);
-     // this.loggedIn = (user != null);
+      this.loggedIn = true;
     })
     this.loginModalService.dialogRef.close();
   }

@@ -53,8 +53,10 @@ export class AddProductComponent {
   onSubmit(newProduct : ProductModel,marca,idCategoria){
     if(this.form.valid){      
       newProduct.marca = marca; newProduct.categoria = idCategoria; newProduct.idVendedor = this.globalHandler.userData.id;
-      this.productHandler.pushImageCloud(newProduct);
-      this.openSnackBar('Producto agregado!', 'Ok');
+      let result = this.productHandler.pushImageCloud(newProduct);
+      if(result)
+        this.openSnackBar('Producto agregado!', 'Ok');
+      else this.openSnackBar('Error al insertar el producto!', 'Ok');
       this.dialogRef.close();
     } else {
       this.openSnackBar('Complete los campos correctamente!', 'Ok');

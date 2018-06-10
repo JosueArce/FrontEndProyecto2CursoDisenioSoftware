@@ -29,7 +29,6 @@ export class Http_Requests {
 
 	/*Inserts information through an endPoint*/
 	public postService(params:any,endPoint:string) : Promise<any>{
-		console.log(params,endPoint);
 		let body = JSON.stringify(params);
 		return this.http
 			.post(this.apiURL+endPoint,body,this.options)
@@ -42,7 +41,7 @@ export class Http_Requests {
 	public putService(params:any,endPoint:string) : Promise<any>{
 		let body = JSON.stringify(params);
 		return this.http
-			.put(this.apiURL+endPoint,body,this.options)
+			.post(this.apiURL+endPoint,body,this.options)
 			.toPromise()
 			.then(this.extractData)
 			.catch(this.handleError)
@@ -51,7 +50,6 @@ export class Http_Requests {
 	/*Removes data from the DB when endPoint is called*/
 	public deleteService(params:any,endPoint:string) : Promise<any>{
 		let body = JSON.stringify(params);
-		console.log(body);
 		return this.http
 			.post(this.apiURL+endPoint,body,this.options)
 			.toPromise()

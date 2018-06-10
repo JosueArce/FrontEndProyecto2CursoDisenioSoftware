@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SellersHandlerService } from '../../../shared/handlers/sellers.handler.service';
+import { ProductHandlerService } from '../../../shared/handlers/product.handler.service';
 import { DeleteProductService } from './delete-product.service';
 
 @Component({
@@ -9,14 +9,14 @@ import { DeleteProductService } from './delete-product.service';
 })
 export class DeleteProductComponent implements OnInit {
 
-  constructor(private deleteService : DeleteProductService,private sellerHandler : SellersHandlerService) { 
+  constructor(private deleteService : DeleteProductService,private productHandler : ProductHandlerService) { 
   }
 
   ngOnInit() {
   }
 
   eliminarProducto(){
-  	this.sellerHandler.deleteProduct(this.deleteService._selectedProducto.idProducto);
+  	this.productHandler.deleteProduct(this.deleteService._selectedProducto.idProducto);
   }
 
 }
