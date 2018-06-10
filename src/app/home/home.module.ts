@@ -11,7 +11,7 @@ import { LoginService } from '../login/login.service';
 import {FormsModule, ReactiveFormsModule,FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { FilterDataPipe } from '../shared/pipes/filter-data.pipe';
 import { SellerRegistrationComponent } from './seller-registration/seller-registration.component';
-import { PaginationComponent } from './shared/pagination/pagination.component';
+import { PaginationComponent } from './shared/pagination-catalog/pagination.component';
 import { MyProductsComponent } from './my-products/my-products.component';
 import { AddProductComponent } from './my-products/add-product/add-product.component';
 import { AddProductService } from './my-products/add-product/add-product.service';
@@ -37,6 +37,10 @@ import {
   MatNativeDateModule
 } from '@angular/material';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import { PaginationAdminRequestsComponent } from './shared/pagination-admin-requests/pagination-admin-requests.component';
+import { PaginationAdminSellersComponent } from './shared/pagination-admin-sellers/pagination-admin-sellers.component';
+import { PaginationMyProductsSellerComponent } from './shared/pagination-my-products-seller/pagination-my-products-seller.component';
+import { CategoryRegistrationComponent } from './category-registration/category-registration.component';
 
 
 
@@ -54,7 +58,11 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     AddProductComponent,
     FileSelectDirective,
     EditProductComponent,
-    DeleteProductComponent
+    DeleteProductComponent,
+    PaginationAdminRequestsComponent,
+    PaginationAdminSellersComponent,
+    PaginationMyProductsSellerComponent,
+    CategoryRegistrationComponent
   ],
   imports: [
     HomeRoutingModule,

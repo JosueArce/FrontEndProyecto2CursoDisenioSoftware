@@ -15,6 +15,8 @@ export class ProductHandlerService {
   public sellerRecords : ProductModel[];
   public productRecords : ProductModel[];
   public backUpProductRecrods : ProductModel[];
+  public recordsEmiter : EventEmitter<any> = new EventEmitter<any>(); 
+  public sellerRecordsEmitter : EventEmitter<any> = new EventEmitter<any>(); 
   public selectedProduct : ProductModel;
   public uploader : CloudinaryUploader;
   private user : SocialUser;
@@ -75,7 +77,9 @@ export class ProductHandlerService {
                 if(this.productRecords[index].idVendedor == this.user.id)
                   this.sellerRecords.push(this.productRecords[index]);
             }
-          }           
+          } 
+          this.sellerRecordsEmitter.emit(this.sellerRecords);
+          this.recordsEmiter.emit(response[0]);          
 				}
 			)
 			.catch(error => 

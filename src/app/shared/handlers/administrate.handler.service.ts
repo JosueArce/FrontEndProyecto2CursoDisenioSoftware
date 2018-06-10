@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable,EventEmitter } from '@angular/core';
 import { Http_Requests } from '../http_request.service';
 import { sellerRequest } from '../models/sellerRequest.model';
 import { seller } from '../models/seller.model';
@@ -6,24 +6,25 @@ import { seller } from '../models/seller.model';
 @Injectable()
 export class AdministrateHandlerService {
 
-  public solicitudesVendedores : Array<sellerRequest>;	
+  public solicitudes : Array<sellerRequest>;	
+  public solicitudesEmitter : EventEmitter<any> = new EventEmitter<any>();
   public sellerList : Array<seller>;
+  public sellerListEmitter : EventEmitter<any> = new EventEmitter<any>();
   constructor(private http_request : Http_Requests) { 
-  	this.solicitudesVendedores = new Array<sellerRequest>();
+  	this.solicitudes = new Array<sellerRequest>();
     this.sellerList = new Array<seller>();
-    setInterval(()=>{this.getSellerRequests();this.getSellers()},10000);
   }
 
-
-
-  public acceptSellerRequest(request){
-
-  }
 
   public getSellerRequests(){
   	this.http_request.getService('Solicitudes')
   	.then(response => {
-      this.solicitudesVendedores = response;
+      for (var i = response[0].length - 1; i >= 0; i--) {
+        if(response[0].estado == 1)
+          this.solicitudes.push(response[0]);
+      }
+      this.solicitudesEmitter.emit(this.solicitudes);
+      //this.solicitudes = response[0];
     })
   	.catch(error =>{
   		console.log("Error: ",error)
@@ -33,6 +34,7 @@ export class AdministrateHandlerService {
   public getSellers(){
     this.http_request.getService('Vendedores')
     .then(response => {
+      this.sellerListEmitter.emit(response[0]);
       this.sellerList=response[0];
     })
     .catch(error => {
@@ -40,18 +42,38 @@ export class AdministrateHandlerService {
     })
   }
 
-  public acceptDeclineRequest(request){
+  public acceptRequestSeller(request){
     this.http_request.postService(request,'decidirVendedor')
-    .then(response => {console.log(response);
+    .then(response => {
+      this.getSellerRequests();
        //llamar al snackbar aqui
     })
     .catch(error => console.log("Error:",error))
   }
 
-  public deleteSeller(sellerID){
-    this.http_request.postService(sellerID,'borrarVendedor')
+  public declineRequestSeller(request){
+    this.http_request.deleteService(request,'decidirVendedor')
+    .then(response => {console.log(response);
+      //llamar al snackbar aqui
+      this.getSellerRequests();
+    })
+    .catch(error => console.log("Error",error))
+  }
+
+  public acceptRequestCategory(request){
+    this.http_request.postService(request,'decidirCategoria')
+    .then(response => {console.log(response);
+       //llamar al snackbar aqui
+       this.getSellerRequests();
+    })
+    .catch(error => console.log("Error:",error))
+  }
+
+  public declineRequestCategory(request){
+    this.http_request.deleteService(request,'decidirCategoria')
     .then(response => {
       //llamar al snackbar aqui
+      this.getSellerRequests();
     })
     .catch(error => console.log("Error",error))
   }
