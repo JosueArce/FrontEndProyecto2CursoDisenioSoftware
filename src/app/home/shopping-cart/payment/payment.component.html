@@ -34,7 +34,7 @@
                         <mat-form-field>
                             <mat-label>Provincia</mat-label>
                           <mat-select [(ngModel)]="provinciaSeleccionada" [formControl]="provinciaFormControl">
-                            <mat-option required *ngFor="let provincia of this.purchaseHandler.getProvincias()" [value]="provincia.idProvincia">{{provincia.nombre}}</mat-option>
+                            <mat-option required *ngFor="let provincia of this.purchaseHandler.provincias" [value]="provincia.idProvincia">{{provincia.nombre}}</mat-option>
                           </mat-select>
                           <mat-error *ngIf="provinciaFormControl.hasError('required')">
                               Provincia <strong>requerida</strong>
@@ -53,7 +53,7 @@
 
                         <mat-form-field>
                             <mat-label>Distrito</mat-label>
-                          <mat-select required [(value)]="distrito" [formControl]="distritoFormControl">
+                          <mat-select required [(ngModel)]="distrito" [formControl]="distritoFormControl">
                             <mat-option *ngFor="let distrito of filtrarDistritos(cantonSeleccionado)" [value]="distrito.idDistrito">{{distrito.nombre}}</mat-option>
                           </mat-select>
                           <mat-error *ngIf="distritoFormControl.hasError('required')">

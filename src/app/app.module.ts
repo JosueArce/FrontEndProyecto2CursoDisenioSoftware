@@ -34,7 +34,7 @@ import { PaginationService } from './shared/handlers/pagination.handler.service'
 import { SellersHandlerService } from './shared/handlers/sellers.handler.service';
 import { SellerRegistrationHandlerService } from './shared/handlers/seller-registration.handler.service';
 import { UserHandlerService } from './shared/handlers/user.handler.service';
-import { PurchaseService } from './shared/handlers/purchase.handler.service';
+/*import { PurchaseService } from './shared/handlers/purchase.handler.service';*/
 
 let config = new AuthServiceConfig([
   {
@@ -82,8 +82,8 @@ export function provideConfig() {
     PaginationService,
     SellersHandlerService,
     SellerRegistrationHandlerService,
-    UserHandlerService,
-    PurchaseService
+    UserHandlerService
+    //PurchaseService
   ],
   bootstrap: [AppComponent]
 })

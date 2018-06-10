@@ -22,6 +22,7 @@ import { EditProductService } from './my-products/edit-product/edit-product.serv
 import { AdministrateHandlerService } from '../shared/handlers/administrate.handler.service';
 import { DeleteProductComponent } from './my-products/delete-product/delete-product.component';
 import { DeleteProductService } from './my-products/delete-product/delete-product.service';
+import { PurchaseService } from '../shared/handlers/purchase.handler.service';
 
 //Angular Material
 import {
@@ -42,6 +43,7 @@ import { PaginationAdminRequestsComponent } from './shared/pagination-admin-requ
 import { PaginationAdminSellersComponent } from './shared/pagination-admin-sellers/pagination-admin-sellers.component';
 import { PaginationMyProductsSellerComponent } from './shared/pagination-my-products-seller/pagination-my-products-seller.component';
 import { CategoryRegistrationComponent } from './category-registration/category-registration.component';
+import { PurchasesComponent } from './purchases/purchases.component';
 
 
 
@@ -63,7 +65,8 @@ import { CategoryRegistrationComponent } from './category-registration/category-
     PaginationAdminRequestsComponent,
     PaginationAdminSellersComponent,
     PaginationMyProductsSellerComponent,
-    CategoryRegistrationComponent
+    CategoryRegistrationComponent,
+    PurchasesComponent
   ],
   imports: [
     HomeRoutingModule,
@@ -90,7 +93,8 @@ import { CategoryRegistrationComponent } from './category-registration/category-
     AddProductService,
     EditProductService,
     AdministrateHandlerService,
-    DeleteProductService
+    DeleteProductService,
+    PurchaseService
   ],
   entryComponents: [
     AddProductComponent,

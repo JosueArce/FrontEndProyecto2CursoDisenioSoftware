@@ -42,7 +42,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
   ]
 })
-export class PaymentComponent implements OnInit {
+export class PaymentComponent {
   date = new FormControl(moment());
   form: FormGroup;
   direccionFormControl = new FormControl('', [Validators.required]);
@@ -52,13 +52,10 @@ export class PaymentComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   nuevaDireccion=false;
   tipoEntrega: any;
-  provincias: Array<any>;
   provinciaSeleccionada: any;
   cantonSeleccionado: any;
-  cantones: Array<any>;
-  distritos: Array<any>;
   
-  constructor(private cartHandler: CartService, formBuilder: FormBuilder,private http_request: Http_Requests, private purchaseHandler: PurchaseService) { 
+  constructor(private purchaseHandler : PurchaseService, private cartHandler: CartService, formBuilder: FormBuilder,private http_request: Http_Requests) { 
   	this.form= formBuilder.group({
   		'holderFormControl': [null, Validators.required],
         'cardNumberFormControl': [null, Validators.compose([
@@ -66,25 +63,14 @@ export class PaymentComponent implements OnInit {
         'cvcFormControl': [null, Validators.compose([
         	Validators.required, Validators.min(100), Validators.max(999)])],
   	});
-    
-    //this.provincias=this.purchaseHandler.getProvincias();
-
-    
-    //this.cantones = this.purchaseHandler.getCantones();
-
-    
-    //this.distritos = this.purchaseHandler.getDistritos();
-
-  }
-  ngOnInit() {
 
   }
 
   filtrarCantones(idProvincia: number): Array<any>{
     let temp = new Array<any>();
-    for(let item in this.cantones){
-      if(this.purchaseHandler.getCantones()[item].idProvincia==idProvincia){
-        temp.push(this.purchaseHandler.getCantones()[item]);
+    for(let item in this.purchaseHandler.cantones){
+      if(this.purchaseHandler.cantones[item].idProvincia==idProvincia){
+        temp.push(this.purchaseHandler.cantones[item]);
       }
     }
     return temp;
@@ -92,17 +78,16 @@ export class PaymentComponent implements OnInit {
 
   filtrarDistritos(idCanton: number): Array<any>{
     let temp = new Array<any>();
-    for(let item in this.distritos){
-      if(this.purchaseHandler.getDistritos()[item].idCanton==idCanton){
-        temp.push(this.purchaseHandler.getCantones()[item]);
+    for(let item in this.purchaseHandler.distritos){
+      if(this.purchaseHandler.distritos[item].idCanton==idCanton){
+        temp.push(this.purchaseHandler.distritos[item]);
       }
     }
     return temp;
   }  
 
   //Obtiene la cantidad de items del mismo producto requerido por el usuario a partir del id del producto
-  getCantidad(productId: number): number{
-    
+  getCantidad(productId: number): number{    
     for(let item in this.cartHandler.lista){
       if(this.cartHandler.lista[item].id === productId)
         return this.cartHandler.lista[item].cant;
