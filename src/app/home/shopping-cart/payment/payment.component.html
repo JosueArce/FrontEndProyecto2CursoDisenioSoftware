@@ -5,7 +5,7 @@
                 <h2 class="text-info">Método de Pago</h2>
                 <p>Estás a sólo un paso de completar tu pedido. Por favor elige un método de pago.&nbsp;</p>
                 <mat-button-toggle-group #group="matButtonToggleGroup">
-                  <mat-button-toggle (click)="tipoEntrega=0" value="0">A domcilio</mat-button-toggle>
+                  <mat-button-toggle (click)="tipoEntrega=0" value="0">A domicilio</mat-button-toggle>
                   <mat-button-toggle (click)="tipoEntrega=1" value="1">Recoger en tienda</mat-button-toggle>
                 </mat-button-toggle-group>
             </div>
@@ -25,12 +25,33 @@
                     <mat-card-title>Total</mat-card-title>
                     <mat-card-subtitle>₡{{cartHandler.getTotal()}}</mat-card-subtitle>
                 </mat-card>
+                <div *ngIf="tipoEntrega==0">
+                    <h3>Por favor provea una dirección para la entrega</h3>
+                    <mat-form-field>
+                        <mat-label>Provincia</mat-label>
+                      <mat-select [(ngModel)]="provinciaSeleccionada" [ngModelOptions]="{standalone: true}">
+                        <mat-option *ngFor="let provincia of provincias" [value]="provincia.idProvincia">{{provincia.nombre}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Cantón</mat-label>
+                      <mat-select [(ngModel)]="cantonSeleccionado" [ngModelOptions]="{standalone: true}">
+                        <mat-option *ngFor="let canton of filtrarCantones(provinciaSeleccionada)" [value]="canton.idCanton">{{canton.nombre}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Distrito</mat-label>
+                      <mat-select [(value)]="distrito">
+                        <mat-option *ngFor="let distrito of filtrarDistritos(cantonSeleccionado)" [value]="distrito.idDistrito">{{distrito.nombre}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                </div>
                 <mat-divider></mat-divider>
                 <div class="card-details">
                     <h3 class="title">Información de la tarjeta</h3>
                     <form [formGroup]="form">
                         <div class="form-row">
-                            <div class="col-sm-3">
+                            <div class="col-sm-6">
                                 <mat-form-field>
                                     <mat-label>Card Holder</mat-label>
                                     <input matInput placeholder="Card Holder" [formControl]="form.controls['holderFormControl']">
@@ -39,7 +60,7 @@
                                     </mat-error>
                                 </mat-form-field>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-6">
                                 <mat-form-field>
                                   <mat-label>Fecha Expiración</mat-label>
                                   <input matInput [matDatepicker]="dp" placeholder="Month and Year" [formControl]="date">
@@ -52,7 +73,7 @@
                                   </mat-datepicker>
                                 </mat-form-field>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-6">
                                 <mat-form-field>
                                     <mat-label>Número tarjeta</mat-label>
                                     <input matInput type="number" placeholder="Sin Guiones" [formControl]="form.controls['cardNumberFormControl']" [errorStateMatcher]="matcher">
@@ -62,7 +83,7 @@
                                     </mat-error>
                                 </mat-form-field>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-6">
                                 <mat-form-field>
                                     <mat-label>CVC</mat-label>
                                     <input matInput type="number" placeholder="CVC" [formControl]="form.controls['cvcFormControl']" [errorStateMatcher]="matcher">
