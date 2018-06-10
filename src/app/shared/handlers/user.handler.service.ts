@@ -23,6 +23,7 @@ export class UserHandlerService{
 		this.http_requests.postService({'idUsuario': userId},'cargarUsuario')
 		.then(response => {
 			this.user=response[0];
+			console.log(this.user);
 		})
 		.catch(error => {
 			console.log(error);

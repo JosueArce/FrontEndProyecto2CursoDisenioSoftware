@@ -11,18 +11,14 @@ export class AdministrateHandlerService {
   constructor(private http_request : Http_Requests) { 
   	this.solicitudes = new Array<sellerRequest>();
     this.sellerList = new Array<seller>();
-    setInterval(()=>{this.getSellerRequests();this.getSellers()},10000);
+    //setInterval(()=>{this.getSellerRequests();this.getSellers()},10000);
   }
 
-
-
-  public acceptSellerRequest(request){
-
-  }
 
   public getSellerRequests(){
   	this.http_request.getService('Solicitudes')
   	.then(response => {
+      console.log(response);
       this.solicitudes = response[0];
     })
   	.catch(error =>{
@@ -40,34 +36,38 @@ export class AdministrateHandlerService {
     })
   }
 
-  public acceptRequestSeller(requestID){
-    this.http_request.postService(requestID,'decidirVendedor')
-    .then(response => {console.log(response);
+  public acceptRequestSeller(request){
+    this.http_request.postService(request,'decidirVendedor')
+    .then(response => {
+      this.getSellerRequests();
        //llamar al snackbar aqui
     })
     .catch(error => console.log("Error:",error))
   }
 
-  public declineRequestSeller(requestID){
-    this.http_request.deleteService(requestID,'borrarVendedor')
-    .then(response => {
+  public declineRequestSeller(request){
+    this.http_request.deleteService(request,'decidirVendedor')
+    .then(response => {console.log(response);
       //llamar al snackbar aqui
+      this.getSellerRequests();
     })
     .catch(error => console.log("Error",error))
   }
 
-  public acceptRequestCategory(requestID){
-    this.http_request.postService(requestID,'decidirVendedor')
+  public acceptRequestCategory(request){
+    this.http_request.postService(request,'decidirCategoria')
     .then(response => {console.log(response);
        //llamar al snackbar aqui
+       this.getSellerRequests();
     })
     .catch(error => console.log("Error:",error))
   }
 
-  public declineRequestCategory(requestID){
-    this.http_request.deleteService(requestID,'borrarVendedor')
+  public declineRequestCategory(request){
+    this.http_request.deleteService(request,'decidirCategoria')
     .then(response => {
       //llamar al snackbar aqui
+      this.getSellerRequests();
     })
     .catch(error => console.log("Error",error))
   }

@@ -34,7 +34,7 @@ export class MyProductsComponent implements OnDestroy{
     private productHandler : ProductHandlerService,
     private deleteService : DeleteProductService,
     public dialog: MatDialog) {
-    this.interval = setInterval(()=>{console.log("PREGUNTÉ");this.productHandler.getProducts()},10000);
+    this.interval = setInterval(()=>{this.productHandler.getProducts()},10000);
   }
 
 

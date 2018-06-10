@@ -30,7 +30,7 @@ export class CategoryRegistrationComponent {
   constructor(private globalService: GlobalService,
     private loginModalService: LoginModalService,
     private catalogHandler:CatalogHandlerService,
-    public snackBar: MatSnackBar, ) { }
+    public snackBar: MatSnackBar ) { }
 
  
 

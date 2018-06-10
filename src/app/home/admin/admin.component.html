@@ -14,10 +14,10 @@
             <p *ngIf="adminHandler.solicitudes.length === 0">No hay solicitudes en este momento.</p>
             <div class="row"  style="padding:30px;">
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" *ngFor="let solicitud of adminHandler.solicitudes">
-                    <mat-card class="elemento">
+                    <mat-card class="elemento" *ngIf="solicitud.estado == 1">
                         <mat-card-title>{{solicitud.nComercio}}</mat-card-title>
-                        <mat-card-subtitle *ngIf="solicitud.tipoSolicitud == 1">Solcitud de Vendedor Pendiente</mat-card-subtitle>
-                        <mat-card-subtitle *ngIf="solicitud.tipoSolicitud == 0">Solcitud de Categoría Pendiente</mat-card-subtitle>
+                        <mat-card-subtitle *ngIf="solicitud.tipoSolicitud == 1">Solicitud de Vendedor Pendiente</mat-card-subtitle>
+                        <mat-card-subtitle *ngIf="solicitud.tipoSolicitud == 0">Solicitud de Categoría Pendiente</mat-card-subtitle>
                         <mat-card-content>
                             {{solicitud.descripcion}}
                         </mat-card-content>
