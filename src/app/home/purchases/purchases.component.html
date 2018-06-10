@@ -1,3 +1,25 @@
-<p>
-  purchases works!
-</p>
+<mat-form-field>
+	<input style="width: 100%" matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+</mat-form-field>
+
+<mat-table [dataSource]="dataSource" [ngStyle]="{width:'100%'}">
+    <!-- nombreComprador Column -->
+    <ng-container matColumnDef="nombreComprador">
+      <mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size':'15px'}"> Comprador </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.nombreComprador}} </mat-cell>
+    </ng-container>
+
+    <!-- fechaHora Column -->
+    <ng-container matColumnDef="fechaHora">
+      <mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size':'15px'}"> Fecha/Hora </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.fechaHora}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" >
+    </mat-row>
+</mat-table>
+
+<div class="col-sm-12 col-xs-12 col-md-12 col-lg-12 col-xl-12" style="display: flex;justify-content: flex-end">
+	<mat-paginator [length]="100" [pageSize]="10"[pageSizeOptions]="[5, 10, 25, 100]" [ngStyle]="{backgroundColor:'transparent'}"></mat-paginator>
+</div>

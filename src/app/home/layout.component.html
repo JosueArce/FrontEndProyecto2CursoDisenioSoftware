@@ -47,6 +47,12 @@
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a 
                                 *ngIf="isLogged" 
+                                routerLink="/purchases"
+                                class="btn " 
+                                role="button">Historial De Compras
+                            </a>
+                            <a 
+                                *ngIf="isLogged" 
                                 (click)="globalService.signOut()" 
                                 class="btn " 
                                 role="button">Cerrar Sesión
