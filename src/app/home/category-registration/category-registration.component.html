@@ -1,0 +1,33 @@
+<main class="page registration-page">
+    <section class="clean-block clean-form dark">
+        <div class="container">
+            <div class="block-heading">
+                <h1 class="text-info">¿Necesitas de una nueva categoría?</h1>
+                <p>¡Enviale a uno de nuestros administradores una solicitud para tener una nueva categoría en el sistema!&nbsp;</p>
+            </div>
+            <form>
+                <mat-form-field class="full-width">
+                    <input 
+                    matInput placeholder="Nombre categoría" 
+                    [formControl]="categoryNameFormControl" 
+                    [errorStateMatcher]="matcher"
+                    [(ngModel)]="categoria">
+                    <mat-error *ngIf="categoryNameFormControl.hasError('required')">
+                        Campo requerido
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                    <input 
+                    matInput placeholder="Descripción" 
+                    [formControl]="descriptionNameFormControl" 
+                    [errorStateMatcher]="matcher"
+                    [(ngModel)]="descripcion">
+                    <mat-error *ngIf="descriptionNameFormControl.hasError('required')">
+                        Campo requerido
+                    </mat-error>
+                </mat-form-field>
+                <button mat-button class="full-width aplicar" (click)="onSubmit(categoria,descripcion)">Enviar Solicitud</button>
+            </form>
+        </div>
+    </section>
+</main>

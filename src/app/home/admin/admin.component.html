@@ -29,7 +29,7 @@
                 
             </div>
             <nav class="d-flex justify-content-center align-items-center" style="padding-top:21px;background-color:#ffffff;">
-                <app-pagination ></app-pagination>
+                <!-- <app-pagination ></app-pagination> -->
             </nav>
         </div>
     </div>
@@ -45,8 +45,8 @@
     <div id="seccion" style="height: 400px;overflow: auto;overflow-x: auto;overflow-y: auto;">
         <div class="container align-content-center" style="padding:0px;background-color:#ffffff;">
             <p *ngIf="adminHandler.sellerList.length === 0">No hay vendedores en este momento.</p>
-            <div class="row" *ngFor="let vendedor of adminHandler.sellerList" style="padding:30px;">
-                <mat-card class="elemento">
+            <div class="row"  style="padding:30px;">
+                <mat-card class=" col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4" *ngFor="let vendedor of adminHandler.sellerList"> 
                     <mat-card-title class="titulo">{{vendedor.comercio}}</mat-card-title>
                     <mat-card-subtitle>{{vendedor.representante}}</mat-card-subtitle>
                     <mat-card-content>
@@ -58,7 +58,7 @@
                 </mat-card>
             </div>
             <nav class="d-flex justify-content-center align-items-center" style="padding-top:21px;background-color:#ffffff;">
-                <app-pagination ></app-pagination>
+                <!-- <app-pagination ></app-pagination> -->
             </nav>
         </div>
         

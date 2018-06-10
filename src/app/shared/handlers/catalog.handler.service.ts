@@ -160,11 +160,12 @@ export class CatalogHandlerService {
 		)
   }
 
-  public postCategorie(newProduct : seller) : void{
-  	this.http_request.postService(newProduct,'insertProducts')
+  public postCategory(category : any) : void{
+  	this.http_request.postService(category,'insertProducts')
 		.then(response => 
 		{
 			//this.onChange.emit({data : response.data});
+      console.log(response);
 		}
 		)
 		.catch(error => 
