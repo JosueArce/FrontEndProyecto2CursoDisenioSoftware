@@ -34,7 +34,7 @@
                         <mat-form-field>
                             <mat-label>Provincia</mat-label>
                           <mat-select [(ngModel)]="provinciaSeleccionada" [formControl]="provinciaFormControl">
-                            <mat-option required *ngFor="let provincia of provincias" [value]="provincia.idProvincia">{{provincia.nombre}}</mat-option>
+                            <mat-option required *ngFor="let provincia of this.purchaseHandler.getProvincias()" [value]="provincia.idProvincia">{{provincia.nombre}}</mat-option>
                           </mat-select>
                           <mat-error *ngIf="provinciaFormControl.hasError('required')">
                               Provincia <strong>requerida</strong>
@@ -125,7 +125,7 @@
                     
                     <div class="form-row" style="margin-top: 10px;">
                         <div class="col-sm-12">
-                            <div class="form-group"><button class="btn btn-primary btn-block" type="button" (click)="onSubmit()">Proceder</button></div>
+                            <div class="form-group"><button class="btn btn-primary btn-block" type="button" (click)="onSubmit()">Realizar Compra</button></div>
                         </div>
                     </div>
                 </div>

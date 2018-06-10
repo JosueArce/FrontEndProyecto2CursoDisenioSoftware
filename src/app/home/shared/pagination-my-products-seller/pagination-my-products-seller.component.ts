@@ -22,7 +22,6 @@ private allItems: any[];
         this.setPage(1);
       }
     });
-    this.setPage(1);
   }
 
 

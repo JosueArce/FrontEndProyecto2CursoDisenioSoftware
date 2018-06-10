@@ -22,7 +22,6 @@ export class PaginationAdminSellersComponent implements OnInit {
         this.setPage(1);
       }
     });
-    this.setPage(1);
   }
 
 

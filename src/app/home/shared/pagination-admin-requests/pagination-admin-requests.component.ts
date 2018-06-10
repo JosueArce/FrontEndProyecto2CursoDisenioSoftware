@@ -23,7 +23,6 @@ export class PaginationAdminRequestsComponent implements OnInit {
         this.setPage(1);
       }
     });
-    this.setPage(1);
   }
 
 

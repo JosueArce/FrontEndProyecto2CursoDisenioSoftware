@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Http_Requests } from '../../../shared/http_request.service';
+import { PurchaseService } from '../../../shared/handlers/purchase.handler.service';
 import { CartService } from '../../../shared/handlers/cart.handler.service';
 import { ProductModel } from '../../../shared/models/product.model';
 import {ErrorStateMatcher} from '@angular/material/core';
@@ -57,7 +58,7 @@ export class PaymentComponent implements OnInit {
   cantones: Array<any>;
   distritos: Array<any>;
   
-  constructor(private cartHandler: CartService, formBuilder: FormBuilder,private http_request: Http_Requests) { 
+  constructor(private cartHandler: CartService, formBuilder: FormBuilder,private http_request: Http_Requests, private purchaseHandler: PurchaseService) { 
   	this.form= formBuilder.group({
   		'holderFormControl': [null, Validators.required],
         'cardNumberFormControl': [null, Validators.compose([
@@ -65,32 +66,14 @@ export class PaymentComponent implements OnInit {
         'cvcFormControl': [null, Validators.compose([
         	Validators.required, Validators.min(100), Validators.max(999)])],
   	});
-    this.provincias=new Array<any>();
-    this.http_request.getService('Provincias')
-    .then(response => {
-      this.provincias=response;
-    })
-    .catch(error =>{
-      console.log("Error: ",error)
-    })
+    
+    //this.provincias=this.purchaseHandler.getProvincias();
 
-    this.cantones=new Array<any>();
-    this.http_request.getService('Cantones')
-    .then(response => {
-      this.cantones=response;
-    })
-    .catch(error =>{
-      console.log("Error: ",error)
-    })
+    
+    //this.cantones = this.purchaseHandler.getCantones();
 
-    this.distritos=new Array<any>();
-    this.http_request.getService('Distritos')
-    .then(response => {
-      this.distritos=response;
-    })
-    .catch(error =>{
-      console.log("Error: ",error)
-    })
+    
+    //this.distritos = this.purchaseHandler.getDistritos();
 
   }
   ngOnInit() {
@@ -100,8 +83,8 @@ export class PaymentComponent implements OnInit {
   filtrarCantones(idProvincia: number): Array<any>{
     let temp = new Array<any>();
     for(let item in this.cantones){
-      if(this.cantones[item].idProvincia==idProvincia){
-        temp.push(this.cantones[item]);
+      if(this.purchaseHandler.getCantones()[item].idProvincia==idProvincia){
+        temp.push(this.purchaseHandler.getCantones()[item]);
       }
     }
     return temp;
@@ -110,8 +93,8 @@ export class PaymentComponent implements OnInit {
   filtrarDistritos(idCanton: number): Array<any>{
     let temp = new Array<any>();
     for(let item in this.distritos){
-      if(this.distritos[item].idCanton==idCanton){
-        temp.push(this.distritos[item]);
+      if(this.purchaseHandler.getDistritos()[item].idCanton==idCanton){
+        temp.push(this.purchaseHandler.getCantones()[item]);
       }
     }
     return temp;
@@ -156,9 +139,16 @@ export class PaymentComponent implements OnInit {
   }
 
   onSubmit(){
-  	if(this.form.valid){
+    if(this.nuevaDireccion){
+      if(this.form.valid && this.direccionFormControl.valid && this.provinciaFormControl.valid && this.cantonFormControl && this.distritoFormControl){
 
-  	}
+      }
+    } else{
+      if(this.form.valid){
+
+      }
+    	
   }
+    }
 
 }
