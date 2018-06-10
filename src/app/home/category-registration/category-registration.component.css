@@ -1,0 +1,11 @@
+h1{
+	font-family: 'Indie Flower', cursive;
+}
+
+.full-width{
+	width: 100%;
+}
+
+.aplicar:hover{
+	background-color: #21D8D8;
+}
