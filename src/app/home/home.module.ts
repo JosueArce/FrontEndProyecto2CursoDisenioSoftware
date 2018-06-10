@@ -34,7 +34,8 @@ import {
   MatSelectModule,
   MatDividerModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatSlideToggleModule
 } from '@angular/material';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import { PaginationAdminRequestsComponent } from './shared/pagination-admin-requests/pagination-admin-requests.component';
@@ -80,7 +81,8 @@ import { CategoryRegistrationComponent } from './category-registration/category-
     MatMomentDateModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatSlideToggleModule
   ],
   providers: [
     LoginService,

@@ -49,6 +49,7 @@ export class PaymentComponent implements OnInit {
   cantonFormControl = new FormControl('', [Validators.required]);
   distritoFormControl = new FormControl('', [Validators.required]);
   matcher = new MyErrorStateMatcher();
+  nuevaDireccion=false;
   tipoEntrega: any;
   provincias: Array<any>;
   provinciaSeleccionada: any;
