@@ -44,6 +44,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class PaymentComponent implements OnInit {
   date = new FormControl(moment());
   form: FormGroup;
+  direccionFormControl = new FormControl('', [Validators.required]);
+  provinciaFormControl = new FormControl('', [Validators.required]);
+  cantonFormControl = new FormControl('', [Validators.required]);
+  distritoFormControl = new FormControl('', [Validators.required]);
   matcher = new MyErrorStateMatcher();
   tipoEntrega: any;
   provincias: Array<any>;
