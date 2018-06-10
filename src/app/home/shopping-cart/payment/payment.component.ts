@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Http_Requests } from '../../../shared/http_request.service';
 import { CartService } from '../../../shared/handlers/cart.handler.service';
 import { ProductModel } from '../../../shared/models/product.model';
 import {ErrorStateMatcher} from '@angular/material/core';
@@ -43,9 +44,18 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class PaymentComponent implements OnInit {
   date = new FormControl(moment());
   form: FormGroup;
+  direccionFormControl = new FormControl('', [Validators.required]);
+  provinciaFormControl = new FormControl('', [Validators.required]);
+  cantonFormControl = new FormControl('', [Validators.required]);
+  distritoFormControl = new FormControl('', [Validators.required]);
   matcher = new MyErrorStateMatcher();
   tipoEntrega: any;
-  constructor(private cartHandler: CartService, formBuilder: FormBuilder,) { 
+  provincias: Array<any>;
+  provinciaSeleccionada: any;
+  cantonSeleccionado: any;
+  cantones: Array<any>;
+  distritos: Array<any>;
+  constructor(private cartHandler: CartService, formBuilder: FormBuilder,private http_request: Http_Requests) { 
   	this.form= formBuilder.group({
   		'holderFormControl': [null, Validators.required],
         'cardNumberFormControl': [null, Validators.compose([
@@ -53,10 +63,57 @@ export class PaymentComponent implements OnInit {
         'cvcFormControl': [null, Validators.compose([
         	Validators.required, Validators.min(100), Validators.max(999)])],
   	});
+    this.provincias=new Array<any>();
+    this.http_request.getService('Provincias')
+    .then(response => {
+      this.provincias=response;
+    })
+    .catch(error =>{
+      console.log("Error: ",error)
+    })
+
+    this.cantones=new Array<any>();
+    this.http_request.getService('Cantones')
+    .then(response => {
+      this.cantones=response;
+    })
+    .catch(error =>{
+      console.log("Error: ",error)
+    })
+
+    this.distritos=new Array<any>();
+    this.http_request.getService('Distritos')
+    .then(response => {
+      this.distritos=response;
+    })
+    .catch(error =>{
+      console.log("Error: ",error)
+    })
+
   }
   ngOnInit() {
 
   }
+
+  filtrarCantones(idProvincia: number): Array<any>{
+    let temp = new Array<any>();
+    for(let item in this.cantones){
+      if(this.cantones[item].idProvincia==idProvincia){
+        temp.push(this.cantones[item]);
+      }
+    }
+    return temp;
+  }  
+
+  filtrarDistritos(idCanton: number): Array<any>{
+    let temp = new Array<any>();
+    for(let item in this.distritos){
+      if(this.distritos[item].idCanton==idCanton){
+        temp.push(this.distritos[item]);
+      }
+    }
+    return temp;
+  }  
 
   //Obtiene la cantidad de items del mismo producto requerido por el usuario a partir del id del producto
   getCantidad(productId: number): number{
