@@ -53,7 +53,7 @@
 
                         <mat-form-field>
                             <mat-label>Distrito</mat-label>
-                          <mat-select required [(ngModel)]="distrito" [formControl]="distritoFormControl">
+                          <mat-select required [(ngModel)]="distritoSeleccionado" [formControl]="distritoFormControl">
                             <mat-option *ngFor="let distrito of filtrarDistritos(cantonSeleccionado)" [value]="distrito.idDistrito">{{distrito.nombre}}</mat-option>
                           </mat-select>
                           <mat-error *ngIf="distritoFormControl.hasError('required')">
@@ -62,7 +62,8 @@
                         </mat-form-field>
 
                         <mat-form-field>
-                            <textarea matInput placeholder="Dirección exacta" [formControl]="direccionFormControl"></textarea>
+                            <textarea matInput #dir maxlength="150" placeholder="Dirección exacta" [(ngModel)]="direccion" [formControl]="direccionFormControl"></textarea>
+                            <mat-hint align="end">{{dir.value.length}} / 150</mat-hint>
                             <mat-error *ngIf="direccionFormControl.hasError('required')">
                               Dirección <strong>requerida</strong>
                             </mat-error>

@@ -28,18 +28,18 @@ export class CartService {
         return this.openSnackBar('Ese producto ya estaba en el carrito!', 'Ok');
       }
     }
-    this.http_request.postService({
-      'idProducto':newElement.idProducto,
-      'idUsuario':this.userHandler.user.idUsuario,
-      'cantidad':1,
-      'precio':newElement.precio
-      },'agregarAlCarrito')
-    .then(response => {
-      console.log('response:',response);
-    })
-    .catch(error =>{
-      console.log("Error: ",error)
-    })
+    // this.http_request.postService({
+    //   'idProducto':newElement.idProducto,
+    //   'idUsuario':this.userHandler.user.idUsuario,
+    //   'cantidad':1,
+    //   'precio':newElement.precio
+    //   },'agregarAlCarrito')
+    // .then(response => {
+    //   console.log('response:',response);
+    // })
+    // .catch(error =>{
+    //   console.log("Error: ",error)
+    // })
     this.cartElements.push(newElement); this.copyList(newElement);
     this.lista.push({id : newElement.idProducto, cant: 1});
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Http_Requests } from '../../../shared/http_request.service';
 import { PurchaseService } from '../../../shared/handlers/purchase.handler.service';
+import { UserHandlerService } from '../../../shared/handlers/user.handler.service';
 import { CartService } from '../../../shared/handlers/cart.handler.service';
 import { ProductModel } from '../../../shared/models/product.model';
 import {ErrorStateMatcher} from '@angular/material/core';
@@ -9,6 +10,7 @@ import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MatDatepicker} from '@angular/material/datepicker';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatSnackBar } from '@angular/material';
 import * as _moment from 'moment';
 import {default as _rollupMoment, Moment} from 'moment';
 
@@ -51,11 +53,19 @@ export class PaymentComponent {
   distritoFormControl = new FormControl('', [Validators.required]);
   matcher = new MyErrorStateMatcher();
   nuevaDireccion=false;
+  direccion: string;
   tipoEntrega: any;
   provinciaSeleccionada: any;
   cantonSeleccionado: any;
+  distritoSeleccionado: any;
   
-  constructor(private purchaseHandler : PurchaseService, private cartHandler: CartService, formBuilder: FormBuilder,private http_request: Http_Requests) { 
+  constructor(
+    private purchaseHandler : PurchaseService,
+     private cartHandler: CartService,
+     formBuilder: FormBuilder,
+     private http_request: Http_Requests,
+     public snackBar: MatSnackBar,
+     private userHandler: UserHandlerService) { 
   	this.form= formBuilder.group({
   		'holderFormControl': [null, Validators.required],
         'cardNumberFormControl': [null, Validators.compose([
@@ -126,14 +136,24 @@ export class PaymentComponent {
   onSubmit(){
     if(this.nuevaDireccion){
       if(this.form.valid && this.direccionFormControl.valid && this.provinciaFormControl.valid && this.cantonFormControl && this.distritoFormControl){
+        this.purchaseHandler.insertarDireccion(this.userHandler.user.idUsuario,this.distritoSeleccionado,this.direccion);
 
-      }
+        this.purchaseHandler.realizarCompra(this.userHandler.user.idUsuario,Number(this.purchaseHandler.idDireccion),this.tipoEntrega,'0');
+      } else this.openSnackBar('Credenciales incorrectas!', 'Ok');
     } else{
       if(this.form.valid){
-
-      }
+        //this.purchaseHandler.realizarCompra();
+      } else this.openSnackBar('Credenciales incorrectas!', 'Ok');
     	
-  }
     }
+  }
+
+  openSnackBar(message: string, action: string) {
+    let extraClasses=['background-grey'];
+      this.snackBar.open(message, action, {
+        duration: 2000,
+        extraClasses: extraClasses
+    });
+  }
 
 }
