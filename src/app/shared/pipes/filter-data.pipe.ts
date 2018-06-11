@@ -9,7 +9,7 @@ export class FilterDataPipe implements PipeTransform {
         if (input) {
             input = input.toLowerCase();
             return value.filter(function (element: any) {
-                return element.producto.toLowerCase().indexOf(input) > -1;
+                return element.producto.toLowerCase().indexOf(input) > -1;//retorna solamente los elementos que cumplan esto
             })
         }
         return value;

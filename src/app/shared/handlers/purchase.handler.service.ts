@@ -97,8 +97,7 @@ export class PurchaseService{
 	}
 	
 	//inserta la compra 
-	public realizarCompraAuxiliar(idDireccion: number, tipoEntrega: number, guia: string){
-		console.log(this.userHandler.user.idUsuario,"+",idDireccion,"+",tipoEntrega,"+",guia);
+	private realizarCompraAuxiliar(idDireccion: number, tipoEntrega: number, guia: string){
 		this.http_request.postService(
 		{
 			idUsuario:this.userHandler.user.idUsuario,
@@ -107,7 +106,6 @@ export class PurchaseService{
 			guia:guia
 		},'insertarCompra')
 		.then(response => {
-			console.log(response[0][0]);
 			this.asociarCompra(response[0][0].idCompra);
 		})
 		.catch(error => {

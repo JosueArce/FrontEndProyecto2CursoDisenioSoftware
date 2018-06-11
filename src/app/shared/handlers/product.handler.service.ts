@@ -68,15 +68,19 @@ export class ProductHandlerService {
   	this.http_request.getService('ProductosDisponibles')
   			.then(response => 
 				{
-					this.backUpProductRecrods = response[0];
-					this.productRecords = response[0];
+					//this.backUpProductRecrods = response[0];
+					//this.productRecords = response[0];
           this.sellerRecords = [];
            
           if(this.userHandler.user.tipoUsuario==1 && this.globalHandler.loggedIn){
+              for(let index = 0;index<response[0].length;index++){
+                if(response[0].existencia>0)
+                  {this.productRecords.push(response[0][index]);this.backUpProductRecrods.push(response[0][index])}//cambiar esto a como estaba antes si no sirve                  
+              }
               for(let index = 0;index<this.productRecords.length;index++){
                 if(this.productRecords[index].idVendedor == this.user.id)
                   this.sellerRecords.push(this.productRecords[index]);
-            }
+              }              
           } 
           this.sellerRecordsEmitter.emit(this.sellerRecords);
           this.recordsEmiter.emit(response[0]);          

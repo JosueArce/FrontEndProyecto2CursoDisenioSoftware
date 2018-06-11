@@ -15,6 +15,12 @@
       <mat-cell *matCellDef="let element"> {{element.fechaHora | date:'yyyy-MM-dd HH:mm a z':'-0600'}} </mat-cell>
     </ng-container>
 
+    <!-- tipoEntrega Column -->
+    <ng-container matColumnDef="tipoEntrega">
+      <mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size':'15px'}"> Tipo Entrega </mat-header-cell>
+      <mat-cell *matCellDef="let element"> Domicilio </mat-cell>
+    </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" >
     </mat-row>

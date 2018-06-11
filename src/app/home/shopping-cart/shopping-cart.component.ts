@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CartService } from '../../shared/handlers/cart.handler.service';
 import { GlobalService } from '../../shared/handlers/global-service.service';
 
@@ -7,15 +7,9 @@ import { GlobalService } from '../../shared/handlers/global-service.service';
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.css']
 })
-export class ShoppingCartComponent implements OnInit {
+export class ShoppingCartComponent{
 
   constructor(private cartHandler : CartService, private globalHandler : GlobalService) { }
 
-  ngOnInit() {
-  }
-
-  irACheckout(){
-  	console.log(this.cartHandler.lista);
-  }
-
+  
 }

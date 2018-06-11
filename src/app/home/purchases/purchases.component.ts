@@ -19,7 +19,7 @@ export class PurchasesComponent implements OnDestroy {
   private dataSource : MatTableDataSource<compras>; 
   private subscriber : ISubscription; 
   constructor(private purchaseHandler:PurchaseService) { 
-  	 this.displayedColumns = ['nombreComprador','fechaHora'];
+  	 this.displayedColumns = ['nombreComprador','fechaHora','tipoEntrega'];
      this.purchaseHandler.getComprasUsuario();
 
      //se pone un ojo en la lista
