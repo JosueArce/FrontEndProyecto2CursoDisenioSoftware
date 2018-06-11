@@ -11,16 +11,30 @@ export class PurchaseService{
 	public cantones : Array<any>;
 	public distritos : Array<any>;
 	public comprasUsuario : EventEmitter<any> = new EventEmitter<any>();
+	public direcciones: Array<any>;
 
 	constructor(private http_request: Http_Requests,private userHandler: UserHandlerService, private cartHandler: CartService){
 		this.provincias = new Array<any>();
 		this.cantones = new Array<any>();
 		this.distritos = new Array<any>();
+		this.direcciones = new Array<any>();
 
 		this.getProvincias();
 		this.getCantones();
 		this.getDistritos();
 		this.getComprasUsuario();
+		this.getDirecciones();
+	}
+
+	public getDirecciones(){
+		this.http_request.postService({'idUsuario':this.userHandler.user.idUsuario},'direccionesUsuario')
+		.then(response => {
+			console.log(response);
+			this.direcciones = response;
+		})
+		.catch(error => {
+			console.log('Error:',error)
+		})
 	}
 
 	//permite extraer todas las provincias de la bd

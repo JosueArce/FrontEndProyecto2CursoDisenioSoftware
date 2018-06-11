@@ -29,6 +29,13 @@
                 </mat-card>
                 <div *ngIf="tipoEntrega==0">
                     <h3>Por favor elija una dirección para la entrega</h3>
+                    <p *ngIf="this.purchaseHandler.direcciones.length==0">Aún no has agregado direcciones a tu cuenta.</p>
+                    <mat-selection-list #dirs>
+                      <mat-list-option *ngFor="let direccion of this.purchaseHandler.direcciones" [value]="direccion.idDireccion">
+                        {{direccion.direccionExacta}} ({{direccion.distrito}} - {{direccion.canton}} - {{direccion.provincia}})
+                      </mat-list-option>
+                    </mat-selection-list>
+                    
                     <mat-slide-toggle color="primary" [checked]="nuevaDireccion" (change)="nuevaDireccion=!nuevaDireccion">Agregar nueva dirección</mat-slide-toggle>
                     <div *ngIf="nuevaDireccion==true">
                         <mat-form-field>

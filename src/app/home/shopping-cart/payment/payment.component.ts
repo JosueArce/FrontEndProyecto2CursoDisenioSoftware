@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Http_Requests } from '../../../shared/http_request.service';
 import { PurchaseService } from '../../../shared/handlers/purchase.handler.service';
 import { UserHandlerService } from '../../../shared/handlers/user.handler.service';
@@ -10,7 +10,8 @@ import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MatDatepicker} from '@angular/material/datepicker';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatSelectionList, MatListOption } from '@angular/material';
+import { SelectionModel } from '@angular/cdk/collections';
 import * as _moment from 'moment';
 import {default as _rollupMoment, Moment} from 'moment';
 
@@ -44,7 +45,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
   ]
 })
-export class PaymentComponent {
+export class PaymentComponent implements OnInit{
   date = new FormControl(moment());
   form: FormGroup;
   direccionFormControl = new FormControl('', [Validators.required]);
@@ -58,7 +59,8 @@ export class PaymentComponent {
   provinciaSeleccionada: any;
   cantonSeleccionado: any;
   distritoSeleccionado: any;
-  
+  @ViewChild(MatSelectionList) dirs: MatSelectionList;
+
   constructor(
     private purchaseHandler : PurchaseService,
      private cartHandler: CartService,
@@ -74,6 +76,10 @@ export class PaymentComponent {
         	Validators.required, Validators.min(100), Validators.max(999)])],
   	});
 
+  }
+
+  ngOnInit(){
+    this.dirs.selectedOptions = new SelectionModel<MatListOption>(false);
   }
 
   filtrarCantones(idProvincia: number): Array<any>{
