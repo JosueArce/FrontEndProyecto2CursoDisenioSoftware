@@ -95,8 +95,7 @@ export class PurchaseService{
 			console.log('Error:',error)
 		})
 	}
-
-
+	
 	//inserta la compra 
 	private realizarCompraAuxiliar(idDireccion: number, tipoEntrega: number, guia: string){
 		console.log(this.userHandler.user.idUsuario,"+",idDireccion,"+",tipoEntrega,"+",guia);
