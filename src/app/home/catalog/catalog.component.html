@@ -49,7 +49,7 @@
                         <div class="products">
                             <div class="row no-gutters" style="max-height: 400px;overflow: auto;">                                
                                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 col-xl-3" *ngFor = "let product of (productHandler.productRecords | filterData : queryString : productHandler.productRecords) let i = index">                                
-                                    <mat-card class="card" >
+                                    <mat-card class="card" *ngIf="product.existencia > 0">
                                       <img  mat-card-image src="{{product.imagen}}">
                                       <mat-card-content>
                                         <div class="product-name"><a (click)="selectedProduct(product)" [routerLink]="['/product']"><strong>{{product.producto}}</strong>

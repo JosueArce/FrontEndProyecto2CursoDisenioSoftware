@@ -2,7 +2,7 @@
 	<input style="width: 100%" matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
 </mat-form-field>
 
-<mat-table [dataSource]="dataSource" [ngStyle]="{width:'100%'}">
+<mat-table [dataSource]="dataSource" [ngStyle]="{width:'100%'}" >
     <!-- nombreComprador Column -->
     <ng-container matColumnDef="nombreComprador">
       <mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size':'15px'}"> Comprador </mat-header-cell>
@@ -12,7 +12,7 @@
     <!-- fechaHora Column -->
     <ng-container matColumnDef="fechaHora">
       <mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size':'15px'}"> Fecha/Hora </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.fechaHora}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.fechaHora | date:'yyyy-MM-dd HH:mm a z':'-0600'}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
