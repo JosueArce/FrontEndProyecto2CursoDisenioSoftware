@@ -59,7 +59,6 @@ export class PurchaseService{
 	public getComprasUsuario(){
 		this.http_request.postService({idUsuario:this.userHandler.user.idUsuario},'ComprasUsuario')
 	    .then(response => {	    	
-	        console.log(response);
 	        this.comprasUsuario.emit(response[0]);
 	    })
 	    .catch(error =>{

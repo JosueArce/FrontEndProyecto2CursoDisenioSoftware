@@ -36,10 +36,8 @@ export class PaginationAdminSellersComponent implements OnInit {
 
   setPage(page : number)
   {
-
     this.pager = this.paginationHandler.getPager(this.allItems.length,page);
     this.adminHandler.sellerList = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
-    console.log(this.pager);
   }
 
 }

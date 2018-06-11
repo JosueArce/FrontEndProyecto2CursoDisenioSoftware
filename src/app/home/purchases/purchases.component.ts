@@ -21,7 +21,7 @@ export class PurchasesComponent implements OnDestroy {
   constructor(private purchaseHandler:PurchaseService) { 
   	 this.displayedColumns = ['nombreComprador','fechaHora'];
 
-  	 this.purchaseHandler.comprasUsuario.subscribe({
+  	this.subscriber = this.purchaseHandler.comprasUsuario.subscribe({
   	 	next:(data:any)=>{
   	 		this.dataSource = new MatTableDataSource(data);
   	 		this.dataSource.paginator = this.paginator;
