@@ -55,8 +55,6 @@ export class LayoutHome{
 	    });
 	}
 
-	
-
 	logIn(){
 		this.loginModalService.openDialog();
 	}

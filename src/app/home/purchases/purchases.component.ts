@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { compras } from '../../shared/models/compras.model';
 import { PurchaseService } from '../../shared/handlers/purchase.handler.service';
 import { ISubscription } from "rxjs/Subscription";
+import { UserHandlerService } from '../../shared/handlers/user.handler.service';
 
 @Component({
   selector: 'app-purchases',
@@ -18,9 +19,16 @@ export class PurchasesComponent implements OnDestroy {
   private displayedColumns : string[] = [];
   private dataSource : MatTableDataSource<compras>; 
   private subscriber : ISubscription; 
-  constructor(private purchaseHandler:PurchaseService) { 
+  //private interval : any;
+  constructor(private purchaseHandler:PurchaseService,private userHandler:UserHandlerService) { 
   	 this.displayedColumns = ['nombreComprador','fechaHora','tipoEntrega'];
      this.purchaseHandler.getComprasUsuario();
+
+     /*this.interval = setInterval(()=>{
+       if(this.userHandler.user.idUsuario != '')
+         {this.purchaseHandler.getComprasUsuario();console.log("ENTRE");}
+       else console.log(" NO ESTAS LOGEADO, LOGEATE!");
+     },500);*/
 
      //se pone un ojo en la lista
   	this.subscriber = this.purchaseHandler.comprasUsuario.subscribe({
@@ -33,6 +41,7 @@ export class PurchasesComponent implements OnDestroy {
 
    ngOnDestroy(){
     this.subscriber.unsubscribe();
+    //clearInterval(this.interval);
   }
 
 

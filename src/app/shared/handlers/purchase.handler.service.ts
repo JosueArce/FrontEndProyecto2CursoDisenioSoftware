@@ -26,10 +26,10 @@ export class PurchaseService{
 		this.getDirecciones();
 	}
 
+	//permite obtener las direcciones del usuario
 	public getDirecciones(){
-		this.http_request.postService({'idUsuario':this.userHandler.user.idUsuario},'direccionesUsuario')
+		this.http_request.postService({"idUsuario":this.userHandler.user.idUsuario},'direccionesUsuario')
 		.then(response => {
-			console.log(response);
 			this.direcciones = response;
 		})
 		.catch(error => {
@@ -72,10 +72,9 @@ export class PurchaseService{
 
 	//obtiene las compras realizadas por el usuario logeado
 	public getComprasUsuario(){
-		this.http_request.postService({idUsuario:this.userHandler.user.idUsuario},'ComprasUsuario')
+		this.http_request.postService({"idUsuario":this.userHandler.user.idUsuario},'ComprasUsuario')
 	    .then(response => {	    	
-	    	console.log(response);
-	        this.comprasUsuario.emit(response[0]);
+	        this.comprasUsuario.emit(response);
 	    })
 	    .catch(error =>{
 	      console.log("Error: ",error)
@@ -97,7 +96,7 @@ export class PurchaseService{
 	}
 	
 	//inserta la compra 
-	private realizarCompraAuxiliar(idDireccion: number, tipoEntrega: number, guia: string){
+	public realizarCompraAuxiliar(idDireccion: number, tipoEntrega: number, guia: string){
 		this.http_request.postService(
 		{
 			idUsuario:this.userHandler.user.idUsuario,

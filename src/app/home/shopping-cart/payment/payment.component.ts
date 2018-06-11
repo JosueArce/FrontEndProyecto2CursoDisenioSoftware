@@ -14,6 +14,7 @@ import { MatSnackBar, MatSelectionList, MatListOption, MatSelectionListChange } 
 import { SelectionModel } from '@angular/cdk/collections';
 import * as _moment from 'moment';
 import {default as _rollupMoment, Moment} from 'moment';
+import { Router, ActivatedRoute } from '@angular/router';
 
 const moment = _rollupMoment || _moment;
 export const MY_FORMATS = {
@@ -45,7 +46,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
   ]
 })
-export class PaymentComponent implements OnInit{
+export class PaymentComponent{
   date = new FormControl(moment());
   form: FormGroup;
   direccionFormControl = new FormControl('', [Validators.required]);
@@ -67,7 +68,8 @@ export class PaymentComponent implements OnInit{
      formBuilder: FormBuilder,
      private http_request: Http_Requests,
      public snackBar: MatSnackBar,
-     private userHandler: UserHandlerService) { 
+     private userHandler: UserHandlerService,
+     private router:Router) { 
   	this.form= formBuilder.group({
   		'holderFormControl': [null, Validators.required],
         'cardNumberFormControl': [null, Validators.compose([
@@ -76,9 +78,6 @@ export class PaymentComponent implements OnInit{
         	Validators.required, Validators.min(100), Validators.max(999)])],
   	});
 
-  }
-
-  ngOnInit(){
   }
 
   handleSelection(event) {
@@ -150,12 +149,14 @@ export class PaymentComponent implements OnInit{
     if(this.nuevaDireccion){
       if(this.form.valid && this.direccionFormControl.valid && this.provinciaFormControl.valid && this.cantonFormControl && this.distritoFormControl){
         this.purchaseHandler.insertarDireccionCompra(this.distritoSeleccionado,this.direccion,this.tipoEntrega,'-');
-
-        //this.purchaseHandler.realizarCompra(this.userHandler.user.idUsuario,Number(this.purchaseHandler.idDireccion),this.tipoEntrega,'0');
+        this.openSnackBar("Compra realizada!","OK");
+        this.router.navigate(['catalog']);
       } else this.openSnackBar('Credenciales incorrectas!', 'Ok');
     } else{
       if(this.form.valid){
         this.purchaseHandler.realizarCompraAuxiliar(this.idDireccion, this.tipoEntrega, '-');
+        this.openSnackBar("Compra realizada!","OK");
+        this.router.navigate(['catalog']);
       } else this.openSnackBar('Credenciales incorrectas!', 'Ok');
     	
     }

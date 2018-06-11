@@ -46,7 +46,7 @@
                           </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a 
-                                *ngIf="isLogged && (userHandler.user.tipoUsuario == 2 || userHandler.user.tipoUsuario==1)" 
+                                *ngIf="isLogged && (userHandler.user.tipoUsuario == 0 || userHandler.user.tipoUsuario==1)" 
                                 routerLink="/purchases"
                                 class="btn " 
                                 role="button">Historial De Compras
