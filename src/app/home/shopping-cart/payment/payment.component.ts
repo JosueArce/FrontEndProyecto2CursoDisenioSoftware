@@ -28,7 +28,7 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
-
+//funcion para mostrar diferentes mensajes de error
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -79,7 +79,7 @@ export class PaymentComponent{
   	});
 
   }
-
+  //funcion para permitir seleccionar solo una direccion a la vez 
   handleSelection(event) {
     if (event.option.selected) {
       event.source.deselectAll();

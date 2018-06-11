@@ -49,7 +49,7 @@ export class AddProductComponent {
         extraClasses: extraClasses
     });
   }
-
+  //añade el producto a la BD
   onSubmit(newProduct : ProductModel,marca,idCategoria){
     if(this.form.valid){      
       newProduct.marca = marca; newProduct.categoria = idCategoria; newProduct.idVendedor = this.globalHandler.userData.id;

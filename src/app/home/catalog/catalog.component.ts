@@ -24,7 +24,7 @@ export class CatalogComponent {
   selectedProduct(product){
   	this.productHandler.setSelectedProduct(product);
   }
-
+  //captura las marcas seleccionadas en el catalogo
   private getCheckedBrands(estado,marca){
     estado = !estado;
     if(estado) 
@@ -37,7 +37,7 @@ export class CatalogComponent {
 
     this.catalogHandler.applyFilter();
   }
-
+  //captura las cateorias seleccionadas en el catalogo
   private getCheckedCategories(estado,category){
     estado = !estado;
     if(estado) 
@@ -50,7 +50,7 @@ export class CatalogComponent {
 
     this.catalogHandler.applyFilter();
   }
-
+  //captura los vendedores marcados en el catalogo
   private getCheckedSeller(estado,seller){
     estado = !estado;
     if(estado) 

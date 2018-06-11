@@ -21,7 +21,7 @@ export class CartService {
      this.lista = new Array<{id:number,cant:number}>();
   }
 
-
+  //agrega un producto al carrito
   public pushToCartElementList(newElement : ProductModel) : void{
     for(let item in this.cartElements){
       if(this.cartElements[item].idProducto === newElement.idProducto){
@@ -43,7 +43,7 @@ export class CartService {
     this.cartElements.push(newElement); this.copyList(newElement);
     this.lista.push({id : newElement.idProducto, cant: 1});
   }
-
+  //crea un backup del carrito para que funcionen los filtros
   private copyList(producto : ProductModel){
     this.backUpCartElements.push(
       {
@@ -59,11 +59,11 @@ export class CartService {
       }
     );
   }
-
+  //devuelve el carrito
   public getFromCartElementList() :Array<ProductModel>{
   	return this.backUpCartElements;
   }
-
+  //elimina producto del carrito
   public removeFromCartElements(producto : ProductModel) : void {
     let index = this.cartElements.indexOf(producto,0);
     this.cartElements.splice(index,1);
@@ -88,7 +88,7 @@ export class CartService {
     }
     return total;
   }
-
+  //actualiza el total cuando se selecciona mas de 1 producto
   public onChangeQuantity(producto, cantidadActual : number){
     
     for(let item in this.cartElements){

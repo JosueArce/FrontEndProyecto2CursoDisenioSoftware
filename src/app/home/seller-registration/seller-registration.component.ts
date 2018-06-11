@@ -68,7 +68,7 @@ export class SellerRegistrationComponent implements OnInit {
         duration: 2000,
     });
   }
-
+  //Validator para revisar que el nombre de la compañia sea unico
   isUnique(): boolean{
     for (var i = this.companyNames.length - 1; i >= 0; i--) {
       if(this.companyNames[i]===this.company){

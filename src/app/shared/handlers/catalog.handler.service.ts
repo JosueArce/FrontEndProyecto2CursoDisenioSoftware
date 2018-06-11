@@ -78,7 +78,7 @@ export class CatalogHandlerService {
   	}
   }
 
-
+  //filtro de busqueda en el catalogo
   public applyFilter(){
     	this.productHandler.productRecords = this.productHandler.backUpProductRecrods.slice(0);
 

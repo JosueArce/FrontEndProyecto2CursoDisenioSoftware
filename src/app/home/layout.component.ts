@@ -34,7 +34,7 @@ export class LayoutHome{
 		this.globalService.isLoggedIn();
 		this.isLoggedIn();
 	}
-	
+	//revisa que el usuario este logueado en a aplicacion
 	isLoggedIn(){
 		this.globalService.userLogged.subscribe({
 	      next : (event : any) => {
