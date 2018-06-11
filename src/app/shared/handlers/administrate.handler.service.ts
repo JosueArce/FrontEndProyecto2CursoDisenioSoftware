@@ -16,6 +16,7 @@ export class AdministrateHandlerService {
   }
 
 
+  //permite obtener las solicitudes de existentes
   public getSellerRequests(){
   	this.http_request.getService('Solicitudes')
   	.then(response => {
@@ -31,6 +32,7 @@ export class AdministrateHandlerService {
   	})
   }
 
+  //obtiene los vendedores actuales
   public getSellers(){
     this.http_request.getService('Vendedores')
     .then(response => {
@@ -42,6 +44,7 @@ export class AdministrateHandlerService {
     })
   }
 
+  //acepta las solicitudes de vendedor
   public acceptRequestSeller(request){
     this.http_request.postService(request,'decidirVendedor')
     .then(response => {
@@ -51,6 +54,7 @@ export class AdministrateHandlerService {
     .catch(error => console.log("Error:",error))
   }
 
+  //rechaza solicitud de vendedor
   public declineRequestSeller(request){
     this.http_request.deleteService(request,'decidirVendedor')
     .then(response => {console.log(response);
@@ -60,6 +64,7 @@ export class AdministrateHandlerService {
     .catch(error => console.log("Error",error))
   }
 
+  //acepta las solicitudes de categorias
   public acceptRequestCategory(request){
     this.http_request.postService(request,'decidirCategoria')
     .then(response => {console.log(response);
@@ -74,6 +79,15 @@ export class AdministrateHandlerService {
     .then(response => {
       //llamar al snackbar aqui
       this.getSellerRequests();
+    })
+    .catch(error => console.log("Error",error))
+  }
+
+  public deleteSeller(request){
+    this.http_request.deleteService(request,'devolverVendedor')
+    .then(response => {
+      //llamar al snackbar aqui
+      this.getSellers();
     })
     .catch(error => console.log("Error",error))
   }

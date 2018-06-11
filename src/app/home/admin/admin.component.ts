@@ -43,6 +43,11 @@ export class AdminComponent implements OnDestroy{
       
   }
 
+  deleteSeller(vendedor){
+    console.log(vendedor);
+    this.adminHandler.deleteSeller({n_Comercio:vendedor.comercio});
+  }
+
   ngOnDestroy(){
     clearInterval(this.interval);
   }
