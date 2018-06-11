@@ -97,7 +97,7 @@ export class PurchaseService{
 	}
 	
 	//inserta la compra 
-	private realizarCompraAuxiliar(idDireccion: number, tipoEntrega: number, guia: string){
+	public realizarCompraAuxiliar(idDireccion: number, tipoEntrega: number, guia: string){
 		console.log(this.userHandler.user.idUsuario,"+",idDireccion,"+",tipoEntrega,"+",guia);
 		this.http_request.postService(
 		{

@@ -10,7 +10,7 @@ import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MatDatepicker} from '@angular/material/datepicker';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import { MatSnackBar, MatSelectionList, MatListOption } from '@angular/material';
+import { MatSnackBar, MatSelectionList, MatListOption, MatSelectionListChange } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import * as _moment from 'moment';
 import {default as _rollupMoment, Moment} from 'moment';
@@ -59,7 +59,7 @@ export class PaymentComponent implements OnInit{
   provinciaSeleccionada: any;
   cantonSeleccionado: any;
   distritoSeleccionado: any;
-  @ViewChild(MatSelectionList) dirs: MatSelectionList;
+  idDireccion: number;
 
   constructor(
     private purchaseHandler : PurchaseService,
@@ -79,7 +79,14 @@ export class PaymentComponent implements OnInit{
   }
 
   ngOnInit(){
-    this.dirs.selectedOptions = new SelectionModel<MatListOption>(false);
+  }
+
+  handleSelection(event) {
+    if (event.option.selected) {
+      event.source.deselectAll();
+      event.option._setSelected(true);
+      this.idDireccion=event.option.value;
+    }
   }
 
   filtrarCantones(idProvincia: number): Array<any>{
@@ -148,7 +155,7 @@ export class PaymentComponent implements OnInit{
       } else this.openSnackBar('Credenciales incorrectas!', 'Ok');
     } else{
       if(this.form.valid){
-        //this.purchaseHandler.realizarCompra();
+        this.purchaseHandler.realizarCompraAuxiliar(this.idDireccion, this.tipoEntrega, '-');
       } else this.openSnackBar('Credenciales incorrectas!', 'Ok');
     	
     }
