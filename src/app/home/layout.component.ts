@@ -33,16 +33,6 @@ export class LayoutHome{
 		){	
 		this.globalService.isLoggedIn();
 		this.isLoggedIn();
-		/*setInterval(()=>{
-			if(!this.globalService.loggedIn)
-				{this.router.navigate(['']);}
-			else if(this.userHandler.user.tipoUsuario==0)
-				{this.router.navigate(['catalog']);}
-			else if(this.userHandler.user.tipoUsuario==1)
-				{this.router.navigate(['my-products']);}
-			else if(this.userHandler.user.tipoUsuario==2)
-				{this.router.navigate(['admin']);}
-		},500);*/
 	}
 	
 	isLoggedIn(){

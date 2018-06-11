@@ -11,8 +11,6 @@ export class PurchaseService{
 	public cantones : Array<any>;
 	public distritos : Array<any>;
 	public comprasUsuario : EventEmitter<any> = new EventEmitter<any>();
-	public idDireccion: string;
-	public idCompra: string;
 
 	constructor(private http_request: Http_Requests,private userHandler: UserHandlerService, private cartHandler: CartService){
 		this.provincias = new Array<any>();
@@ -62,6 +60,7 @@ export class PurchaseService{
 	public getComprasUsuario(){
 		this.http_request.postService({idUsuario:this.userHandler.user.idUsuario},'ComprasUsuario')
 	    .then(response => {	    	
+	    	console.log(response);
 	        this.comprasUsuario.emit(response[0]);
 	    })
 	    .catch(error =>{
@@ -69,39 +68,48 @@ export class PurchaseService{
 	    })
 	}
 
-	public insertarDireccion(idUsuario: string, idDistrito: number, dExacta: string){
+	//permite realizar una compra
+	public insertarDireccionCompra( idDistrito: number, dExacta: string,tipoEntrega:number,guia:string){
 		this.http_request.postService({
-			'idUsuario':idUsuario, 
-			'idDistrito':idDistrito,
-			'dExacta':dExacta},'insertarDireccion')
+			idUsuario:this.userHandler.user.idUsuario, 
+			idDistrito:idDistrito,
+			dExacta:dExacta},'insertarDireccion')
 		.then(response => {
-			this.idDireccion=response[0].idDireccion;
+			this.realizarCompraAuxiliar(response[0][0].idDireccion,tipoEntrega,guia);
 		})
 		.catch(error => {
 			console.log('Error:',error)
 		})
-
 	}
 
-	public realizarCompra(idUsuario: string, idDireccion: number, tipoEntrega: number, guia: string){
-		this.cartHandler.getFromCartElementList();
-		this.http_request.postService({
-			'idUsuario':idUsuario,
-			'idDireccion': idDireccion,
-			'tipoEntrega':tipoEntrega,
-			'guia':guia},'insertarCompra')
+
+	//inserta la compra 
+	private realizarCompraAuxiliar(idDireccion: number, tipoEntrega: number, guia: string){
+		console.log(this.userHandler.user.idUsuario,"+",idDireccion,"+",tipoEntrega,"+",guia);
+		this.http_request.postService(
+		{
+			idUsuario:this.userHandler.user.idUsuario,
+			idDireccion: idDireccion,
+			tipoEntrega:tipoEntrega,
+			guia:guia
+		},'insertarCompra')
 		.then(response => {
-			this.idCompra = response[0].idCompra;
+			console.log(response[0][0]);
+			this.asociarCompra(response[0][0].idCompra);
 		})
 		.catch(error => {
 			console.log('Error: ',error);
-		})
+		})	
+	}
+
+	//permite asociar una compra a los productos
+	private asociarCompra(idCompra : number){
 		for(let item in this.cartHandler.getFromCartElementList()){
 			this.http_request.postService({
-				'idCompra':Number(this.idCompra),
-				'idProducto':this.cartHandler.getFromCartElementList()[item].idProducto,
-				'cantidad':this.cartHandler.lista[item].cant,
-				'precio':this.cartHandler.getFromCartElementList()[item].precio
+				idCompra:Number(idCompra),
+				idProducto:this.cartHandler.getFromCartElementList()[item].idProducto,
+				cantidad:this.cartHandler.lista[item].cant,
+				precio:this.cartHandler.getFromCartElementList()[item].precio
 				},'asociarACompra')
 			.then(response => {
 				console.log(response)
@@ -110,8 +118,6 @@ export class PurchaseService{
 				console.log(error)
 			})
 		}
-		
-
 	}
 
 }

@@ -20,7 +20,9 @@ export class PurchasesComponent implements OnDestroy {
   private subscriber : ISubscription; 
   constructor(private purchaseHandler:PurchaseService) { 
   	 this.displayedColumns = ['nombreComprador','fechaHora'];
+     this.purchaseHandler.getComprasUsuario();
 
+     //se pone un ojo en la lista
   	this.subscriber = this.purchaseHandler.comprasUsuario.subscribe({
   	 	next:(data:any)=>{
   	 		this.dataSource = new MatTableDataSource(data);
@@ -33,6 +35,8 @@ export class PurchasesComponent implements OnDestroy {
     this.subscriber.unsubscribe();
   }
 
+
+  //filtro para buscar texto
   applyFilter(filterValue: string) 
   {
     filterValue = filterValue.trim(); // Remove whitespace
