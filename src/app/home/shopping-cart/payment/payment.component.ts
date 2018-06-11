@@ -138,7 +138,7 @@ export class PaymentComponent {
       if(this.form.valid && this.direccionFormControl.valid && this.provinciaFormControl.valid && this.cantonFormControl && this.distritoFormControl){
         this.purchaseHandler.insertarDireccion(this.userHandler.user.idUsuario,this.distritoSeleccionado,this.direccion);
 
-        this.purchaseHandler.realizarCompra(this.userHandler.user.idUsuario,this.purchaseHandler.idDireccion,this.tipoEntrega,0);
+        this.purchaseHandler.realizarCompra(this.userHandler.user.idUsuario,Number(this.purchaseHandler.idDireccion),this.tipoEntrega,'0');
       } else this.openSnackBar('Credenciales incorrectas!', 'Ok');
     } else{
       if(this.form.valid){

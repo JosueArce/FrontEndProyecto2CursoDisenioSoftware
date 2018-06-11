@@ -84,11 +84,11 @@ export class PurchaseService{
 
 	}
 
-	public realizarCompra(idUsuario: string, idDireccion: string, tipoEntrega: number, guia: number){
+	public realizarCompra(idUsuario: string, idDireccion: number, tipoEntrega: number, guia: string){
 		this.cartHandler.getFromCartElementList();
 		this.http_request.postService({
 			'idUsuario':idUsuario,
-			'idDireccion':idDireccion,
+			'idDireccion': idDireccion,
 			'tipoEntrega':tipoEntrega,
 			'guia':guia},'insertarCompra')
 		.then(response => {
@@ -99,11 +99,11 @@ export class PurchaseService{
 		})
 		for(let item in this.cartHandler.getFromCartElementList()){
 			this.http_request.postService({
-				'idCompra':this.idCompra,
+				'idCompra':Number(this.idCompra),
 				'idProducto':this.cartHandler.getFromCartElementList()[item].idProducto,
 				'cantidad':this.cartHandler.lista[item].cant,
 				'precio':this.cartHandler.getFromCartElementList()[item].precio
-				},'asociarCompra')
+				},'asociarACompra')
 			.then(response => {
 				console.log(response)
 			})
